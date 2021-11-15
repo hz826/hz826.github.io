@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open Sans:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2012年noi冬令营陈立杰SAM讲稿阅读笔记   SAM(&quot;abbab&quot;)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SAM 结构及证明">
+<meta property="og:url" content="http://example.com/2020/08/19/Suffix-Automaton/index.html">
+<meta property="og:site_name" content="hz&#39;s blog">
+<meta property="og:description" content="2012年noi冬令营陈立杰SAM讲稿阅读笔记   SAM(&quot;abbab&quot;)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/SAM_abbab.png">
+<meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/wiki_DFA.png">
+<meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/wiki_NFA.png">
+<meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/seg_01.png">
+<meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/seg_01.png">
+<meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/beamer_01.png">
+<meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/seg_02.png">
+<meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/seg_03.png">
+<meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/seg_04.png">
+<meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/seg_05.png">
+<meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/seg_06.png">
+<meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/graph_01.png">
+<meta property="article:published_time" content="2020-08-19T07:44:56.000Z">
+<meta property="article:modified_time" content="2021-11-10T07:27:06.444Z">
+<meta property="article:author" content="hz">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/08/19/Suffix-Automaton/SAM_abbab.png">
+
+<link rel="canonical" href="http://example.com/2020/08/19/Suffix-Automaton/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>SAM 结构及证明 | hz's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hz's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/19/Suffix-Automaton/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hz">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hz's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SAM 结构及证明
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-19 15:44:56" itemprop="dateCreated datePublished" datetime="2020-08-19T15:44:56+08:00">2020-08-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-10 15:27:06" itemprop="dateModified" datetime="2021-11-10T15:27:06+08:00">2021-11-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <center>2012年noi冬令营陈立杰SAM讲稿阅读笔记</center>
+
+<p><img src="/2020/08/19/Suffix-Automaton/SAM_abbab.png" alt></p>
+<center><font color="grey" size="2">SAM("abbab")</font></center>
+
+<a id="more"></a>
+<h2 id="NFA、DFA（确定有限自动机）与最小DFA"><a href="#NFA、DFA（确定有限自动机）与最小DFA" class="headerlink" title="NFA、DFA（确定有限自动机）与最小DFA"></a>NFA、DFA（确定有限自动机）与最小DFA</h2><h3 id="自动机"><a href="#自动机" class="headerlink" title="自动机"></a>自动机</h3><p>以下内容摘自wiki，有省略</p>
+<p>自动机可用一个五元组 $\langle Q,\Sigma,\delta,q_0,F \rangle$表示：</p>
+<blockquote>
+<p>$Q$ ：状态集合</p>
+<p>$\Sigma$ : 符号的有限集合，自动机接受的“字母表”</p>
+<p>$\delta$ : <strong>转移</strong>函数，在某一状态下，接受字母，转移到新状态 （$\delta : (Q,\Sigma) \rightarrow Q$）（下文记作 $\text{nxt}(q,x)$）</p>
+<p>$q_0$ : 开始状态（$q_0 \in Q$）</p>
+<p>$F$ : 终止状态集合（$F \subset Q$，对于可识别字符串，自动机一定停止于 $F$ 中的某个状态）</p>
+</blockquote>
+<hr>
+<h3 id="DFA（确定有限自动机）"><a href="#DFA（确定有限自动机）" class="headerlink" title="DFA（确定有限自动机）"></a>DFA（确定有限自动机）</h3><p>与 NFA 不同，在 DFA 中，一个状态接受一个字符后的转移唯一，一个状态必须接受符号才能转移</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><img src="/2020/08/19/Suffix-Automaton/wiki_DFA.png" style="zoom:50%;"></th>
+<th><img src="/2020/08/19/Suffix-Automaton/wiki_NFA.png" style="zoom:50%;"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DFA（转移唯一）</td>
+<td>NFA（转移不唯一）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>自动机可用有向图表示，其中每个点连出的边有标号（接受的符号）<br>每个状态对应图中一个节点，其中集合 F 中的状态用<strong>双圆圈</strong>表示</p>
+<p>显然我们可以构造一个含有n个节点的NFA识别字符串的所有后缀，但 NFA 识别的复杂度为 O(mn)，DFA 的识别复杂度 O(n)，NFA 转 DFA 的复杂度极高</p>
+<p>利用字符串后缀的特殊性质，可以 O(n) 构造出后缀的 DFA（SAM）</p>
+<p>对于最小DFA，有以下结论：</p>
+<ol>
+<li><p>最小DFA唯一</p>
+</li>
+<li><p>一个DFA为 最小DFA 当且仅当 该DFA中不存在 </p>
+<p>2.1 <strong>不可达状态</strong>（指对DFA输入任意可识别串，都无法到达的状态）</p>
+<p>2.2 <strong>等价状态</strong>（指  可识别语言（字符串）集合  相同的状态）</p>
+</li>
+</ol>
+<p>证明：</p>
+<p>设状态q能识别的语言集合为L(q)，若DFA M, N满足 L(M.q_0) = L(N.q_0)，则对于M,N来说 L(\text{nxt}(q_0,x )) 也是相等的，以此类推，<strong>若两个 DFA 内均没有等价状态，这两个DFA必定同构</strong></p>
+<h2 id="本文的一些定义"><a href="#本文的一些定义" class="headerlink" title="本文的一些定义"></a>本文的一些定义</h2><p>对于字符串 $S$，SAM 是 <strong>恰能识别</strong> $S$ <strong>所有后缀</strong> 的 <strong>最小DFA</strong></p>
+<p>$s = s_0s_1 \dots s_{n-1}$ ，$|s|$ 表示字符串长度，字符串为 $\text{0-index}$</p>
+<p>$\text{substring}(s)$ 表示 $s$ 的所有子串，每个非空子串可以用左闭右开区间 $s\small{\left[ l,r \right)}, (0\le l&lt;r\le n)$ 表示</p>
+<p>$\text{perfix}(s)$ 表示 $s$ 的所有前缀， $\text{suffix}(s)$ 表示 $s$ 的所有后缀</p>
+<p>$\text{nxt}(q,x)$ 表示状态 $q$ 接受字符 $x$ 后转移到的节点（可能为 $\text{null}$）</p>
+<p>$\text{trans}(q,s)$ 表示状态 $q$ 接受字符串 $s$ 后转移到的节点，即 $\text{trans}(q,s) = \text{nxt}(\text{trans}(q,s\small{\left[0,|s|-1\right)} ), s_{|s|-1})$（可能为 $\text{null}$）</p>
+<p>定义 $L(q) = \{s \mid \text{trans}(q_0, s) = q\}$ 表示状态 $q$ 可以识别的字符串</p>
+<p>下面讨论字符串 $S$ 构建的 SAM，其中 $S$ 长度为 $n$ </p>
+<p><strong>由最小 DFA 性质，SAM 唯一，根据相关条件，可推导出 SAM 满足以下一些性质：</strong></p>
+<h2 id="后缀与子串"><a href="#后缀与子串" class="headerlink" title="后缀与子串"></a>后缀与子串</h2><p>根据 SAM 定义，$\text{trans}(q_0,s) \in F \iff s \in \text{suffix}(S)$ </p>
+<p>此外，由于最小 DFA 中不存在不能转移到 $F$ 集的状态，若 $\text{trans}(q_0,s) \not = \text{null}$，说明 $s$ 是某个<u>后缀的前缀</u>，也就是说：$\text{trans}(q_0,s) \not = \text{null} \iff s \in \text{substring}(S)$</p>
+<h2 id="right集合、len区间，与parent树"><a href="#right集合、len区间，与parent树" class="headerlink" title="right集合、len区间，与parent树"></a>right集合、len区间，与parent树</h2><h3 id="right集合"><a href="#right集合" class="headerlink" title="right集合"></a>right集合</h3><p>考虑状态 $q$ 能识别哪些字符串：若 $q$ 能转移到 $F$ 集，则存在 从 $q_0$ 出发，经过 $q$ 的转移路径 到 $F$ 集，因此 $q$ 能识别的字符串都是 <u>后缀的后缀</u>，$q$ <strong>只能识别后缀</strong></p>
+<p><strong>定义：$\text{right}(q)$ 是 $q$ 能识别的后缀的左端点集合</strong>，假设 $q$ 能识别 $S\left[r_1,n\right),S\left[r_2,n\right)……S\left[r_m,n\right)$，则$\text{right}(q) = \{ r_1,r_2,\dots,r_m \}$</p>
+<p>若 $\text{trans}( q_0,S\left[l,r\right) ) = q$，因为 $\text{trans}( q_0,S\left[l,n\right) ) \in F$，所以 $\text{trans}( q,S\left[r,n\right) ) \in F$</p>
+<p>也就是说：$\text{trans}( q_0,S\left[l,r\right) )=q \Longrightarrow r \in \text{right}(q)$（可以发现：$q \in F   \Longleftrightarrow n\in \text{right}(q)$ ）</p>
+<p>另外，由最小 DFA 性质，不可能存在两个状态的 $\text{right}$ 集合相等</p>
+<h3 id="len区间"><a href="#len区间" class="headerlink" title="len区间"></a>len区间</h3><p>上文中已得出 $\text{trans}( q_0,S\left[l,r\right) )=q \Longrightarrow r \in \text{right}(q)$，现在考虑对 $l$ 的要求：</p>
+<p>设 $l_1 &lt; l_2$ ，则 $S\left[l_1,r\right)$ 包含 $S\left[l_2,r\right)$ ，若 $S\left[l_1,r\right)$ 出现在字符串某位置，$S\left[l_2,r\right)$ 一定也出现</p>
+<p><img src="/2020/08/19/Suffix-Automaton/seg_01.png" alt></p>
+<p>因此：$ \text{right}( \text{trans}( q_0,S\left[l_1,r\right) ) ) \subseteq \text{right}( \text{trans}( q_0,S\left[l_2,r\right) ) )$</p>
+<p>注意到：$\text{right}$ 集合相同则状态相同，所以，对于确定的 $r,q$，$\text{trans}( q_0,S\left[l,r\right) ) = q \iff \text{right}(\text{trans}( q_0,S\left[l,r\right))) = \text{right}(q)$ </p>
+<p>结合 $\text{right}$ 的包含性质可得出，满足 $\text{trans}( q_0,S\left[l,r\right) ) = q$ 的 $l$ 一定在某个区间内，</p>
+<p>定义 $l \in \text{len}(q) = \left[\min(q),\max(q)\right]$ </p>
+<p>$\text{trans}( q_0,S\left[l,r\right) )=q \Longleftrightarrow r \in \text{right}(q) \land r-l \in \left[\min(q),\max(q)\right]$</p>
+<p>$L(q)$ 包含长度从 $\min(q)$ 到 $\max(q)$ 的字符串各一个</p>
+<p>定义 $L_m(q)$ 表示 $L(q)$ 中最长的字符串（长度为 $\max(q)$）</p>
+<p>那么 $L(q) = \{s \mid s \in \text{suffix}(L_m(q) )\land |s| \in \left[\min(q),\max(q)\right]\}$ </p>
+<p><strong>$s$ 在 $S$ 中的出现次数等于 $| \text{right}( \text{trans}(q_0,s) ) |$</strong></p>
+<p>综上，SAM 中状态的内容可分为两部分</p>
+<script type="math/tex; mode=display">
+q_0 \xrightarrow{\quad[min(q),max(q)]\quad} q \xrightarrow{\quad \text{right}(q)\quad } F</script><p>一个没什么用但有助于理解的结论：$\sum_{q\not = q_0} [\max(q)-\min(q)+1] \times | \text{right}(q) | = \frac{n(n-1)}{2}$</p>
+<h3 id="parent树"><a href="#parent树" class="headerlink" title="parent树"></a>parent树</h3><p>考虑两个状态 $q_1, q_2$ 的 $\text{right}$ 集合的交：</p>
+<p>若 $\text{right}(q_1), \text{right}(q_2)$ 有交，设 $r \in \text{right}(q_1) \cap \text{right}(q_2)$，</p>
+<p>则 $\forall x_1\in \text{len}(q_1), S\left[r-x_1,r\right) \in L(q_1)$ ，$\forall x_2\in \text{len}(q_2), S\left[r-x_2,r\right) \in L(q_2)$</p>
+<p><img src="/2020/08/19/Suffix-Automaton/seg_01.png" alt></p>
+<p>有和上文相同的包含关系，又因为 $q_1,q_2$ 的 $\text{right}$ 集不等，可推出 $\text{right}(q_1) \subset \text{right}(q_2)$ 或 $\text{right}(q_2) \subset \text{right}(q_1)$</p>
+<p>因此，<strong>所有状态的 $\text{right}$ 集合由形成一颗有根树（parent树）</strong>，父集合包含子集合中的全部元素和一些其他元素</p>
+<p><img src="/2020/08/19/Suffix-Automaton/beamer_01.png" style="zoom:67%;"></p>
+<p>定义状态 $q$ 在 <strong>parent 树中的父节点为 $\text{pre}(q)$</strong>，则 $\text{right}(q) \subset \text{right}(\text{pre}(q))$</p>
+<p>显然，对于任一 $\text{right}$ 集合中元素 $r$，$r$ 只出现在由根到某一结点 $q$ 的路径中，</p>
+<p>也就是说 ：$\text{trans}(s+t)=p, \text{trans}(t)=q \Longrightarrow \exists t\ge 0, \text{pre}^t(p) = q$ </p>
+<p>深度减小，$\text{right}$ 集大小增大，$\text{len}$ 区间减小，由区间的连续性，$\max(\text{pre}(q)) + 1 = \min(q)$</p>
+<p><img src="/2020/08/19/Suffix-Automaton/seg_02.png" alt></p>
+<center> <font color="grey" size="2">在下文中，用所有最长的满足 \text{trans}(q_0,str) = q 的 字符串str表示状态q</font> </center>
+
+<h3 id="right底层节点"><a href="#right底层节点" class="headerlink" title="right底层节点"></a>right底层节点</h3><p>$r \in \text{right}(q) \iff \exists l, \text{trans}(q_0, S\left[l,r\right))=q$​ ，因为深度减小，$\text{len}$​ 区间减小，所以满足 $r \in \text{right}(q)$​ 的最深的 $q$​ 一定满足 $q = \text{trans}(q_0, S\left[0,r\right))$​</p>
+<p><strong>在计算 $\text{right}$ 时有重要作用</strong></p>
+<h3 id="失配指针"><a href="#失配指针" class="headerlink" title="失配指针"></a>失配指针</h3><p>设 $\text{trans}(q_0, S\left[l,r\right)) = q$，考虑 $S\left[l,r\right)$ 的最长后缀 $S\left[l’,r\right)$ 满足 $\text{trans}( q_0,S\left[l’,r\right) ) \not = q$，</p>
+<p>（易证 $\text{trans}( q_0,S\left[l’,r\right) ) = \text{pre}(q)$ ），因此 $\text{pre}$ 在 SAM 中也是该状态的失配指针（与AC自动机中的 fail 相同）</p>
+<h2 id="线性证明"><a href="#线性证明" class="headerlink" title="线性证明"></a>线性证明</h2><p>由于 parent 树的划分性质，最大状态数 $f(n) = \max_{\sum a_i \le n} \{ \sum f(a_i) + 1\}, f(1) = 1$，解得 $f(n)=2n-1$</p>
+<p>关于SAM中有效转移（状态到非 $\text{null}$ 状态） 的边数，有以下证明：</p>
+<blockquote>
+<p> 将自动机的转移看作一个DAG，对 DAG 求出任意一颗以 q_0 为根的生成树，下证明非树边数量不大于后缀数量：</p>
+<p>构造映射（满射） f : 所有非树边 $\rightarrow$ 部分后缀，返回 先走树边，再走非树边，然后到达F集的路径所对于的后缀（由于该非树边为第一条非树边，所以不会重复）</p>
+</blockquote>
+<h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><p>设原字符串为 $S$，长度为 $n$，现在添加字符 $x$，设新的 $F$ 集为 $F’$</p>
+<p>新建 $np = \text{trans}(q_0,S+x)$，$np$ 没有后继，只能识别 $S+x$ ，即 $\text{right}(np) = \{n+1\}$</p>
+<p>由 parent 树性质，原 $F$ 集中所有状态可表示为 $\text{pre}^t(\text{trans}(q_0, S\left[0,n\right) ))$ ，在 parent 树的一条链上</p>
+<p>对于原 $F$ 集的<strong>所有节点 $p$</strong> ，都要保证 $\text{trans}(p,x)$ $\in F’$ ，同时也要保证不能误识别非后缀字符串</p>
+<p>下面分3种情况讨论：</p>
+<h3 id="case-1"><a href="#case-1" class="headerlink" title="case 1"></a>case 1</h3><p>$\text{nxt}(p,x) = \text{null}$，将 $\text{nxt}(p,x)$ 直接修改为 $np$ 即可</p>
+<p>注意到：$\text{nxt}(q,x) \not = \text{null} \iff \exists r \in \text{right}(q) , S_{r} = x$</p>
+<p>而 $\text{right}$ 集合随 parent 树深度减小而扩大，因此可以将从底层节点到根的路径分为上下两部分：</p>
+<p>下部的所有状态 p 满足 $\text{nxt}(p,x) = \text{null}$，可直接处理</p>
+<p>而上部 $\text{nxt}(p,x) \not = \text{null}$，继续讨论 </p>
+<p><img src="/2020/08/19/Suffix-Automaton/seg_03.png" alt></p>
+<center> <font color="grey" size="2">图中，p属于下部，而 q=pre(p) 属于上部</font> </center>
+
+<h3 id="case-2"><a href="#case-2" class="headerlink" title="case 2"></a>case 2</h3><p>设上部所有节点集合为 $P$，设 $Q’ = \{\text{nxt}(p_i,x) \mid p_i \in P\}$，$P$ 中最深节点为 $p$，$\text{nxt}(p,x) = q$ （由于 parent 树的后缀性质，显然 $Q’$ 中所有不同的元素也在一条链上，且 $q$ 为其中最深的节点）</p>
+<p>考虑直接将所有 $Q’$ 集元素和 $np$ 设为 $F’$ 的可能性：</p>
+<p>对于任意一个新后缀，可表示为 $suf + x$，其中 $suf$ 为原后缀。若 $suf$ 满足 $\text{trans}(q_0,suf) \in P$（原 F），一定满足 $\text{trans}(q_0,suf+x) \in F’$</p>
+<p>现在考虑<strong>是否存在不是新后缀的 str</strong>，满足 $\text{trans}(q_0,str) \in Q’$ ：</p>
+<p><img src="/2020/08/19/Suffix-Automaton/seg_04.png" alt></p>
+<center> <font color="grey" size="2">如果 max(p)+1 = max(q)， 可以直接设新F集</font> </center>
+
+<ol>
+<li>由 max( \text{nxt}(\text{pre}(p),x) ) $\le$ max( \text{nxt}(p,x) ) （当且仅当 \text{nxt}(\text{pre}(p),x) = \text{nxt}(p,x) 时取等），可得：<strong>若 \text{trans}(q_0,str) $\in$ Q’，则 |str| $\le$ max(q)</strong></li>
+<li>若 |str| $\le$ max(p)+1 ，一定存在原后缀 suf 满足 |suf|=|str|-1，\text{trans}(q_0,suf) $\in$ P，\text{trans}(q_0,suf+x) $\in$ Q’，由于 str 与 suf+x 等长，可证明 str = suf+x，str 一定为新后缀</li>
+</ol>
+<p>因此不用考虑其他情况，一定不会误识别</p>
+<p>此外，还要将 np 的父节点设为 q </p>
+<h3 id="case-3"><a href="#case-3" class="headerlink" title="case 3"></a>case 3</h3><p>由 max 定义，显然有 max(p) + 1 $\le$ max(q)，上一节已经讨论了 max(p) + 1 = max(q) 的情况</p>
+<p>而如果 max(p) + 1 &lt; max(q) ，在直接将 q 加入 新 F 集时，<strong>一定会出现不是新后缀的 str，满足\text{trans}(q_0,str) = q</strong></p>
+<p><img src="/2020/08/19/Suffix-Automaton/seg_05.png" alt></p>
+<center> <font color="grey" size="2">注意：图中黄色字符一定不等于绿色字符 y
+</font> </center>
+
+<p>反证：若黄色字符也是 y，考虑 “原后缀” suf’ = y + S[n-max(p),n) （字符 y 加上蓝色部分），</p>
+<p>suf’ 满足 \text{trans}( q_0, suf’ ) 属于原 F 集，又有 |suf’| &gt; max(p) ，\text{trans}(q_0, suf’) 属于下部分，</p>
+<p>所以 \text{nxt}( \text{trans}( suf’ ) , x) 应该为 \text{null}，但字符串 suf’ + x 一定出现过（q存在），矛盾。</p>
+<hr>
+<p>为避免误识别，尝试设置一新状态 nq，max(nq) = max(p)+1</p>
+<p><img src="/2020/08/19/Suffix-Automaton/seg_06.png" alt></p>
+<p>显然有 max(nq) &lt; max(q)，而由于 \text{nxt}(p,x) = q，有</p>
+<script type="math/tex; mode=display">
+min(q) \le max(p)+1\\</script><script type="math/tex; mode=display">
+max(pre(q))+1 \le max(p)+1 = max(nq) \\</script><script type="math/tex; mode=display">
+max(pre(q)) < max(nq)</script><p>对于 parent树：在 q 和 \text{pre}(q) 之间插入 nq ，并将 np 的父节点设为 nq 即可</p>
+<script type="math/tex; mode=display">
+pre(q) \xleftarrow{} nq \xleftarrow{} q</script><p>对于 \text{nxt}函数：</p>
+<ol>
+<li>考虑哪些节点应该转移到 nq：因为 \text{nxt}(p,x) = nq，所以若 \text{nxt}(p’,x) = nq，p’ 是 p 一定范围内的祖先（直到 \text{nxt}(p’,x) = \text{pre}(q) ）（parent树的后缀性质）</li>
+<li>考虑 nq 应该转移到哪些节点：\text{nxt}(nq) 由 \text{right}(nq) 决定，又因为 \text{right}(nq) = \text{right}(q) $\cup$ {n+1}，所以 \text{nxt}(nq) = \text{nxt}(q)</li>
+</ol>
+<h3 id="构造复杂度"><a href="#构造复杂度" class="headerlink" title="构造复杂度"></a>构造复杂度</h3><p>构造 S[0,n) 的 SAM 时，新增 O(n) 边</p>
+<p>不会删除边</p>
+<p>对于边的修改：可以证明<strong>被修改过的边不会再被修改</strong></p>
+<p>证明如下：</p>
+<p>只需考虑 parent 树上的两条链（称为p链和q链），其中每个p链上部点都有一条边连向q链上部点（对于每一个q链上的点，有<strong>一到多个</strong>p链上的点连向它）</p>
+<p><img src="/2020/08/19/Suffix-Automaton/graph_01.png" style="zoom:38%;"></p>
+<center><font size="2" color="grey"> 左侧为p链，右侧为q链</font></center>
+
+<p>若一条边 p-&gt;q 满足 max(p)+1 = max(q)，在接下来的操作中，p-&gt;q 边上方的边均不会被修改（只考虑两条链的话，边之间显然不会交叉）</p>
+<h3 id="证明新SAM是最小DFA"><a href="#证明新SAM是最小DFA" class="headerlink" title="证明新SAM是最小DFA"></a>证明新SAM是最小DFA</h3><p>$\text{right}$ 集合不重复，而且新 SAM 恰好只可以所有后缀，新 SAM 一定是最小 DFA</p>
+<h2 id="SAM建后缀树"><a href="#SAM建后缀树" class="headerlink" title="SAM建后缀树"></a>SAM建后缀树</h2><p>$L_m(\text{pre}(p)) \in \text{suffix}(L_m(p))$，反转后，$\text{pre}(p)$ 对应的最长字符串是 $p$ 对应的最长字符串的前缀</p>
+<p>定义 $a^R = \{x \mid |a|+1-x \in a\}$</p>
+<p>那么，反SAM中，节点p对应起点在 $\text{right}(p)^R, \text{len}(p.\text{pre}) &lt; \text{len}\le \text{len}(p)$​ 的子串，他们有相同的前缀</p>
+<p>在父节点中的排名权值为 $S_{r+\text{len}(p.pre)}$</p>
+<h2 id="广义SAM"><a href="#广义SAM" class="headerlink" title="广义SAM"></a>广义SAM</h2><p>T : trie<br>F(T) : T 中的子串 s = Tx…Ty，where Ty \in subtree( Tx )<br>S(T) : T 中的后缀<br>\text{right}(s) : Ty, where s=Tx…Ty</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/12/Emacs/" rel="prev" title="Emacs配置和快捷键笔记">
+      <i class="fa fa-chevron-left"></i> Emacs配置和快捷键笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/01/DP-Optimizing/" rel="next" title="dp优化小结">
+      dp优化小结 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NFA%E3%80%81DFA%EF%BC%88%E7%A1%AE%E5%AE%9A%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%89%E4%B8%8E%E6%9C%80%E5%B0%8FDFA"><span class="nav-number">1.</span> <span class="nav-text">NFA、DFA（确定有限自动机）与最小DFA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.1.</span> <span class="nav-text">自动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DFA%EF%BC%88%E7%A1%AE%E5%AE%9A%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">DFA（确定有限自动机）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AE%9A%E4%B9%89"><span class="nav-number">2.</span> <span class="nav-text">本文的一些定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%BC%80%E4%B8%8E%E5%AD%90%E4%B8%B2"><span class="nav-number">3.</span> <span class="nav-text">后缀与子串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#right%E9%9B%86%E5%90%88%E3%80%81len%E5%8C%BA%E9%97%B4%EF%BC%8C%E4%B8%8Eparent%E6%A0%91"><span class="nav-number">4.</span> <span class="nav-text">right集合、len区间，与parent树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#right%E9%9B%86%E5%90%88"><span class="nav-number">4.1.</span> <span class="nav-text">right集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#len%E5%8C%BA%E9%97%B4"><span class="nav-number">4.2.</span> <span class="nav-text">len区间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parent%E6%A0%91"><span class="nav-number">4.3.</span> <span class="nav-text">parent树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#right%E5%BA%95%E5%B1%82%E8%8A%82%E7%82%B9"><span class="nav-number">4.4.</span> <span class="nav-text">right底层节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B1%E9%85%8D%E6%8C%87%E9%92%88"><span class="nav-number">4.5.</span> <span class="nav-text">失配指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E8%AF%81%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">线性证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#case-1"><span class="nav-number">6.1.</span> <span class="nav-text">case 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#case-2"><span class="nav-number">6.2.</span> <span class="nav-text">case 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#case-3"><span class="nav-number">6.3.</span> <span class="nav-text">case 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">6.4.</span> <span class="nav-text">构造复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E%E6%96%B0SAM%E6%98%AF%E6%9C%80%E5%B0%8FDFA"><span class="nav-number">6.5.</span> <span class="nav-text">证明新SAM是最小DFA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SAM%E5%BB%BA%E5%90%8E%E7%BC%80%E6%A0%91"><span class="nav-number">7.</span> <span class="nav-text">SAM建后缀树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E4%B9%89SAM"><span class="nav-number">8.</span> <span class="nav-text">广义SAM</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hz</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hz</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

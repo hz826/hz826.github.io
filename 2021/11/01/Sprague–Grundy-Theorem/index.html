@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open Sans:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="对无偏博弈、SG函数及其拓展的简单讨论和部分证明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单无偏博弈">
+<meta property="og:url" content="http://example.com/2021/11/01/Sprague%E2%80%93Grundy-Theorem/index.html">
+<meta property="og:site_name" content="hz&#39;s blog">
+<meta property="og:description" content="对无偏博弈、SG函数及其拓展的简单讨论和部分证明">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-01T14:48:51.000Z">
+<meta property="article:modified_time" content="2021-11-15T07:08:11.758Z">
+<meta property="article:author" content="hz">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/11/01/Sprague%E2%80%93Grundy-Theorem/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>简单无偏博弈 | hz's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hz's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/01/Sprague%E2%80%93Grundy-Theorem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hz">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hz's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          简单无偏博弈
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-11-01 22:48:51" itemprop="dateCreated datePublished" datetime="2021-11-01T22:48:51+08:00">2021-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-15 15:08:11" itemprop="dateModified" datetime="2021-11-15T15:08:11+08:00">2021-11-15</time>
+              </span>
+
+          
+            <div class="post-description">对无偏博弈、SG函数及其拓展的简单讨论和部分证明</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <a id="more"></a>
+<h1 id="简单无偏博弈"><a href="#简单无偏博弈" class="headerlink" title="简单无偏博弈"></a>简单无偏博弈</h1><p><strong>无偏博弈(Impartial Game)</strong>，指<strong>状态可行的移动</strong>与当前<strong>轮到的人</strong>无关的双人游戏，而且有完全信息、无随机、有限步终止，状态间的转移形成一个 DAG（Graph Games）</p>
+<p>在无偏博弈中，每个状态下先手还是后手胜利是确定的（如果双方足够聪明）</p>
+<p>称<strong>先手必胜</strong>的状态为 N 状态（next），称<strong>先手必负</strong>的状态为 P 状态（previous），称一个状态的结果（<strong><em>outcome classes</em></strong>）为 N 或 P</p>
+<p>显然有：</p>
+<ol>
+<li>N状态 <strong>至少能转移到</strong>一个 P 状态</li>
+<li><p>P状态 <strong>只能转移到</strong> N 状态</p>
+</li>
+<li><p>在一个“不能移动者判负”的游戏（Normal play convention）中，空状态是 P 状态</p>
+</li>
+</ol>
+<p>通过以上结论，显然可以通过递推得知一个状态的结果</p>
+<h3 id="游戏"><a href="#游戏" class="headerlink" title="游戏"></a>游戏</h3><p>集合表示 $G = \{g_i\}$ 表示转移列表</p>
+<p>$G\in P$ 表示 $G$ 先手必胜， $G\in N$ 表示 $G$ 先手必败</p>
+<h3 id="标准游戏"><a href="#标准游戏" class="headerlink" title="标准游戏"></a>标准游戏</h3><p>定义 $\ast 0 = \{\}$</p>
+<p>$\forall a\in \mathbb{N}^+$ 定义 $\ast a = \{\ast b \mid b\in \mathbb{N} ,ba\}$</p>
+<h2 id="不能移动者负（normal-play）"><a href="#不能移动者负（normal-play）" class="headerlink" title="不能移动者负（normal play）"></a>不能移动者负（normal play）</h2><h3 id="游戏加法"><a href="#游戏加法" class="headerlink" title="游戏加法"></a>游戏加法</h3><p>$G_1+G_2 = \{g_1+G_2 \mid g_1 \in G_1\} \cup \{G_1+g_2 \mid g_2 \in G_2\}$</p>
+<p>$G+G\in N$</p>
+<p>$G_1 \in N \wedge G_2 \in N \Longrightarrow (G_1+G_2) \in N$</p>
+<p>交换律，结合律显然</p>
+<h3 id="（加法）等价"><a href="#（加法）等价" class="headerlink" title="（加法）等价"></a>（加法）等价</h3><p>定义 $G \sim \ast a \iff SG(G) = a\iff (G+\ast a) \in N$</p>
+<p>SG值唯一：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&(G+\ast a)\in N \wedge (G+\ast b) \in N \\
+\Longrightarrow& (G+G+\ast a+\ast b)\in N \\
+\Longrightarrow& (\ast a+\ast b)\in N \\
+\Longrightarrow & a=b
+\end{aligned}</script><p>（可通过制定策略证明）</p>
+<h3 id="一般游戏的转移"><a href="#一般游戏的转移" class="headerlink" title="一般游戏的转移"></a>一般游戏的转移</h3><p>归纳证明：$SG(G) = \text{mex}\big(\{SG(g_i)\}\big)$</p>
+<p>设 $G = \{g_i\}$ ，$\forall g_i \in G, \exists! a_i, SG(g_i) = a_i$</p>
+<p>$\forall a\in \mathbb{N}$ ， $G+\ast a = \{G+\ast a’\mid a’\in \mathbb{N}, a’&lt;a\} \cup \{g_i + \ast a \mid g_i \in G\}$</p>
+<ol>
+<li><p>若 $a &lt; \text{mex}\big(\{SG(g_i)\}\big)$ :  $\exists g_i, SG(g_i) = a \Longrightarrow (g_i+\ast a) \in N \Longrightarrow (G+\ast a) \in P$</p>
+</li>
+<li><p>当 $a = \text{mex}\big(\{SG(g_i)\}\big)$ 时，$(G+\ast a’)\in P$ （在1.中证明） ，$(g_i+\ast a) \in P$ （SG值唯一），$(G+\ast a) \in N$</p>
+</li>
+</ol>
+<h3 id="标准游戏的加法"><a href="#标准游戏的加法" class="headerlink" title="标准游戏的加法"></a>标准游戏的加法</h3><p>归纳证明：$(\ast a+\ast b+*c)\in N \Longrightarrow a\oplus b\oplus c=0$</p>
+<p>$(\ast a+\ast b+*c)\in N \Longrightarrow \forall a’&lt;a, a’\oplus b\oplus c \not= 0 \Longrightarrow \left\{\begin{array}\\a\le b\oplus c\\b\le a\oplus c\\c\le a\oplus b\end{array}\right.$ ，从高到低考虑每一个二进制位，每位恰有偶数个1，三个不等式两边的值一直相等，得证</p>
+<h3 id="一般游戏的加法"><a href="#一般游戏的加法" class="headerlink" title="一般游戏的加法"></a>一般游戏的加法</h3><script type="math/tex; mode=display">
+\begin{aligned}
+&(G_1+\ast a_1)\in N \wedge (G_2+\ast a_2)\in N \wedge (\ast a_1+\ast a_2+*(a_1\oplus a_2)) \in N\\
+\Longrightarrow& ((G_1+G_2)+*(a_1 \oplus a_2)) \in N\\
+\Longrightarrow& SG(G_1+G_2) = SG(G_1) \oplus SG(G_2)
+\end{aligned}</script><h2 id="不能移动者胜（SJ定理）"><a href="#不能移动者胜（SJ定理）" class="headerlink" title="不能移动者胜（SJ定理）"></a>不能移动者胜（SJ定理）</h2><p>在DAG意义上考虑：$\overline G$ 表示新增一个点，将原DAG中的所有终点连向该点</p>
+<h3 id="anti-nim"><a href="#anti-nim" class="headerlink" title="anti-nim"></a>anti-nim</h3><p>$\overline{\ast a_1+\ast a_2+\dots+\ast a_n}\in P \iff \begin{cases}\oplus_{i=1}^n a_i=0 &amp; \max(\{a_i\})\le 1\ \oplus_{i=1}^n a_i\not=0 &amp; \max(\{a_i\})&gt;1\end{cases}$</p>
+<ol>
+<li>$\max(\{a_i\})\le 1$ 时显然</li>
+<li>$\{a_i\} = \{\underbrace{1,1,\dots,1}_{n个},x\}  (x&gt;1)$ ，能转移到 $\{\underbrace{1,1,\dots,1}_{n个}\}$ 和 $\{\underbrace{1,1,\dots,1}_{n+1个}\}$ ， 一定先手必胜，有 $\overline{\sum \ast a} \in P \iff \sum \ast a \in P$</li>
+<li>$\{a_i\}$ 中至少两个元素大于1，只能转移到 2. 状态和 3. 状态。 由于 $\overline{\sum \ast a}$ 中该点的转移和 $\sum \ast a$ 中该点的转移相同，归纳证明 $\overline{\sum \ast a} \in P \iff \sum \ast a \in P$ 同样满足</li>
+</ol>
+<p>但是，将任意游戏映射到SG后再转为不能移动者胜会出现问题：</p>
+<p>$SG(\{\ast 1\}) = 0, \overline{\{\ast 1\}} \in P$</p>
+<p>$SG(\{\ast 2\}) = 0, \overline{\{\ast 2\}} \in N$</p>
+<h3 id="anti-SG"><a href="#anti-SG" class="headerlink" title="anti-SG"></a>anti-SG</h3><p>如果 $\{g_i\}$ 满足：” $(\forall g_i, SG(g_i) = 0) \wedge (\sum g_i \not= \ast 0) \longrightarrow \exists g_i$，$g_i$ 能转移到 $SG=1$ 的状态 “  </p>
+<p>那么有：</p>
+<script type="math/tex; mode=display">
+\overline{\ast g_1+\ast g_2+\dots+\ast g_n}\in P \iff \begin{cases}\oplus_{i=1}^n SG(g_i)=0 & \max(\{SG(g_i)\})\le 1\\ \oplus_{i=1}^n SG(g_i)\not=0 & \max(\{SG(g_i)\})>1\end{cases}</script><h2 id="n阶Nim和"><a href="#n阶Nim和" class="headerlink" title="n阶Nim和"></a>n阶Nim和</h2><p>状态为 $(\ast a_1,\ast a_2,\dots,\ast a_m)_n$ ，每次可以选择至少一个，至多n个子游戏进行移动，不能移动者输</p>
+<p>$(\ast a_1,\ast a_2,\dots,\ast a_m)_n \in N \iff $ 对于每一个二进制位，$\{a_i\}$ 中该位为1的数的个数都是 $n+1$ 的倍数</p>
+<h2 id="游戏乘法（nim积）"><a href="#游戏乘法（nim积）" class="headerlink" title="游戏乘法（nim积）"></a>游戏乘法（nim积）</h2><h3 id="标准游戏积"><a href="#标准游戏积" class="headerlink" title="标准游戏积"></a>标准游戏积</h3><p>$\mathbb{N} \times \mathbb{N}$ 上有一个无穷表格 $A$，$A_{x,y} = \begin{cases}1 &amp; x=n,y=m\\0 &amp; \text{otherwise}\end{cases}$</p>
+<p>每次可以选择 $0\le a&lt; x, 0\le b&lt; y$ ，$A_{x,y}=1$ ，翻转 $A_{a,b}, A_{a,y}, A_{x,b}, A_{x,y}$ ，不能移动者输</p>
+<p>定义 $SG(A_{x,y}) = x \otimes y$，则 $x\otimes y = \text{mex}(\{(a\otimes b)\oplus(a\otimes y)\oplus(x\otimes b)\mid a&lt;x,b&lt;y\})$</p>
+<p>可证明 $&lt;[0,2^{2^n}-1], \oplus, \otimes&gt;$ 构成有限域 $GF(2^{2^n})$ （乘法结合律、分配律、乘法逆元存在较难证明）</p>
+<h3 id="一般游戏积"><a href="#一般游戏积" class="headerlink" title="一般游戏积"></a>一般游戏积</h3><p>The Tartan Theorem: $SG(G_1×G_2) = SG(G_1) \oplus SG(G_2)$</p>
+<p>$G_1 \times G_2$ 不明</p>
+<h3 id="快速计算nim积"><a href="#快速计算nim积" class="headerlink" title="快速计算nim积"></a>快速计算nim积</h3><p>$O(\log x\log y)$ 计算 $x\otimes y$ 的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Resolve(i, x) for (int u = (x), i = 0; (1ll <span class="meta-string">&lt;&lt; i) &lt;= u; ++ i) if (u &gt;&gt; i &amp; 1)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">f</span><span class="params">(ll x, ll y)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">g</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!x || !y) <span class="keyword">return</span> <span class="number">1l</span>l &lt;&lt; (x | y);</span><br><span class="line">	<span class="keyword">if</span> (~tab[x][y]) <span class="keyword">return</span> tab[x][y];</span><br><span class="line">	ll res = <span class="number">1</span>;</span><br><span class="line">	Resolve(i, x ^ y) res &lt;&lt;= (<span class="number">1</span> &lt;&lt; i);</span><br><span class="line">	Resolve(i, x &amp; y) res = f(res, <span class="number">3l</span>l &lt;&lt; ((<span class="number">1</span> &lt;&lt; i) - <span class="number">1</span>));</span><br><span class="line">	<span class="keyword">return</span> tab[x][y] = res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">f</span><span class="params">(ll x, ll y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!x || !y) <span class="keyword">return</span> x | y;</span><br><span class="line">	<span class="keyword">if</span> (x == <span class="number">1</span> || y == <span class="number">1</span>) <span class="keyword">return</span> max(x, y);</span><br><span class="line">	ll res = <span class="number">0</span>;</span><br><span class="line">	Resolve(i, x) Resolve(j, y) res ^= g(i, j);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">f(x,y) = x \oplus y</span></span><br><span class="line"><span class="comment">g(x,y) = 2^x \oplus 2^y</span></span><br><span class="line"><span class="comment">init : forall x,y &lt;= log, tab[x][y] = -1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>WC2009 从“k倍动态减法游戏”出发探究一类组合游戏问题</p>
+<p>2009集训队论文 组合游戏略述——浅谈SG游戏的若干拓展及变形</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zjp-shadow/p/10507030.html">Nim积解法小结 - zjp_shadow - 博客园 (cnblogs.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://wcysai.github.io/2019/09/17/On-nim-multiplication-and-related-games/">On nim multiplication and some related games · wcysai</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/25/MSET-Inversion/" rel="prev" title="2021 icpc网络赛 I题 MSET反演">
+      <i class="fa fa-chevron-left"></i> 2021 icpc网络赛 I题 MSET反演
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/14/Labeled-Tree-Counting/" rel="next" title="有标号树计数杂谈">
+      有标号树计数杂谈 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%97%A0%E5%81%8F%E5%8D%9A%E5%BC%88"><span class="nav-number">1.</span> <span class="nav-text">简单无偏博弈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F"><span class="nav-number">1.0.1.</span> <span class="nav-text">游戏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%B8%B8%E6%88%8F"><span class="nav-number">1.0.2.</span> <span class="nav-text">标准游戏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E8%83%BD%E7%A7%BB%E5%8A%A8%E8%80%85%E8%B4%9F%EF%BC%88normal-play%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">不能移动者负（normal play）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E5%8A%A0%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">游戏加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E5%8A%A0%E6%B3%95%EF%BC%89%E7%AD%89%E4%BB%B7"><span class="nav-number">1.1.2.</span> <span class="nav-text">（加法）等价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E6%B8%B8%E6%88%8F%E7%9A%84%E8%BD%AC%E7%A7%BB"><span class="nav-number">1.1.3.</span> <span class="nav-text">一般游戏的转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%B8%B8%E6%88%8F%E7%9A%84%E5%8A%A0%E6%B3%95"><span class="nav-number">1.1.4.</span> <span class="nav-text">标准游戏的加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E6%B8%B8%E6%88%8F%E7%9A%84%E5%8A%A0%E6%B3%95"><span class="nav-number">1.1.5.</span> <span class="nav-text">一般游戏的加法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E8%83%BD%E7%A7%BB%E5%8A%A8%E8%80%85%E8%83%9C%EF%BC%88SJ%E5%AE%9A%E7%90%86%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">不能移动者胜（SJ定理）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#anti-nim"><span class="nav-number">1.2.1.</span> <span class="nav-text">anti-nim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#anti-SG"><span class="nav-number">1.2.2.</span> <span class="nav-text">anti-SG</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#n%E9%98%B6Nim%E5%92%8C"><span class="nav-number">1.3.</span> <span class="nav-text">n阶Nim和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E4%B9%98%E6%B3%95%EF%BC%88nim%E7%A7%AF%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">游戏乘法（nim积）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%B8%B8%E6%88%8F%E7%A7%AF"><span class="nav-number">1.4.1.</span> <span class="nav-text">标准游戏积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E6%B8%B8%E6%88%8F%E7%A7%AF"><span class="nav-number">1.4.2.</span> <span class="nav-text">一般游戏积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E8%AE%A1%E7%AE%97nim%E7%A7%AF"><span class="nav-number">1.4.3.</span> <span class="nav-text">快速计算nim积</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">1.5.</span> <span class="nav-text">链接</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hz</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hz</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

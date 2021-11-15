@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open Sans:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Emacs for OIer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Emacs配置和快捷键笔记">
+<meta property="og:url" content="http://example.com/2020/07/12/Emacs/index.html">
+<meta property="og:site_name" content="hz&#39;s blog">
+<meta property="og:description" content="Emacs for OIer">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-01T14:07:31.252Z">
+<meta property="article:author" content="hz">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/07/12/Emacs/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Emacs配置和快捷键笔记 | hz's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hz's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/07/12/Emacs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hz">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hz's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Emacs配置和快捷键笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-07-12 00:00:00" itemprop="dateCreated datePublished" datetime="2020-07-12T00:00:00+08:00">2020-07-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-01 22:07:31" itemprop="dateModified" datetime="2021-11-01T22:07:31+08:00">2021-11-01</time>
+              </span>
+
+          
+            <div class="post-description">Emacs for OIer</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <a id="more"></a>
+<h2 id="Emacs配置和快捷键笔记"><a href="#Emacs配置和快捷键笔记" class="headerlink" title="Emacs配置和快捷键笔记"></a>Emacs配置和快捷键笔记</h2><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">setq</span> default-tab-width <span class="number">4</span>)</span><br><span class="line">(<span class="name">setq</span> c-basic-offset <span class="number">4</span>)</span><br><span class="line">(<span class="name">global-linum-mode</span> <span class="literal">t</span>)<span class="comment">;;行号</span></span><br><span class="line">(<span class="name">electric-pair-mode</span> <span class="literal">t</span>)<span class="comment">;;输入时括号匹配</span></span><br><span class="line"></span><br><span class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">&quot;&lt;f8&gt;&quot;</span>) &#x27;shell)</span><br><span class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">&quot;&lt;f9&gt;&quot;</span>) &#x27;CCompile)<span class="comment">;;自定义的编译函数</span></span><br><span class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">&quot;RET&quot;</span>) &#x27;newline-and-indent)<span class="comment">;;emacs24下需要</span></span><br><span class="line"><span class="comment">;;按键绑定：遇到交互题可以绑定更多快捷键</span></span><br><span class="line"></span><br><span class="line">(<span class="name">defun</span> CCompile()<span class="comment">;;一键编译</span></span><br><span class="line">  (<span class="name">interactive</span>)</span><br><span class="line">  (<span class="name">compile</span></span><br><span class="line">   	(<span class="name">format</span></span><br><span class="line">       <span class="string">&quot;g++ -Wall -o %s %s -g -lm&quot;</span></span><br><span class="line">       (<span class="name">file-name-sans-extension</span> (<span class="name">buffer-name</span>))</span><br><span class="line">       (<span class="name">buffer-name</span>)</span><br><span class="line">     )</span><br><span class="line">   )</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">;;下面是custom-set</span></span><br><span class="line">(<span class="name">custom-set-variables</span></span><br><span class="line"> <span class="comment">;; custom-set-variables was added by Custom.</span></span><br><span class="line"> <span class="comment">;; If you edit it by hand, you could mess it up, so be careful.</span></span><br><span class="line"> <span class="comment">;; Your init file should contain only one such instance.</span></span><br><span class="line"> <span class="comment">;; If there is more than one, they won&#x27;t work right.</span></span><br><span class="line"> &#x27;(backward-delete-char-untabify-method nil)<span class="comment">;;Emacs默认用四个空格代替tab，这个语句能默认使用tab，设置方法：C-h f + 函数名，选择customize-&gt;nil-&gt;save for future version...</span></span><br><span class="line"> &#x27;(gdb-many-windows t)<span class="comment">;;在gdb时默认自动分割窗格，设置方法同上</span></span><br><span class="line"> &#x27;(show-paren-mode t)<span class="comment">;;高亮配对括号，可以在菜单栏找到，勾选后点击save option</span></span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">C-b x</td>
+<td>返回原窗格</td>
+</tr>
+<tr>
+<td style="text-align:left">C-x o</td>
+<td>切换窗格</td>
+</tr>
+<tr>
+<td style="text-align:left">C-x 5 2</td>
+<td>新窗口</td>
+</tr>
+<tr>
+<td style="text-align:left">C-x h</td>
+<td>全选</td>
+</tr>
+<tr>
+<td style="text-align:left">M-&gt;</td>
+<td>到末尾(shell)</td>
+</tr>
+<tr>
+<td style="text-align:left">M-p（M-n）</td>
+<td>上（下）一条命令(shell)</td>
+</tr>
+<tr>
+<td style="text-align:left">M-{ （M-}）</td>
+<td>向前/后</td>
+</tr>
+<tr>
+<td style="text-align:left">M-r</td>
+<td>将光标滚动到中间</td>
+</tr>
+<tr>
+<td style="text-align:left">C-c C-o</td>
+<td>删除最后一条命令产生的输出</td>
+</tr>
+<tr>
+<td style="text-align:left">C-c C-r</td>
+<td>屏幕滚动到最后一条命令输出的开头</td>
+</tr>
+<tr>
+<td style="text-align:left">C-c C-e</td>
+<td>屏幕滚动到最后一条命令输出的结尾</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Emacs-Calc-Mode"><a href="#Emacs-Calc-Mode" class="headerlink" title="Emacs Calc Mode"></a><a target="_blank" rel="noopener" href="https://www.gnu.org/software/emacs/manual/html_node/calc/">Emacs Calc Mode</a></h3><p><a target="_blank" rel="noopener" href="https://www.gnu.org/software/emacs/manual/html_node/calc/Function-Index.html#Function-Index">https://www.gnu.org/software/emacs/manual/html_node/calc/Function-Index.html#Function-Index</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.gnu.org/software/emacs/manual/html_node/calc/Summary.html#Summary">https://www.gnu.org/software/emacs/manual/html_node/calc/Summary.html#Summary</a></p>
+<p>以下命令都是对栈顶元素使用，命令严格区分大小写</p>
+<p>Shift+m : 将栈大小增大一倍</p>
+<p>常量：pi = $\pi$ ，e = $e$</p>
+<h3 id="Combinatorial-Functions"><a href="#Combinatorial-Functions" class="headerlink" title="Combinatorial Functions"></a><a target="_blank" rel="noopener" href="https://www.gnu.org/software/emacs/manual/html_node/calc/Combinatorial-Functions.html">Combinatorial Functions</a></h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>k E</td>
+<td>exgcd</td>
+</tr>
+<tr>
+<td>(H) k c</td>
+<td>组合数（H:下降幂）</td>
+</tr>
+<tr>
+<td>k b</td>
+<td>伯努利数</td>
+</tr>
+<tr>
+<td>(H) k s</td>
+<td>第一类斯特林数（H:第二类斯特林数）</td>
+</tr>
+<tr>
+<td>k p</td>
+<td>素数检验（重复输入k p命令能提高正确率）</td>
+</tr>
+<tr>
+<td>k n</td>
+<td>下一个素数</td>
+</tr>
+<tr>
+<td>k f</td>
+<td>分解质因数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>注：素数检验只保证p<1e9的正确性，p>1e9基于随机，分解质因数只保证分解小于5000的因子</1e9的正确性，p></p>
+<h3 id="Vector-Matrix-Functions"><a href="#Vector-Matrix-Functions" class="headerlink" title="Vector/Matrix Functions"></a><a target="_blank" rel="noopener" href="https://www.gnu.org/software/emacs/manual/html_node/calc/Matrix-Functions.html#Matrix-Functions">Vector/Matrix Functions</a></h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&amp;</td>
+<td>求逆</td>
+</tr>
+<tr>
+<td>V D</td>
+<td>求行列式</td>
+</tr>
+<tr>
+<td>V C</td>
+<td>向量叉积</td>
+</tr>
+<tr>
+<td>V J</td>
+<td>共轭矩阵</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Polynomials"><a href="#Polynomials" class="headerlink" title="Polynomials"></a><a target="_blank" rel="noopener" href="https://www.gnu.org/software/emacs/manual/html_node/calc/Polynomials.html#Polynomials">Polynomials</a></h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a f</td>
+<td>整数因式分解（复杂度较高）</td>
+</tr>
+<tr>
+<td>a x</td>
+<td>多项式乘法（将栈顶多项式表示成$\sum a_kx^k$的形式）</td>
+</tr>
+<tr>
+<td>a /</td>
+<td>多项式带余除法</td>
+</tr>
+<tr>
+<td>a g</td>
+<td>多项式gcd</td>
+</tr>
+<tr>
+<td>a S [variable]</td>
+<td>解方程（单解）</td>
+</tr>
+<tr>
+<td>a P [variable]</td>
+<td>解多项式方程（多解）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>注：因式分解算法使用复数，次数较高时可能有精度误差</p>
+<h3 id="Modulo"><a href="#Modulo" class="headerlink" title="Modulo"></a>Modulo</h3><p>用algebra模式键入 <code>a mod b</code> 或 <code>aMeta-Mb</code><br>支持模意义下的 <strong>加减乘除&amp;快速幂</strong></p>
+<h3 id="Complex"><a href="#Complex" class="headerlink" title="Complex"></a>Complex</h3><p><code>m p</code> 切换默认复数表示方式（直角坐标/极坐标）</p>
+<p><code>m d</code> 切换为角度deg模式</p>
+<p><code>m r</code> 切换为弧度rad模式</p>
+<p>输入方式：<br>    直角坐标：a+bi, (a,b)<br>    极坐标：(a;b), a*e^(b*i)</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c p</td>
+<td>切换当前复数表示方式（直角坐标/极坐标）</td>
+</tr>
+<tr>
+<td>J</td>
+<td>求共轭复数</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/09/hello-world/" rel="prev" title="Hello World">
+      <i class="fa fa-chevron-left"></i> Hello World
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/19/Suffix-Automaton/" rel="next" title="SAM 结构及证明">
+      SAM 结构及证明 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Emacs%E9%85%8D%E7%BD%AE%E5%92%8C%E5%BF%AB%E6%8D%B7%E9%94%AE%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">Emacs配置和快捷键笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Emacs-Calc-Mode"><span class="nav-number">1.1.</span> <span class="nav-text">Emacs Calc Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Combinatorial-Functions"><span class="nav-number">1.2.</span> <span class="nav-text">Combinatorial Functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vector-Matrix-Functions"><span class="nav-number">1.3.</span> <span class="nav-text">Vector&#x2F;Matrix Functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Polynomials"><span class="nav-number">1.4.</span> <span class="nav-text">Polynomials</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Modulo"><span class="nav-number">1.5.</span> <span class="nav-text">Modulo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Complex"><span class="nav-number">1.6.</span> <span class="nav-text">Complex</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hz</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hz</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
