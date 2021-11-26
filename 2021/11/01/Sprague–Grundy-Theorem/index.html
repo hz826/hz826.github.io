@@ -28,7 +28,7 @@
 <meta property="og:description" content="对无偏博弈、SG函数及其拓展的简单讨论和部分证明">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-01T14:48:51.000Z">
-<meta property="article:modified_time" content="2021-11-26T13:28:40.592Z">
+<meta property="article:modified_time" content="2021-11-26T13:32:37.004Z">
 <meta property="article:author" content="hz">
 <meta name="twitter:card" content="summary">
 
@@ -180,7 +180,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-26 21:28:40" itemprop="dateModified" datetime="2021-11-26T21:28:40+08:00">2021-11-26</time>
+                <time title="Modified: 2021-11-26 21:32:37" itemprop="dateModified" datetime="2021-11-26T21:32:37+08:00">2021-11-26</time>
               </span>
 
           
@@ -209,7 +209,7 @@
 <h3 id="游戏"><a href="#游戏" class="headerlink" title="游戏"></a>游戏</h3><p>集合表示： $G = \{g_i\}$ 表示当前游戏可以转移到的游戏</p>
 <p>$G\in P$ 表示 $G$ 先手必胜， $G\in N$ 表示 $G$ 先手必败</p>
 <h3 id="标准游戏"><a href="#标准游戏" class="headerlink" title="标准游戏"></a>标准游戏</h3><p>定义 $\ast 0 = \varnothing$ ，是一个无法移动的游戏</p>
-<p>$\forall a\in \mathbb{N}^+$ 定义 $\ast a = \{\ast b \mid b\in \mathbb{N} ,b \textless a\}$ ，例如 $\ast 1 = \{\ast 0\} = \{\varnothing\}, \ast2 = \{\ast 0, \ast 1\} = \{\{\varnothing\}, \varnothing\} \dots$ </p>
+<p>$\forall a\in \mathbb{N}^+$ 定义 $\ast a = \{\ast b \mid b\in \mathbb{N} ,b &lt; a\}$ ，例如 $\ast 1 = \{\ast 0\} = \{\varnothing\}, \ast2 = \{\ast 0, \ast 1\} = \{\{\varnothing\}, \varnothing\} \dots$ </p>
 <p>显然 $\forall a\in \mathbb{N}^+, \ast a \in P$  </p>
 <h2 id="不能移动者负（normal-play）"><a href="#不能移动者负（normal-play）" class="headerlink" title="不能移动者负（normal play）"></a>不能移动者负（normal play）</h2><h3 id="游戏加法"><a href="#游戏加法" class="headerlink" title="游戏加法"></a>游戏加法</h3><p>表示每次移动选择两个游戏之一进行移动，形式化地：</p>
 <p>$G_1+G_2 = \{g_1+G_2 \mid g_1 \in G_1\} \cup \{G_1+g_2 \mid g_2 \in G_2\}$</p>
