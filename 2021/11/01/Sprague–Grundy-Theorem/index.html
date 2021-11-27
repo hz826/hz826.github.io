@@ -28,7 +28,7 @@
 <meta property="og:description" content="对无偏博弈、SG函数及其拓展的简单讨论和部分证明">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-01T14:48:51.000Z">
-<meta property="article:modified_time" content="2021-11-26T13:32:37.004Z">
+<meta property="article:modified_time" content="2021-11-27T03:10:54.261Z">
 <meta property="article:author" content="hz">
 <meta name="twitter:card" content="summary">
 
@@ -180,7 +180,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-26 21:32:37" itemprop="dateModified" datetime="2021-11-26T21:32:37+08:00">2021-11-26</time>
+                <time title="Modified: 2021-11-27 11:10:54" itemprop="dateModified" datetime="2021-11-27T11:10:54+08:00">2021-11-27</time>
               </span>
 
           
@@ -255,8 +255,11 @@
 <h3 id="anti-SG"><a href="#anti-SG" class="headerlink" title="anti-SG"></a>anti-SG</h3><p>如果 $\{g_i\}$ 满足：” $(\forall g_i, SG(g_i) = 0) \wedge (\sum g_i \not= \ast 0) \longrightarrow \exists g_i$，$g_i$ 能转移到 $SG=1$ 的状态 “  </p>
 <p>那么有：</p>
 <script type="math/tex; mode=display">
-\overline{\ast g_1+\ast g_2+\dots+\ast g_n}\in P \iff \begin{cases}\oplus_{i=1}^n SG(g_i)=0 & \max(\{SG(g_i)\})\le 1\\ \oplus_{i=1}^n SG(g_i)\not=0 & \max(\{SG(g_i)\})>1\end{cases}</script><h2 id="n阶Nim和"><a href="#n阶Nim和" class="headerlink" title="n阶Nim和"></a>n阶Nim和</h2><p>状态为 $(\ast a_1,\ast a_2,\dots,\ast a_m)_n$ ，每次可以选择至少一个，至多n个子游戏进行移动，不能移动者输</p>
+\overline{\ast g_1+\ast g_2+\dots+\ast g_n}\in P \iff \begin{cases}\oplus_{i=1}^n SG(g_i)=0 & \max(\{SG(g_i)\})\le 1\\ \oplus_{i=1}^n SG(g_i)\not=0 & \max(\{SG(g_i)\})>1\end{cases}</script><h2 id="n阶Nim和"><a href="#n阶Nim和" class="headerlink" title="n阶Nim和"></a>n阶Nim和</h2><p>状态为 $(\ast a_1,\ast a_2,\dots,\ast a_m)_n$ ，表示每次可以选择至少一个，至多 $n$ 个子游戏进行移动，不能移动者输</p>
 <p>$(\ast a_1,\ast a_2,\dots,\ast a_m)_n \in N \iff $ 对于每一个二进制位，$\{a_i\}$ 中该位为1的数的个数都是 $n+1$ 的倍数</p>
+<p>但对于任意游戏，上述结论并不适用：</p>
+<p>$G = (\ast 1, \ast 1, \ast 1, \{\ast 1\})_2$ ，$\{SG(g_i)\} = \{1,1,1,0\}$，但存在先手必胜策略：</p>
+<p>先手从 $(\ast 1, \ast 1, \ast 1, \{\ast 1\})_2$ 移动到 $(\ast 1, \ast 1, \ast 1)_2$，无论后手移动到 $(\ast 1, \ast 1)_2$ 还是 $(\ast 1)_2$ ，都是必败态</p>
 <h2 id="游戏乘法（nim积）"><a href="#游戏乘法（nim积）" class="headerlink" title="游戏乘法（nim积）"></a>游戏乘法（nim积）</h2><h3 id="标准游戏积"><a href="#标准游戏积" class="headerlink" title="标准游戏积"></a>标准游戏积</h3><p>$\mathbb{N} \times \mathbb{N}$ 上有一个无穷表格 $A$，$A_{x,y} = \begin{cases}1 &amp; x=n,y=m\\0 &amp; \text{otherwise}\end{cases}$</p>
 <p>每次可以选择 $0\le a&lt; x, 0\le b&lt; y$ ，$A_{x,y}=1$ ，翻转 $A_{a,b}, A_{a,y}, A_{x,b}, A_{x,y}$ ，不能移动者输</p>
 <p>定义 $SG(A_{x,y}) = x \otimes y$，则 $x\otimes y = \text{mex}(\{(a\otimes b)\oplus(a\otimes y)\oplus(x\otimes b)\mid a&lt;x,b&lt;y\})$</p>
