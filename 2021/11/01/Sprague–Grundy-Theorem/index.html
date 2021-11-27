@@ -28,7 +28,7 @@
 <meta property="og:description" content="对无偏博弈、SG函数及其拓展的简单讨论和部分证明">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-01T14:48:51.000Z">
-<meta property="article:modified_time" content="2021-11-27T03:15:51.178Z">
+<meta property="article:modified_time" content="2021-11-27T03:29:56.207Z">
 <meta property="article:author" content="hz">
 <meta name="twitter:card" content="summary">
 
@@ -180,7 +180,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-27 11:15:51" itemprop="dateModified" datetime="2021-11-27T11:15:51+08:00">2021-11-27</time>
+                <time title="Modified: 2021-11-27 11:29:56" itemprop="dateModified" datetime="2021-11-27T11:29:56+08:00">2021-11-27</time>
               </span>
 
           
@@ -210,7 +210,7 @@
 <p>$G\in P$ 表示 $G$ 先手必胜， $G\in N$ 表示 $G$ 先手必败</p>
 <h3 id="标准游戏"><a href="#标准游戏" class="headerlink" title="标准游戏"></a>标准游戏</h3><p>定义 $\ast 0 = \varnothing$ ，是一个无法移动的游戏</p>
 <p>$\forall a\in \mathbb{N}^+$ 定义 $\ast a = \{\ast b \mid b\in \mathbb{N} ,b &lt; a\}$ ，例如 $\ast 1 = \{\ast 0\} = \{\varnothing\}, \ast2 = \{\ast 0, \ast 1\} = \{\{\varnothing\}, \varnothing\} \dots$ </p>
-<p>显然 $\forall a\in \mathbb{N}^+, \ast a \in P$  </p>
+<p>显然 $\ast 0 \in N,  \forall a\in \mathbb{N}^+, \ast a \in P$  </p>
 <h2 id="不能移动者负（normal-play）"><a href="#不能移动者负（normal-play）" class="headerlink" title="不能移动者负（normal play）"></a>不能移动者负（normal play）</h2><h3 id="游戏加法"><a href="#游戏加法" class="headerlink" title="游戏加法"></a>游戏加法</h3><p>表示每次移动选择两个游戏之一进行移动，形式化地：</p>
 <p>$G_1+G_2 = \{g_1+G_2 \mid g_1 \in G_1\} \cup \{G_1+g_2 \mid g_2 \in G_2\}$</p>
 <p>发现游戏加法有以下性质：</p>
@@ -219,7 +219,7 @@
 <p>$(G_1+G_2) \in N \wedge G_1 \in N \Longrightarrow G_2 \in N$</p>
 <p>交换律，结合律显然</p>
 <h3 id="（加法）等价"><a href="#（加法）等价" class="headerlink" title="（加法）等价"></a>（加法）等价</h3><p>定义 $G \sim \ast a \iff SG(G) = a\iff (G+\ast a) \in N$</p>
-<p>SG值唯一：</p>
+<p>SG值不超过一个：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 &(G+\ast a)\in N \wedge (G+\ast b) \in N \\
@@ -231,11 +231,12 @@
 <p>设 $G = \{g_i\}$ ，$\forall g_i \in G, \exists! a_i, SG(g_i) = a_i$</p>
 <p>$\forall a\in \mathbb{N}$ ， $G+\ast a = \{G+\ast a’\mid a’\in \mathbb{N}, a’&lt;a\} \cup \{g_i + \ast a \mid g_i \in G\}$</p>
 <ol>
-<li><p>若 $a &lt; \text{mex}\big(\{SG(g_i)\}\big)$ :  $\exists g_i, SG(g_i) = a \Longrightarrow (g_i+\ast a) \in N \Longrightarrow (G+\ast a) \in P$</p>
+<li><p>$a &lt; \text{mex}\big(\{SG(g_i)\}\big)$ ， $\exists g_i, SG(g_i) = a \Longrightarrow (g_i+\ast a) \in N \Longrightarrow (G+\ast a) \in P$</p>
 </li>
-<li><p>当 $a = \text{mex}\big(\{SG(g_i)\}\big)$ 时，$(G+\ast a’)\in P$ （在1.中证明） ，$(g_i+\ast a) \in P$ （SG值唯一），$(G+\ast a) \in N$</p>
+<li><p>$a = \text{mex}\big(\{SG(g_i)\}\big)$ ，因为 $(G+\ast a’)\in P$ （在1.中证明） ，$(g_i+\ast a) \in P$ （SG值不超过一个），所以 $(G+\ast a) \in N$ </p>
 </li>
 </ol>
+<p>因此，每个游戏有唯一 SG 值</p>
 <h3 id="标准游戏的加法"><a href="#标准游戏的加法" class="headerlink" title="标准游戏的加法"></a>标准游戏的加法</h3><p>归纳证明：$(\ast a+\ast b+*c)\in N \Longrightarrow a\oplus b\oplus c=0$</p>
 <p>$(\ast a+\ast b+*c)\in N \Longrightarrow \left\{\begin{array}\\\forall a’&lt;a, a’\oplus b\oplus c \not= 0\ \forall b’&lt;b, a\oplus b’\oplus c \not= 0 \ \forall c’&lt;c, a\oplus b\oplus c’ \not= 0 \end{array}\right. \Longrightarrow \left\{\begin{array}\\a\le b\oplus c\\b\le a\oplus c\\c\le a\oplus b\end{array}\right.$ ，从高到低考虑每一个二进制位，每位恰有偶数个1，三个不等式两边的值一直相等，得证</p>
 <h3 id="一般游戏的加法"><a href="#一般游戏的加法" class="headerlink" title="一般游戏的加法"></a>一般游戏的加法</h3><script type="math/tex; mode=display">
