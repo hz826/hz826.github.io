@@ -29,7 +29,6 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/SAM_abbab.png">
 <meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/wiki_DFA.png">
-<meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/wiki_NFA.png">
 <meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/seg_01.png">
 <meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/seg_01.png">
 <meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/beamer_01.png">
@@ -40,7 +39,7 @@
 <meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/seg_06.png">
 <meta property="og:image" content="http://example.com/2020/08/19/Suffix-Automaton/graph_01.png">
 <meta property="article:published_time" content="2020-08-19T07:44:56.000Z">
-<meta property="article:modified_time" content="2021-11-10T07:27:06.444Z">
+<meta property="article:modified_time" content="2021-12-08T07:06:56.841Z">
 <meta property="article:author" content="hz">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2020/08/19/Suffix-Automaton/SAM_abbab.png">
@@ -193,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-10 15:27:06" itemprop="dateModified" datetime="2021-11-10T15:27:06+08:00">2021-11-10</time>
+                <time title="Modified: 2021-12-08 15:06:56" itemprop="dateModified" datetime="2021-12-08T15:06:56+08:00">2021-12-08</time>
               </span>
 
           
@@ -213,56 +212,40 @@
 <center><font color="grey" size="2">SAM("abbab")</font></center>
 
 <a id="more"></a>
-<h2 id="NFA、DFA（确定有限自动机）与最小DFA"><a href="#NFA、DFA（确定有限自动机）与最小DFA" class="headerlink" title="NFA、DFA（确定有限自动机）与最小DFA"></a>NFA、DFA（确定有限自动机）与最小DFA</h2><h3 id="自动机"><a href="#自动机" class="headerlink" title="自动机"></a>自动机</h3><p>以下内容摘自wiki，有省略</p>
-<p>自动机可用一个五元组 $\langle Q,\Sigma,\delta,q_0,F \rangle$表示：</p>
+<h2 id="本文的一些定义"><a href="#本文的一些定义" class="headerlink" title="本文的一些定义"></a>本文的一些定义</h2><h3 id="确定有限自动机-DFA"><a href="#确定有限自动机-DFA" class="headerlink" title="确定有限自动机 (DFA)"></a>确定有限自动机 (DFA)</h3><p>以下内容摘自wiki，有省略</p>
+<p>DFA 可用一个五元组 $\langle Q,\Sigma,\delta,q_0,F \rangle$ 表示：</p>
 <blockquote>
 <p>$Q$ ：状态集合</p>
 <p>$\Sigma$ : 符号的有限集合，自动机接受的“字母表”</p>
-<p>$\delta$ : <strong>转移</strong>函数，在某一状态下，接受字母，转移到新状态 （$\delta : (Q,\Sigma) \rightarrow Q$）（下文记作 $\text{nxt}(q,x)$）</p>
+<p>$\delta$ : <strong>转移</strong>函数，在某一状态下，接受字母，转移到唯一新状态 （$\delta : (Q,\Sigma) \rightarrow Q$）（下文记作 $\text{nxt}(q,x)$）</p>
 <p>$q_0$ : 开始状态（$q_0 \in Q$）</p>
 <p>$F$ : 终止状态集合（$F \subset Q$，对于可识别字符串，自动机一定停止于 $F$ 中的某个状态）</p>
 </blockquote>
-<hr>
-<h3 id="DFA（确定有限自动机）"><a href="#DFA（确定有限自动机）" class="headerlink" title="DFA（确定有限自动机）"></a>DFA（确定有限自动机）</h3><p>与 NFA 不同，在 DFA 中，一个状态接受一个字符后的转移唯一，一个状态必须接受符号才能转移</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th><img src="/2020/08/19/Suffix-Automaton/wiki_DFA.png" style="zoom:50%;"></th>
-<th><img src="/2020/08/19/Suffix-Automaton/wiki_NFA.png" style="zoom:50%;"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DFA（转移唯一）</td>
-<td>NFA（转移不唯一）</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>自动机可用有向图表示，其中每个点连出的边有标号（接受的符号）<br>每个状态对应图中一个节点，其中集合 F 中的状态用<strong>双圆圈</strong>表示</p>
-<p>显然我们可以构造一个含有n个节点的NFA识别字符串的所有后缀，但 NFA 识别的复杂度为 O(mn)，DFA 的识别复杂度 O(n)，NFA 转 DFA 的复杂度极高</p>
-<p>利用字符串后缀的特殊性质，可以 O(n) 构造出后缀的 DFA（SAM）</p>
-<p>对于最小DFA，有以下结论：</p>
+<p><img src="/2020/08/19/Suffix-Automaton/wiki_DFA.png" style="zoom:50%;"></p>
+<center><font color="grey" size="2">自动机可用有向图表示，其中每条边上都写着一个字符表示接受的符号，每个状态对应图中一个节点，F集中的状态用双圆圈表示</font></center>
+
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>$s = s_0s_1 \dots s_{n-1}$ ，$|s|$ 表示字符串长度</p>
+<p>$\text{substring}(s)$ 表示 $s$ 的所有子串，每个非空子串可以用左闭右开区间 $s\small{\left[ l,r \right)}, (0\le l&lt;r\le n)$ 表示</p>
+<p>$\text{perfix}(s)$ 表示 $s$ 的所有前缀 $s\small{\left[ 0,r \right)}$， $\text{suffix}(s)$ 表示 $s$ 的所有后缀 $s\small{\left[ l,n \right)}$</p>
+<p>$\text{nxt}(q,x)$ 表示状态 $q$ 接受字符 $x$ 后转移到的节点（可能为 $\text{null}$，$\text{null}$ 永远转移到 $\text{null}$）</p>
+<p>$\text{trans}(q,s)$ 表示状态 $q$ 接受字符串 $s$ 后转移到的节点，即 $\text{trans}(q,s) = \text{nxt}(\text{trans}(q,s\small{\left[0,|s|-1\right)} ), s_{|s|-1})$（可能为 $\text{null}$）</p>
+<p>定义状态 $q$ 可以<strong>识别</strong>的字符串为 $L(q) = \{s \mid \text{trans}(q, s) \in F\}$ </p>
+<h3 id="最小-DFA"><a href="#最小-DFA" class="headerlink" title="最小 DFA"></a>最小 DFA</h3><p>对于最小DFA，有以下结论：</p>
 <ol>
 <li><p>最小DFA唯一</p>
 </li>
-<li><p>一个DFA为 最小DFA 当且仅当 该DFA中不存在 </p>
-<p>2.1 <strong>不可达状态</strong>（指对DFA输入任意可识别串，都无法到达的状态）</p>
-<p>2.2 <strong>等价状态</strong>（指  可识别语言（字符串）集合  相同的状态）</p>
+<li><p>一个DFA为最小DFA当且仅当该DFA中不存在：</p>
+<p>2.1 <strong>不可达状态</strong>（指对DFA输入任意字符串，都无法到达的状态）</p>
+<p>2.2 <strong>等价状态</strong>（指可识别字符串集合 $L$ 相同的状态）</p>
 </li>
 </ol>
 <p>证明：</p>
-<p>设状态q能识别的语言集合为L(q)，若DFA M, N满足 L(M.q_0) = L(N.q_0)，则对于M,N来说 L(\text{nxt}(q_0,x )) 也是相等的，以此类推，<strong>若两个 DFA 内均没有等价状态，这两个DFA必定同构</strong></p>
-<h2 id="本文的一些定义"><a href="#本文的一些定义" class="headerlink" title="本文的一些定义"></a>本文的一些定义</h2><p>对于字符串 $S$，SAM 是 <strong>恰能识别</strong> $S$ <strong>所有后缀</strong> 的 <strong>最小DFA</strong></p>
-<p>$s = s_0s_1 \dots s_{n-1}$ ，$|s|$ 表示字符串长度，字符串为 $\text{0-index}$</p>
-<p>$\text{substring}(s)$ 表示 $s$ 的所有子串，每个非空子串可以用左闭右开区间 $s\small{\left[ l,r \right)}, (0\le l&lt;r\le n)$ 表示</p>
-<p>$\text{perfix}(s)$ 表示 $s$ 的所有前缀， $\text{suffix}(s)$ 表示 $s$ 的所有后缀</p>
-<p>$\text{nxt}(q,x)$ 表示状态 $q$ 接受字符 $x$ 后转移到的节点（可能为 $\text{null}$）</p>
-<p>$\text{trans}(q,s)$ 表示状态 $q$ 接受字符串 $s$ 后转移到的节点，即 $\text{trans}(q,s) = \text{nxt}(\text{trans}(q,s\small{\left[0,|s|-1\right)} ), s_{|s|-1})$（可能为 $\text{null}$）</p>
-<p>定义 $L(q) = \{s \mid \text{trans}(q_0, s) = q\}$ 表示状态 $q$ 可以识别的字符串</p>
+<p>因为不存在等价状态，所以可以通过有限集 $L$ 唯一确定对应的 $q$，通过有限集 $L(q_0)$ 能唯一确定一个最简 DFA，可以符号化地构造：</p>
+<p>状态：$\forall L_0, (\exists q, L(q) = L_0) \iff (\exists t, L_0 = \{s\mid s\in L(q_0), t\in \text{perfix}(s)\})$</p>
+<p>转移：$\text{nxt}(p,x)=q \iff L(q) = \{s\mid s\in L(p), s_0=x\}$</p>
+<h3 id="后缀自动机-SAM"><a href="#后缀自动机-SAM" class="headerlink" title="后缀自动机 (SAM)"></a>后缀自动机 (SAM)</h3><p>定义：对于字符串 $S$，SAM 是 <strong>恰能识别</strong> $S$ <strong>所有后缀</strong>的<strong>最小DFA</strong></p>
 <p>下面讨论字符串 $S$ 构建的 SAM，其中 $S$ 长度为 $n$ </p>
-<p><strong>由最小 DFA 性质，SAM 唯一，根据相关条件，可推导出 SAM 满足以下一些性质：</strong></p>
+<p><strong>由最小 DFA 性质，SAM 唯一。利用字符串后缀的特殊性质，可以 $O(n)$ 构造出SAM，并且 SAM 满足以下一些性质：</strong></p>
 <h2 id="后缀与子串"><a href="#后缀与子串" class="headerlink" title="后缀与子串"></a>后缀与子串</h2><p>根据 SAM 定义，$\text{trans}(q_0,s) \in F \iff s \in \text{suffix}(S)$ </p>
 <p>此外，由于最小 DFA 中不存在不能转移到 $F$ 集的状态，若 $\text{trans}(q_0,s) \not = \text{null}$，说明 $s$ 是某个<u>后缀的前缀</u>，也就是说：$\text{trans}(q_0,s) \not = \text{null} \iff s \in \text{substring}(S)$</p>
 <h2 id="right集合、len区间，与parent树"><a href="#right集合、len区间，与parent树" class="headerlink" title="right集合、len区间，与parent树"></a>right集合、len区间，与parent树</h2><h3 id="right集合"><a href="#right集合" class="headerlink" title="right集合"></a>right集合</h3><p>考虑状态 $q$ 能识别哪些字符串：若 $q$ 能转移到 $F$ 集，则存在 从 $q_0$ 出发，经过 $q$ 的转移路径 到 $F$ 集，因此 $q$ 能识别的字符串都是 <u>后缀的后缀</u>，$q$ <strong>只能识别后缀</strong></p>
@@ -330,13 +313,13 @@ q_0 \xrightarrow{\quad[min(q),max(q)]\quad} q \xrightarrow{\quad \text{right}(q)
 <center> <font color="grey" size="2">如果 max(p)+1 = max(q)， 可以直接设新F集</font> </center>
 
 <ol>
-<li>由 max( \text{nxt}(\text{pre}(p),x) ) $\le$ max( \text{nxt}(p,x) ) （当且仅当 \text{nxt}(\text{pre}(p),x) = \text{nxt}(p,x) 时取等），可得：<strong>若 \text{trans}(q_0,str) $\in$ Q’，则 |str| $\le$ max(q)</strong></li>
-<li>若 |str| $\le$ max(p)+1 ，一定存在原后缀 suf 满足 |suf|=|str|-1，\text{trans}(q_0,suf) $\in$ P，\text{trans}(q_0,suf+x) $\in$ Q’，由于 str 与 suf+x 等长，可证明 str = suf+x，str 一定为新后缀</li>
+<li>由 $\max( \text{nxt}(\text{pre}(p),x) ) \le \max( \text{nxt}(p,x) )$ （当且仅当 $\text{nxt}(\text{pre}(p),x) = \text{nxt}(p,x)$ 时取等），可得： $\text{trans}(q_0,str) \in Q’ \Longrightarrow |str| \le \max(q)$</li>
+<li>若 $|str| \le \max(p)+1$ ，一定存在原后缀 $suf$ 满足 $|suf|=|str|-1$，$\text{trans}(q_0,suf) \in P，\text{trans}(q_0,suf+x) \in Q’$，由于 $str$ 与 $suf+x$ 等长，可证明 $str = suf+x$，$str$ 一定为新后缀</li>
 </ol>
 <p>因此不用考虑其他情况，一定不会误识别</p>
 <p>此外，还要将 np 的父节点设为 q </p>
-<h3 id="case-3"><a href="#case-3" class="headerlink" title="case 3"></a>case 3</h3><p>由 max 定义，显然有 max(p) + 1 $\le$ max(q)，上一节已经讨论了 max(p) + 1 = max(q) 的情况</p>
-<p>而如果 max(p) + 1 &lt; max(q) ，在直接将 q 加入 新 F 集时，<strong>一定会出现不是新后缀的 str，满足\text{trans}(q_0,str) = q</strong></p>
+<h3 id="case-3"><a href="#case-3" class="headerlink" title="case 3"></a>case 3</h3><p>由 max 定义，显然有 $\max(p) + 1 \le \max(q)$，上一节已经讨论了 $max(p) + 1 = max(q)$ 的情况</p>
+<p>而如果 $\max(p) + 1 &lt; \max(q)$ ，在直接将 $q$ 加入 新 $F$ 集时，<strong>一定会出现不是新后缀的 $str$，满足$\text{trans}(q_0,str) = q$</strong></p>
 <p><img src="/2020/08/19/Suffix-Automaton/seg_05.png" alt></p>
 <center> <font color="grey" size="2">注意：图中黄色字符一定不等于绿色字符 y
 </font> </center>
@@ -372,7 +355,7 @@ pre(q) \xleftarrow{} nq \xleftarrow{} q</script><p>对于 \text{nxt}函数：</p
 <p>定义 $a^R = \{x \mid |a|+1-x \in a\}$</p>
 <p>那么，反SAM中，节点p对应起点在 $\text{right}(p)^R, \text{len}(p.\text{pre}) &lt; \text{len}\le \text{len}(p)$​ 的子串，他们有相同的前缀</p>
 <p>在父节点中的排名权值为 $S_{r+\text{len}(p.pre)}$</p>
-<h2 id="广义SAM"><a href="#广义SAM" class="headerlink" title="广义SAM"></a>广义SAM</h2><p>T : trie<br>F(T) : T 中的子串 s = Tx…Ty，where Ty \in subtree( Tx )<br>S(T) : T 中的后缀<br>\text{right}(s) : Ty, where s=Tx…Ty</p>
+<h2 id="广义SAM"><a href="#广义SAM" class="headerlink" title="广义SAM"></a>广义SAM</h2><p>T : trie<br>F(T) : T 中的子串 s = Tx…Ty，where Ty \in subtree( Tx )<br>S(T) : T 中的后缀<br>\text{right}(s) : Ty, where s=Tx…Ty </p>
 
     </div>
 
@@ -453,7 +436,7 @@ pre(q) \xleftarrow{} nq \xleftarrow{} q</script><p>对于 \text{nxt}函数：</p
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NFA%E3%80%81DFA%EF%BC%88%E7%A1%AE%E5%AE%9A%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%89%E4%B8%8E%E6%9C%80%E5%B0%8FDFA"><span class="nav-number">1.</span> <span class="nav-text">NFA、DFA（确定有限自动机）与最小DFA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.1.</span> <span class="nav-text">自动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DFA%EF%BC%88%E7%A1%AE%E5%AE%9A%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">DFA（确定有限自动机）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AE%9A%E4%B9%89"><span class="nav-number">2.</span> <span class="nav-text">本文的一些定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%BC%80%E4%B8%8E%E5%AD%90%E4%B8%B2"><span class="nav-number">3.</span> <span class="nav-text">后缀与子串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#right%E9%9B%86%E5%90%88%E3%80%81len%E5%8C%BA%E9%97%B4%EF%BC%8C%E4%B8%8Eparent%E6%A0%91"><span class="nav-number">4.</span> <span class="nav-text">right集合、len区间，与parent树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#right%E9%9B%86%E5%90%88"><span class="nav-number">4.1.</span> <span class="nav-text">right集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#len%E5%8C%BA%E9%97%B4"><span class="nav-number">4.2.</span> <span class="nav-text">len区间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parent%E6%A0%91"><span class="nav-number">4.3.</span> <span class="nav-text">parent树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#right%E5%BA%95%E5%B1%82%E8%8A%82%E7%82%B9"><span class="nav-number">4.4.</span> <span class="nav-text">right底层节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B1%E9%85%8D%E6%8C%87%E9%92%88"><span class="nav-number">4.5.</span> <span class="nav-text">失配指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E8%AF%81%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">线性证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#case-1"><span class="nav-number">6.1.</span> <span class="nav-text">case 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#case-2"><span class="nav-number">6.2.</span> <span class="nav-text">case 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#case-3"><span class="nav-number">6.3.</span> <span class="nav-text">case 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">6.4.</span> <span class="nav-text">构造复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E%E6%96%B0SAM%E6%98%AF%E6%9C%80%E5%B0%8FDFA"><span class="nav-number">6.5.</span> <span class="nav-text">证明新SAM是最小DFA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SAM%E5%BB%BA%E5%90%8E%E7%BC%80%E6%A0%91"><span class="nav-number">7.</span> <span class="nav-text">SAM建后缀树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E4%B9%89SAM"><span class="nav-number">8.</span> <span class="nav-text">广义SAM</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">本文的一些定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E6%9C%89%E9%99%90%E8%87%AA%E5%8A%A8%E6%9C%BA-DFA"><span class="nav-number">1.1.</span> <span class="nav-text">确定有限自动机 (DFA)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.2.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F-DFA"><span class="nav-number">1.3.</span> <span class="nav-text">最小 DFA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA-SAM"><span class="nav-number">1.4.</span> <span class="nav-text">后缀自动机 (SAM)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%BC%80%E4%B8%8E%E5%AD%90%E4%B8%B2"><span class="nav-number">2.</span> <span class="nav-text">后缀与子串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#right%E9%9B%86%E5%90%88%E3%80%81len%E5%8C%BA%E9%97%B4%EF%BC%8C%E4%B8%8Eparent%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">right集合、len区间，与parent树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#right%E9%9B%86%E5%90%88"><span class="nav-number">3.1.</span> <span class="nav-text">right集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#len%E5%8C%BA%E9%97%B4"><span class="nav-number">3.2.</span> <span class="nav-text">len区间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parent%E6%A0%91"><span class="nav-number">3.3.</span> <span class="nav-text">parent树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#right%E5%BA%95%E5%B1%82%E8%8A%82%E7%82%B9"><span class="nav-number">3.4.</span> <span class="nav-text">right底层节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B1%E9%85%8D%E6%8C%87%E9%92%88"><span class="nav-number">3.5.</span> <span class="nav-text">失配指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E8%AF%81%E6%98%8E"><span class="nav-number">4.</span> <span class="nav-text">线性证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#case-1"><span class="nav-number">5.1.</span> <span class="nav-text">case 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#case-2"><span class="nav-number">5.2.</span> <span class="nav-text">case 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#case-3"><span class="nav-number">5.3.</span> <span class="nav-text">case 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">5.4.</span> <span class="nav-text">构造复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%81%E6%98%8E%E6%96%B0SAM%E6%98%AF%E6%9C%80%E5%B0%8FDFA"><span class="nav-number">5.5.</span> <span class="nav-text">证明新SAM是最小DFA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SAM%E5%BB%BA%E5%90%8E%E7%BC%80%E6%A0%91"><span class="nav-number">6.</span> <span class="nav-text">SAM建后缀树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E4%B9%89SAM"><span class="nav-number">7.</span> <span class="nav-text">广义SAM</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -495,7 +478,7 @@ pre(q) \xleftarrow{} nq \xleftarrow{} q</script><p>对于 \text{nxt}函数：</p
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
