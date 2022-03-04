@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open Sans:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="大学文化课">
+<meta property="og:type" content="website">
+<meta property="og:title" content="概率论学习笔记">
+<meta property="og:url" content="http://example.com/document/markdown/Probability-Theory-Note.html">
+<meta property="og:site_name" content="hz&#39;s blog">
+<meta property="og:description" content="大学文化课">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-29T04:30:00.000Z">
+<meta property="article:modified_time" content="2022-01-29T04:57:45.223Z">
+<meta property="article:author" content="hz">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/document/markdown/Probability-Theory-Note">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
+
+  <title>概率论学习笔记 | hz's blog
+</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hz's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content page posts-expand">
+            
+
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">概率论学习笔记
+</h1>
+
+<div class="post-meta">
+    <div class="post-description">大学文化课</div>
+  
+  <ul class="breadcrumb">
+          
+            <li><a href="/document/">DOCUMENT</a></li>
+            <li><a href="/document/markdown/">MARKDOWN</a></li>
+            <li>PROBABILITY-THEORY-NOTE</li>
+          
+  </ul>
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h2 id="概率公理化"><a href="#概率公理化" class="headerlink" title="概率公理化"></a>概率公理化</h2><p>定义全集为 $\Omega$ ，事件 $A$ 为 $\Omega$ 的子集 ，$\Omega$ 是事件，可数个事件的并也是事件，有限个事件的交、并也是事件</p>
+<p>概率公理化：</p>
+<ol>
+<li><p>$\forall A, P(A) \ge 0$</p>
+</li>
+<li><p>$P(\Omega) = 1$</p>
+</li>
+<li><p>对于互不相容的 $A_1, A_2, \dots$ ，$P(\bigcup_{j=1}^\infty A_j) = \sum_{j=1}^\infty P(A_j)$</p>
+</li>
+</ol>
+<p>可以推出：$P(\varnothing) = 0$ ，$P(\overline A) = 1-P(A)$ 等性质</p>
+<h2 id="概率公式"><a href="#概率公式" class="headerlink" title="概率公式"></a>概率公式</h2><h3 id="加法公式"><a href="#加法公式" class="headerlink" title="加法公式"></a>加法公式</h3><p>$P(A+B) = P(A) + P(B) - P(AB)$​</p>
+<p>$P(\sum_{j=1}^n A_j) = \sum_{1\le j_1 &lt; j_2 &lt; \dots &lt; j_m \le n} (-1)^{m+1} P(A_{j_1} A_{j_2} \dots A_{j_m})$ </p>
+<h3 id="事件独立"><a href="#事件独立" class="headerlink" title="事件独立"></a>事件独立</h3><p>称事件 $A,B$ 独立当且仅当 $P(AB) = P(A)P(B)$</p>
+<h3 id="条件概率"><a href="#条件概率" class="headerlink" title="条件概率"></a>条件概率</h3><p>当事件 $A$ 发生时事件 $B$ 发生的概率： $P(B|A) = \frac{P(AB)}{P(A)}$</p>
+<p>全概率公式：$P(B) = P(A)P(B|A) + P(\overline A)P(B|\overline A)$</p>
+<p>贝叶斯公式：$P(A|B) = \frac{P(AB)}{P(B)} = \frac{P(A)P(B|A)}{P(B)}$</p>
+<h2 id="随机变量-向量"><a href="#随机变量-向量" class="headerlink" title="随机变量 / 向量"></a>随机变量 / 向量</h2><h3 id="随机变量"><a href="#随机变量" class="headerlink" title="随机变量"></a>随机变量</h3><p>考虑有概率得到不同实数值的变量 $X$ </p>
+<p>定义（概率）分布函数 $F(x) = P(X \le x) (-\infty &lt; x &lt; +\infty)$</p>
+<p>如果 $F(x)$ 连续，$X$ 有（概率）密度 $F(x) = \int_{-\infty}^x f(s) \mathrm d s$</p>
+<p>当 $F’(x)$ 存在时，$f(x) = F’(x)$ ，否则 $f(x)=0$</p>
+<h3 id="随机向量"><a href="#随机向量" class="headerlink" title="随机向量"></a>随机向量</h3><p>联合分布函数：$F(x,y) = P(X\le x, Y\le y)$</p>
+<p>边缘分布函数：$F_X(x) = P(X\le x), F_Y(y) = P(Y\le y)$</p>
+<p>联合密度函数：$P((X,Y)\in D) = \iint_{D} f(x,y) \mathrm dx\mathrm dy$</p>
+<p>独立性：$X,Y$ 独立 $\iff f(x,y) = f_X(x) f_Y(y) \iff P(X\le x, Y\le y) = P(X\le x)P(Y\le y)$</p>
+<h3 id="函数变换"><a href="#函数变换" class="headerlink" title="函数变换"></a>函数变换</h3><h4 id="1D-1D"><a href="#1D-1D" class="headerlink" title="1D-1D"></a>1D-1D</h4><p>（要求 $h$ 单调）</p>
+<p>$P(X=x) = \lim_{\Delta x \to 0} F(x) - F(x-\Delta x) = F’(x) \mathrm dx$</p>
+<p>若 $P(X=x) = f(x) \mathrm dx$，$P(X=h(y)) = |f(h(y)) \mathrm d h(y)| = |h’(y)| f(h(y)) \mathrm dy$</p>
+<p>$Y = h(X)$ ，已知 $X$ 概率密度函数 $f(x)$ ，求 $Y$ 概率密度函数 $g(y)$</p>
+<p>微分法：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+g(y) \mathrm dy &= P(Y=y)\\
+&= P(X = h^{-1}(y)) = f(h^{-1}(y)) \mathrm dx\\
+\\
+x &= h^{-1}(y)\\
+\mathrm dx &= (h^{-1}(y))' \cdot \mathrm dy
+\end{aligned}</script><p>积分法：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\int_{-\infty}^y g(t) \mathrm dt &= P(Y\le y)\\
+&= P(h(X) \le y) = \int_{-\infty}^{h^{-1}(y)} f(x) \mathrm dx\\
+\\
+g(y) &= h^{-1}(y)'\cdot f(h^{-1}(y))
+\end{aligned}</script><h4 id="2D-1D"><a href="#2D-1D" class="headerlink" title="2D-1D"></a>2D-1D</h4><p>$U = u(X,Y), P(U\le u) = \iint \left[u(x,y) \le u\right] f(x,y) \mathrm dx\mathrm dy$</p>
+<h4 id="2D-2D"><a href="#2D-2D" class="headerlink" title="2D-2D"></a>2D-2D</h4><script type="math/tex; mode=display">
+\begin{aligned}
+P(X=x,Y=y) &= f(x,y) \mathrm dx\mathrm dy\\
+P(U=u,V=v) &= P(X=x(u,v), Y=y(u,v))\\
+&= f(x(u,v), y(u,v)) \mathrm dx\mathrm dy\\
+&= f(x(u,v), y(u,v)) \left|\frac{\partial(x,y)}{\partial(u,v)}\right| \mathrm du\mathrm dv\\
+\\
+g(u,v) \mathrm du\mathrm dv &= f(x(u,v), y(u,v)) \mathrm dx\mathrm dy = f(x(u,v), y(u,v)) \left|\frac{\partial(x,y)}{\partial(u,v)}\right| \mathrm du\mathrm dv\\
+\end{aligned}</script><h3 id="离散型随机变量"><a href="#离散型随机变量" class="headerlink" title="离散型随机变量"></a>离散型随机变量</h3><h4 id="二项分布"><a href="#二项分布" class="headerlink" title="二项分布"></a>二项分布</h4><p>$X \sim \mathcal B(n,p), n\in \mathbb N^+, 0&lt;p&lt;1$</p>
+<p>$P(X=k) = {n\choose k} p^k (1-p)^{n-k},  k=0,1,\dots,n$</p>
+<p>$(px+(1-p))^{n} = \sum_{k=0}^n {n\choose k} (px)^k (1-p)^{n-k}, \sum_{k=0}^n P(X=k) =1$</p>
+<p>$n=1$​ 时也被称作伯努利分布（两点分布）</p>
+<p>考虑 $\frac{P(X=k)}{P(X=k-1)}$ ，$P(X = \lfloor (n+1) p\rfloor)$​ 最大</p>
+<p>$E(X) = np$</p>
+<p>$Var(X) = npq$</p>
+<h4 id="泊松分布"><a href="#泊松分布" class="headerlink" title="泊松分布"></a>泊松分布</h4><p>$X \sim \mathcal P(\lambda), \lambda &gt; 0$</p>
+<p>$P(X=k) = \frac{\lambda^k}{k!} e^{-\lambda}, k=0,1,\dots$</p>
+<p>$e^{\lambda x}e^{-\lambda} = \sum_{k=0}^\infty \frac{(\lambda x)^k}{k!}e^{-\lambda}, \sum_{k=0}^\infty P(X=k) =1$</p>
+<p>考虑 $\frac{P(X=k)}{P(X=k-1)}$ ，$P(X = \lfloor \lambda\rfloor)$ 最大</p>
+<p>可加性：$X_1 \sim \mathcal P(\lambda_1), X_2 \sim \mathcal P(\lambda_2) \Longrightarrow X_1+X_2 \sim \mathcal P(\lambda_1+\lambda_2)$</p>
+<p>和二项分布的关系：设 $X \sim \mathcal P(\lambda)$ ，$Y \sim \mathcal B(n,\frac{\lambda}{n})$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\lim_{n\to \infty} P(Y=k) &= \lim_{n\to \infty}{n\choose k} (\frac{\lambda}{n})^k (1-\frac{\lambda}{n})^{n-k}\\
+&= \lim_{n\to \infty} \frac{n^{\underline k}}{k!}(\frac{\lambda}{n})^k (1-\frac{\lambda}{n})^{n-k}\\
+&= \lim_{n\to \infty} \frac{\lambda^k}{k!}\ \frac{n^{\underline k}}{n^k} (1-\frac{\lambda}{n})^{n-k}\\
+&= \frac{\lambda^k}{k!}\lim_{n\to \infty} (1-\frac{\lambda}{n})^{n}\\
+&= \frac{\lambda^k}{k!} e^{-\lambda} = P(X = k)\\
+\end{aligned}</script><p>$E(X) = \lambda$</p>
+<p>$Var(X) = \lambda$</p>
+<h4 id="超几何分布"><a href="#超几何分布" class="headerlink" title="超几何分布"></a>超几何分布</h4><p>$X \sim H(N,M,n), N\ge M, N\ge n$</p>
+<p>$P(X=m) = \frac{ {M \choose m} \cdot {N-M \choose n-m} }{N \choose n}, m = 0,1,\dots,M$</p>
+<p>这里不合法的组合数都为0</p>
+<p>组合意义：$N$ 件产品中有 $M$ 件次品，从 $N$ 件产品中选出 $n$ 件，次品数为随机变量 $X \sim H(N,M,n)$</p>
+<p>$P(X = \lfloor (n+1)\frac{M+1}{N+2}\rfloor)$ 最大</p>
+<h4 id="几何分布"><a href="#几何分布" class="headerlink" title="几何分布"></a>几何分布</h4><p>$0&lt;p&lt;1$</p>
+<p>$P(X=k) = (1-p)^{k-1} p, k=1,2,\dots$  表示单次成功率为 $p$ 的试验第 $k$ 次终于成功的概率</p>
+<p>$E(X) = \frac{1}{p}$</p>
+<p>$Var(X) = \frac{1-p}{p^2}$</p>
+<h3 id="连续性随机变量"><a href="#连续性随机变量" class="headerlink" title="连续性随机变量"></a>连续性随机变量</h3><h4 id="均匀分布"><a href="#均匀分布" class="headerlink" title="均匀分布"></a>均匀分布</h4><p>$X \sim U(a,b), a&lt;b$</p>
+<p>$f(x) = \frac{1}{b-a} (x\in(a,b))$</p>
+<p>$E(X) = \frac{a+b}{2}$</p>
+<p>$Var(X) = \frac{(b-a)^2}{12}$</p>
+<h4 id="指数分布"><a href="#指数分布" class="headerlink" title="指数分布"></a>指数分布</h4><p>$X \sim Exp(\lambda), \lambda&gt;0$</p>
+<p>$f(x) = \lambda e^{-\lambda x} (x\ge 0)$</p>
+<p>$\int_{0}^{+\infty} \lambda e^{-\lambda x} \mathrm dx = \left[-e^{-\lambda x}\right]_0^{+\infty} = 1$</p>
+<p>无记忆性：$P(X&gt;s+t \mid X&gt;s) = P(x&gt;t)$</p>
+<p>$E(X) = \frac{1}{\lambda}$</p>
+<p>$Var(X) = \frac{1}{\lambda^2}$</p>
+<h4 id="正态分布"><a href="#正态分布" class="headerlink" title="正态分布"></a>正态分布</h4><h5 id="标准正态分布"><a href="#标准正态分布" class="headerlink" title="标准正态分布"></a>标准正态分布</h5><p>$\varphi(x) = \frac{1}{\sqrt{2\pi}} \exp(-\frac{x^2}{2})$ ，$\Phi(x) = \int_{-\infty}^x \varphi(s) \mathrm ds$ ，通过查表得到</p>
+<p>证明：$\int_{-\infty}^{+\infty} \exp(-\frac{x^2}2) \mathrm dx = \sqrt{2\pi}$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+(\int_{-\infty}^{+\infty} \exp(-\frac{x^2}2) \mathrm dx)^2 &= \iint_{R^2} \exp(-\frac{x^2+y^2}{2})\mathrm dx \mathrm dy\\
+&= \int_{0}^{2\pi} \mathrm d\theta \int_{0}^{\infty} \exp(-\frac{r^2}{2}) r\mathrm dr\\
+&= 2\pi \int_{0}^{\infty} e^{-\frac{r^2}{2}} r\mathrm dr\\
+&= 2\pi \int_{0}^{\infty} e^{-\frac{r^2}{2}} \mathrm d\frac{r^2}{2}\\
+&= 2\pi \int_{0}^{\infty} e^{-x} \mathrm dx = 2\pi\\
+\end{aligned}</script><h5 id="普通正态分布"><a href="#普通正态分布" class="headerlink" title="普通正态分布"></a>普通正态分布</h5><p>$Z \sim N(0,1), \frac{X-\mu}{\sigma} = Z, X\sim N(\mu,\sigma^2), \sigma&gt;0$</p>
+<p>$f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp \left[-\frac{(x-\mu)^2}{2\sigma^2}\right], (x\in \mathbb R)$</p>
+<p>对于 $X\sim N(\mu,\sigma^2)$ ，$P(x \le a) = \int_{-\infty}^a \frac{1}{\sqrt{2\pi\sigma^2}} \exp \left[-\frac{(x-\mu)^2}{2\sigma^2}\right] \mathrm dx = \int_{-\infty}^{\frac{a-\mu}{\sigma}} \frac{1}{\sqrt{2\pi}} \exp(-\frac{x^2}{2})\mathrm dx = \Phi(\frac{a-\mu}{\sigma})$</p>
+<p>$E(X) = \mu, Var(X) = \sigma^2$</p>
+<p>期望为 $\mu$ ，方差为 $\sigma^2$ 的正态分布只有 $N(\mu,\sigma^2)$</p>
+<h5 id="正态分布“脱靶量”"><a href="#正态分布“脱靶量”" class="headerlink" title="正态分布“脱靶量”"></a>正态分布“脱靶量”</h5><p>$X \sim N(0,1), Y \sim N(0,1), f(x,y) = \frac{1}{2\pi} \exp(-\frac{x^2+y^2}{2})$</p>
+<p>$P(\sqrt{x^2+y^2} \le r) = \iint_D \frac{1}{2\pi} \exp(-\frac{x^2+y^2}{2}) \mathrm dx\mathrm dy = \frac{1}{2\pi} \int_{0}^{2\pi} \mathrm d\theta\int_0^r e^{-\frac{z^2}{2}} z\mathrm dz = \int_0^r e^{-\frac{z^2}{2}} z\mathrm dz$</p>
+<p>$f(r) = re^{-\frac{r^2}2}$</p>
+<h5 id="正态分布高阶矩"><a href="#正态分布高阶矩" class="headerlink" title="正态分布高阶矩"></a>正态分布高阶矩</h5><p>对于 $X\sim N(0,\sigma^2)$ ，求 $E(X^n) = \int_{-\infty}^{+\infty} x^n \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{x^2}{2\sigma^2}} \mathrm dx$ ，当 $n$ 为奇数时显然为 $0$ ，下面只讨论 $n=2k$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\int_{-\infty}^{+\infty} u^n e^{-\frac{u^2}2} \mathrm du
+&= 2\int_{0}^{+\infty} u^n e^{-\frac{u^2}2} \mathrm du\\
+&= 2\int_{0}^{+\infty} (\sqrt{2t})^n e^{-t} \mathrm d(\sqrt{2t})\\
+&= 2^{k+\frac12} \int_{0}^{+\infty} t^{k-\frac12} e^{-t}\mathrm dt\\
+&= 2^{\frac{n+1}2} \Gamma(\frac{n+1}2)\\
+&= (n-1)\cdot 2^{\frac{(n-2)+1}{2}} \Gamma(\frac{(n-2)+1}{2})\\
+&= \dots\\
+&= (n-1)\times(n-3)\times(n-5)\times\dots\times1\times \sqrt{2\pi}\\
+&= (n-1)!!\times\sqrt{2\pi}\\
+\\
+E(X^n) &= \frac{1}{\sqrt{2\pi\sigma^2}}\int_{-\infty}^{+\infty} x^n e^{-\frac{x^2}{2\sigma^2}} \mathrm dx\\
+&= \frac{\sigma^n}{\sqrt{2\pi}}\cdot \int_{-\infty}^{+\infty} u^n e^{-\frac{u^2}2} \mathrm du\\
+&= \sigma^n \times (n-1)!!
+\end{aligned}</script><h4 id="二维正态分布"><a href="#二维正态分布" class="headerlink" title="二维正态分布"></a>二维正态分布</h4><h5 id="标准二维正态分布"><a href="#标准二维正态分布" class="headerlink" title="标准二维正态分布"></a>标准二维正态分布</h5><p>$\varphi(z_1,z_2) = \varphi(z_1) \varphi(z_2) = \frac{1}{2\pi} \exp(-\frac{z_1^2+z_2^2}{2})$</p>
+<h5 id="二维正态分布-1"><a href="#二维正态分布-1" class="headerlink" title="二维正态分布"></a>二维正态分布</h5><p>$(Z_1, Z_2)$ 服从标准二维正态分布，$\begin{cases}X_1 = aZ_1 + bZ_2 + \mu_1\\X_2 = cZ_1+dZ_2 + \mu_2\end{cases}, ad-bc \not=0$ ，$(X_1, X_2)$ 服从二维正态分布</p>
+<script type="math/tex; mode=display">
+f(x_1,x_2) \mathrm dx_1\mathrm dx_2 = \varphi(z_1,z_2) \mathrm dz_1\mathrm dz_2 = \varphi(z_1,z_2) \left|\frac{\partial(x,y)}{\partial(u,v)}\right| \mathrm dx_1\mathrm dx_2\\
+
+J = ad-bc,\ X_1' = X_1-\mu_1,\ X_2' = X_2-\mu_2\\
+
+\begin{cases}
+aZ_1+bZ_2 = X_1'\\
+cZ_1+dZ_2 = X_2'
+\end{cases}
+\Longrightarrow
+\begin{cases}
+Z_1 = \frac1J (dX_1' - bX_2')\\
+Z_2 = \frac1J (-cX_1' + aX_2')\\
+\end{cases}\\
+\left|\frac{\partial(x,y)}{\partial(u,v)}\right| = \frac1J\\
+\\
+\begin{aligned}
+f(x_1,x_2) &= \frac{1}{2\pi J} \exp(-\frac{1}{2J^2} \left[(dX_1' - bX_2')^2 + (-cX_1' + aX_2')^2\right])\\
+&= \frac{1}{2\pi J} \exp(-\frac{1}{2J^2} \left[(c^2+d^2) X_1'^2 - 2(ac+bd)X_1'X_2' + (a^2+b^2)X_2'^2\right])\\
+\end{aligned}
+\\
+\\
+\sigma_1 = \sqrt{a^2+b^2}, \sigma_2 = \sqrt{c^2+d^2},\ \rho = \frac{ac+bd}{\sigma_1\sigma_2}\\
+\begin{aligned}
+J^2 + (\rho\sigma_1\sigma_2)^2 &= (ad-bc)^2 + (ac+bd)^2\\
+&= a^2d^2 + b^2c^2 + a^2c^2 + b^2d^2\\
+&= (a^2 + b^2) (c^2 + d^2) = \sigma_1^2 \sigma_2^2\\
+J^2 &= \sigma_1^2 \sigma_2^2 (1 - \rho^2)
+\end{aligned}\\
+\\
+\begin{aligned}
+f(x_1,x_2) &= \frac{1}{2\pi J} \exp(-\frac{1}{2J^2} \left[\sigma_2^2 X_1'^2 - 2(ac+bd)X_1'X_2' + \sigma_1^2X_2'^2\right])\\
+&= \frac{1}{2\pi J} \exp(-\frac{\sigma_1^2\sigma_2^2}{2J^2} \left[\frac{X_1'^2}{\sigma_1^2} - \frac{2\rho X_1'X_2'}{\sigma_1\sigma_2} + \frac{X_2'^2}{\sigma_2^2}\right])
+\end{aligned}\\
+\\
+f(x_1,x_2) = \small{\frac{1}{2\pi \sigma_1\sigma_2\sqrt{1-\rho^2}} \exp\left(-\frac{1}{2(1-\rho^2)}\left[\frac{(x_1-\mu_1)^2}{\sigma_1^2}-\frac{2\rho (x_1-\mu_1)(x_2-\mu_2)}{\sigma_1\sigma_2}+\frac{(x_2-\mu_2)^2}{\sigma_2^2}\right]\right)}</script><p>称 $(X_1,X_2) \sim N(\mu_1,\mu_2;\sigma_1^2,\sigma_2^2;\rho)$</p>
+<p>$X_1$ 的边缘概率密度：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+f_{X_1}(x) &= \small{\int_{-\infty}^{+\infty}\frac{1}{2\pi \sigma_1\sigma_2\sqrt{1-\rho^2}} \exp\left(-\frac{1}{2(1-\rho^2)}\left[\frac{X_1'^2}{\sigma_1^2}-\frac{2\rho X_1'X_2'}{\sigma_1\sigma_2}+\frac{X_2'^2}{\sigma_2^2}\right]\right)\mathrm dX_2'}\\
+&= \small{\int_{-\infty}^{+\infty}\frac{1}{2\pi \sigma_1\sigma_2\sqrt{1-\rho^2}} \exp\left(-\frac{1}{2(1-\rho^2)}\left[\frac{(1-\rho^2)X_1'^2}{\sigma_1^2}+\frac{\rho^2X_1'^2}{\sigma_1^2}-\frac{2\rho X_1'X_2'}{\sigma_1\sigma_2}+\frac{X_2'^2}{\sigma_2^2}\right]\right)\mathrm dX'_2}\\
+&= \small{\frac{1}{2\pi \sigma_1\sigma_2\sqrt{1-\rho^2}} \exp(-\frac{X_1'^2}{2\sigma_1^2})\ \int_{-\infty}^{+\infty}\exp\left(-\frac{1}{2(1-\rho^2)}\left[\frac{\rho X_1'}{\sigma_1}-\frac{X_2'}{\sigma_2}\right]^2\right)\mathrm dX'_2}\\
+\end{aligned}</script><script type="math/tex; mode=display">
+\begin{aligned}
+\small{\int_{-\infty}^{+\infty}\exp\left(-\frac{1}{2(1-\rho^2)}\left[\frac{\rho X_1'}{\sigma_1}-\frac{X_2'}{\sigma_2}\right]^2\right)\mathrm dX'_2} &= \small{\sigma_2\sqrt{1-\rho^2} \int_{-\infty}^{+\infty}\exp\left(-\frac{1}{2}(\frac{\frac{\rho X_1'}{\sigma_1}-\frac{X_2'}{\sigma_2}}{\sqrt{1-\rho^2}})^2\right)\mathrm d \frac{\frac{X_2'}{\sigma_2}-\frac{\rho X_1'}{\sigma_1}}{\sqrt{1-\rho^2}}}\\
+&= \sigma_2\sqrt{1-\rho^2} \int_{-\infty}^{+\infty} \exp(-\frac12 t^2) \mathrm dt\\
+&= \sigma_2\sqrt{1-\rho^2} \sqrt{2\pi}
+\end{aligned}</script><script type="math/tex; mode=display">
+\begin{aligned}
+f_{X_1}(x) &= \frac{1}{2\pi \sigma_1\sigma_2\sqrt{1-\rho^2}} \exp(-\frac{X_1'^2}{2\sigma_1^2})\sigma_2\sqrt{1-\rho^2} \sqrt{2\pi}\\
+&= \frac{1}{\sqrt{2\pi} \sigma_1} \exp(-\frac{X_1'^2}{2\sigma_1^2}) = \frac{1}{\sqrt{2\pi} \sigma_1} \exp(-\frac{(x-\mu_1)^2}{2\sigma_1^2})
+\end{aligned}</script><p>$(X_1,X_2) \sim N(\mu_1,\mu_2;\sigma_1^2,\sigma_2^2;\rho) \Longrightarrow X_1 \sim N(\mu_1,\sigma_1^2)$</p>
+<p>$X_1,X_2$ 独立 $\iff \rho=0$</p>
+<p>正态分布的非零线性组合也是正态分布</p>
+<p>$Cov(X_1,X_2) = ac+bd, \rho(X_1,X_2) = \rho$</p>
+<h4 id="伽马分布"><a href="#伽马分布" class="headerlink" title="伽马分布"></a>伽马分布</h4><p>引入伽马函数 $\Gamma(\alpha) = \int_0^\infty x^{\alpha-1} e^{-x} \mathrm dx$ ，$\forall \alpha&gt;0, n\in \mathbb N^+, \Gamma(1+\alpha) = \alpha \Gamma(\alpha),  \Gamma(n) = (n-1)!, \Gamma(\frac{1}{2}) = \sqrt{\pi}$</p>
+<p>$X \sim \Gamma(\alpha,\beta), \alpha,\beta &gt; 0$</p>
+<p>$f(x) = \frac{\beta^\alpha}{\Gamma(\alpha)} x^{\alpha-1} e^{-\beta x}$</p>
+<h3 id="期望和方差"><a href="#期望和方差" class="headerlink" title="期望和方差"></a>期望和方差</h3><h4 id="期望"><a href="#期望" class="headerlink" title="期望"></a>期望</h4><p>期望 $E(X) = \sum p_i x_i$ （离散型）  $E(X) = \int_{-\infty}^{+\infty} xf(x) \mathrm dx$ （连续性）</p>
+<p>$\forall X,Y, E(X+Y) = E(X) + E(Y), E(\lambda X) = \lambda E(X)$</p>
+<p>$X,Y$ 独立时，$E(XY) = E(X)E(Y)$</p>
+<p>内积不等式：$EX^2,EY^2&lt;+\infty, |E(XY)| \le \sqrt{EX^2EY^2}$ 当前仅当存在不全为0的 $a,b$ 满足 $P(aX+bY=0)=1$ 时等号成立（类似柯西不等式，用二次型证明）</p>
+<h4 id="方差"><a href="#方差" class="headerlink" title="方差"></a>方差</h4><p>方差 $Var(X) = \sigma_{XX} = E(X-\mu_X)^2 = EX^2 - (EX)^2, \mu_X = \overline{X}$</p>
+<p>标准差 $\sigma_X = \sqrt{Var(X)}$</p>
+<p>$\forall X, Var(a+bX) = b^2 Var(X)$</p>
+<p>当 $X_1,X_2,\dots X_n$ 独立时，$Var(\sum X_i) = E\left(\sum (X_i - \mu_{i})\right)^2 = \left[\sum E (X_i - \mu_{i})^2\right] + \sum E(X_i - \mu_{i})E(X_j - \mu_{j}) = \sum Var(X_i)$</p>
+<h4 id="协方差"><a href="#协方差" class="headerlink" title="协方差"></a>协方差</h4><p>协方差 $\sigma_{XY} = Cov(X,Y) = E\left[(X-\mu_X)(Y-\mu_Y)\right]$</p>
+<p>相关系数 $\rho_{XY} = \frac{\sigma_{XY}}{\sigma_X\sigma_Y} = Cov(\frac{X-\mu_X}{\sigma_X},\frac{Y-\mu_Y}{\sigma_Y})$ ，$|\rho| \le 1$，$\rho=0$ 时 $X,Y$ 不相关（不相关不一定独立，只是无明显线性关系，独立一定不相关），$\rho=\pm 1$ 时 $X,Y$ 有线性关系</p>
+<p>$Cov(X,Y) = E(XY) - (EX)(EY)$</p>
+<p>$Cov(aX+bY,Z) = aCov(X,Z) + bCov(Y,Z)$</p>
+<p>$Var(X\pm Y) = Var(X) + Var(Y) \pm 2Cov(X,Y)$ （证明：$Var(X) = Cov(X,X)$）</p>
+<h4 id="协方差矩阵"><a href="#协方差矩阵" class="headerlink" title="协方差矩阵"></a>协方差矩阵</h4><p>随机向量 $(X_1,X_2)$ 的协方差矩阵 $\Sigma = \left(\begin{array}\ \sigma_{11} &amp; \sigma_{12} \ \sigma_{21} &amp; \sigma_{22}\end{array}\right)$</p>
+<p>协方差矩阵是对称矩阵、半正定矩阵</p>
+<blockquote>
+<p>实对称矩阵$A$称为半正定的，当且仅当对于任意不为$0$的实列向量$x$，都有$x^TAx\ge 0$.</p>
+<p>半正定矩阵的行列式是非负的</p>
+</blockquote>
+<p>$\forall a, a^T\Sigma a = \sum_{i,j} a_i E(X_i-\mu_{i})(X_j-\mu_{j})a_j = E(\sum_{i,j} a_i(X_i-\mu_{i}))^2 \ge 0$</p>
+<h2 id="大数律"><a href="#大数律" class="headerlink" title="大数律"></a>大数律</h2><blockquote>
+<p>$(X_n)_{n\ge 1}$ 是随机事件列，分布函数为 $(F_n(x))_{n\ge 1}$，$X$ 是随机事件，分布函数为 $F(x)$</p>
+<p>依分布收敛：$\lim_{n\to\infty} F_n(x) = F(x)$</p>
+<p>依概率收敛：$\forall \varepsilon&gt;0, \lim_{n\to\infty} P(|X_n-X| &gt; \varepsilon) = 0$</p>
+<p>以概率1收敛：$P(\lim_{n\to\infty} X_n = X) = 1$</p>
+<p>依概率1收敛(a.s.)（几乎处处收敛(w.p.1)）&gt; 依概率收敛(p) &gt; 依分布收敛(d)</p>
+</blockquote>
+<h3 id="强大数律"><a href="#强大数律" class="headerlink" title="强大数律"></a>强大数律</h3><p>随机变量 $X_1,X_2,\dots$ 独立同分布，$E X_1 = \mu$，$\lim_{n\to\infty} \overline{X}_n = \mu$ 以概率$1$成立</p>
+<p>也称Kolmogorov’s law，证明比弱大数律复杂</p>
+<p>（几乎处处收敛）</p>
+<h3 id="切比雪夫不等式"><a href="#切比雪夫不等式" class="headerlink" title="切比雪夫不等式"></a>切比雪夫不等式</h3><p>$X$ 为一随机变量，$\forall \varepsilon&gt;0, P(|X-\mu| \ge \varepsilon) \le \frac{1}{\varepsilon^2} Var(X)$</p>
+<p>证明：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(|X-\mu| \ge \varepsilon) &= \int_{|X-\mu| \ge \varepsilon} f(x) \mathrm dx\\
+&\le \int_{|X-\mu| \ge \varepsilon} \left(\frac{x-\mu}{\varepsilon}\right)^2f(x) \mathrm dx\\
+&\le \int_{R} \left(\frac{x-\mu}{\varepsilon}\right)^2f(x) \mathrm dx = \frac{1}{\varepsilon^2} Var(X)\\
+\end{aligned}</script><h3 id="切比雪夫大数律"><a href="#切比雪夫大数律" class="headerlink" title="切比雪夫大数律"></a>切比雪夫大数律</h3><p>随机变量 $X_1,X_2,\dots$ 独立（不需要同分布），期望存在，方差有相同上界 $M$ </p>
+<p>$\lim_{n\to \infty} P(|\overline{X}_n - \overline{\mu}_n| \ge \varepsilon) \le  \lim_{n\to \infty} \frac{1}{\varepsilon^2} Var(\overline{X}_i) \le \lim_{n\to \infty} \frac{M}{n\varepsilon^2} = 0$</p>
+<h3 id="辛钦大数律"><a href="#辛钦大数律" class="headerlink" title="辛钦大数律"></a>辛钦大数律</h3><p>随机变量 $X_1,X_2,\dots$ 独立同分布，期望存在</p>
+<p>$\lim_{n\to \infty} P(|\overline{X}_n - \overline{\mu}_n| \ge \varepsilon) \le \lim_{n\to \infty} \frac{M}{n\varepsilon^2} = 0$</p>
+<p>未找到证明</p>
+<p>（依概率收敛）</p>
+<h3 id="中心极限定律"><a href="#中心极限定律" class="headerlink" title="中心极限定律"></a>中心极限定律</h3><p>随机变量 $X_1,X_2,\dots$ 独立同分布，$E X_1 = \mu, Var(X_1) = \sigma^2 &gt; 0$</p>
+<p>对于较大的 $n$，$Z_n = \frac{\overline{X}_n - \mu}{\sqrt{\sigma^2/n}} \sim N(0,1)$，$\overline{X}_n \sim N(\mu, \frac{\sigma^2}{n})$ ，部分和 $S_n \sim N(n\mu, n\sigma^2)$ 近似成立</p>
+<p>（依分布收敛）</p>
+<p>对于离散型随机变量，$P(X=k)$ 需要变换为 $P(k-0.5\le X \le k+0.5)$</p>
+<p>如果 $\sigma$ 未知，可以用 $\begin{cases}\hat{\sigma}^2 = \frac{1}{n-1} \sum_{j=1}^n (X_i - \overline X_i)^2\\\hat{\sigma}^2 = \frac{1}{n} \sum_{j=1}^n (X_i - \overline X_i)^2\end{cases}$ 代替</p>
+<p>$\overline X_n \sim N(\mu_1, \frac{\sigma_1^2}{n}), \overline Y_m \sim N(\mu_2, \frac{\sigma_2^2}{m}), (\overline X_n - \overline Y_m) \sim N(\mu_1-\mu_2, \frac{\sigma_1^2}{n}+\frac{\sigma_2^2}{m})$</p>
+<p>$\frac{(\overline X_n - \overline Y_m) - (\mu_1-\mu_2)}{\sqrt{\sigma_1^2/n+\sigma_2^2/m}} \sim N(0,1)$</p>
+<h2 id="参数估计"><a href="#参数估计" class="headerlink" title="参数估计"></a>参数估计</h2><p>$X_1,X_2,\dots X_n$ 独立且与 $X$ 同分布，称 $X$ 是总体，$X_1,X_2,\dots X_n$ 是总体的样本，$x_1,x_2,\dots x_n$ 是样本的观测值</p>
+<p>$\theta$ 是 $X$ 的未知参数，函数 $g(x_1,x_2,\dots x_n)$ 的值 $\hat \theta$ 称作估计量/统计量，估计量由函数 $g$ 和输入 $x_1,x_2,\dots, x_n$ 决定，当 $X_1,X_2,\dots,X_n$ 未确定时（为随机变量），$\hat \theta$ 同样为随机变量</p>
+<p>无偏估计：$E \hat \theta = \theta$</p>
+<p>如果 $\hat \theta_1 = \hat \theta_2$ 都是无偏估计，$Var(\hat \theta_1) &lt; Var(\hat \theta_2)$ ，则称 $\hat \theta_1$ 比 $\hat \theta_2$ 更有效</p>
+<p>相合估计：$n\to \infty$ ，$\hat \theta$ 依概率收敛到 $\theta$</p>
+<p>强相合估计：$n\to \infty$ ，$\hat \theta$ 以概率$1$收敛到 $\theta$，（强相合估计一定是相合估计）</p>
+<h3 id="样本均值"><a href="#样本均值" class="headerlink" title="样本均值"></a>样本均值</h3><p>样本均值 $\hat \mu = \overline X_n$ 是对期望的无偏估计、强相合估计（强大数律），且 $\overline X_n$ 比 $\overline X_{n-1}$ 更有效</p>
+<h3 id="样本方差"><a href="#样本方差" class="headerlink" title="样本方差"></a>样本方差</h3><p>定义 $\hat \mu = \overline X_n, \mu = EX$ ，总方差 $\sigma^2 = Var(X)$ 的估计由样本方差 $S^2 = \frac{1}{n-1} \sum_{j=1}^{n} (X_j - \hat \mu)^2$ 表示</p>
+<p>$S^2$ 是对 $\sigma^2$ 的无偏估计</p>
+<p>证明 $E(S^2) = \sigma^2$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+E(S^2) &= E\left( \frac{1}{n-1} \sum_{j=1}^{n} (X_j - \hat \mu)^2 \right)\\
+&= \frac{1}{n-1} E\left((\sum_{j=1}^{n} X_j^2) - n\hat\mu^2\right)\\
+&= \frac{n}{n-1} E(X^2) - \frac{1}{n(n-1)} E\left((\sum_{j=1}^{n} X_j)^2\right)\\
+&= \frac{n}{n-1} E(X^2) - \frac{1}{n(n-1)} E\left(\sum_{j=1}^{n} X_j^2 + \sum_{i\not=j} X_i X_j\right)\\
+&= \frac{n}{n-1} E(X^2) - \frac{1}{n(n-1)} \left(nE(X^2) + n(n-1) (EX)^2\right)\\
+&= E(X^2) - (EX)^2 = \sigma^2
+\end{aligned}</script><p>$S^2\to \sigma^2$ 以概率$1$成立，$S^2$ 是 $\sigma^2$ 的强相合估计</p>
+<h3 id="样本标准差"><a href="#样本标准差" class="headerlink" title="样本标准差"></a>样本标准差</h3><p>$S = \sqrt{\frac{1}{n-1} \sum_{j=1}^{n} (X_j - \hat \mu)^2}$</p>
+<p>因为$S^2$ 是 $\sigma^2$ 的强相合估计，所以$S$ 是 $\sigma$ 的强相合估计</p>
+<p>但不是无偏估计（$ES = E(S\cdot 1) &lt; \sqrt{ES^2 \cdot E1^2} = \sigma$）</p>
+<h3 id="样本矩"><a href="#样本矩" class="headerlink" title="样本矩"></a>样本矩</h3><p>定义 $\mu_k = EX^k,  (k\ge 1)$</p>
+<p>定义 $k$ 阶样本矩 $\hat\mu_k = \frac{1}{n} \sum_{j=1}^n X_i^k$ ，$\hat\mu_k$ 是 $\mu_k$ 的强相合无偏估计（证明与样本均值相同）</p>
+<h3 id="矩估计"><a href="#矩估计" class="headerlink" title="矩估计"></a>矩估计</h3><p>使用样本矩取代（未知的）总体矩，解出感兴趣的参数，只使用了部分信息，有偏差</p>
+<p>举例：</p>
+<p>$X \sim P(\lambda) \Longrightarrow  \lambda=\mu \Longrightarrow \hat \lambda = \hat \mu_1$</p>
+<p>$X \sim Exp(\lambda) \Longrightarrow \lambda=\frac{1}{\mu} \Longrightarrow \hat \lambda = \frac{1}{\hat\mu_1}$</p>
+<p>$X \sim N(\mu,\sigma^2) \Longrightarrow \sigma^2=\mu_2-\mu_1^2 \Longrightarrow \hat \sigma^2 = \hat \mu_2 - \hat \mu_1^2$</p>
+<p>例如在正态分布中，矩估计有一定偏差</p>
+<h3 id="最大似然估计（MLE）"><a href="#最大似然估计（MLE）" class="headerlink" title="最大似然估计（MLE）"></a>最大似然估计（MLE）</h3><h4 id="离散型"><a href="#离散型" class="headerlink" title="离散型"></a>离散型</h4><p>定义似然函数 $L(\theta) = P(X_1=x_1,X_2=x_2,\dots, X_n=x_n)$，$\hat \theta$ 为 $L(\theta)$ 的最大值点</p>
+<p>对数似然函数 $l(\theta) = \ln L(\theta)$ 和 $L(\theta)$ 有相同最大值点，一般用 $l’(\theta)=0$ 解出 $\hat \theta$</p>
+<h4 id="连续性"><a href="#连续性" class="headerlink" title="连续性"></a>连续性</h4><p>$L(\vec \theta) = f(x_1,x_2,\dots,x_n;\vec \theta) = \prod f(x_j; \vec \theta),\quad l(\vec \theta) = \sum \ln f(x_j; \vec \theta)$</p>
+<p>解似然方程组 $\frac{\partial l(\vec \theta)}{\partial \theta_j} = 0, j=1,2,\dots,n$</p>
+<h2 id="抽样分布"><a href="#抽样分布" class="headerlink" title="抽样分布"></a>抽样分布</h2><h3 id="chi-2-分布"><a href="#chi-2-分布" class="headerlink" title="$\chi^2$ 分布"></a>$\chi^2$ 分布</h3><p>独立随机变量 $X_1,X_2,\dots,X_n$ 都服从 $N(0,1)$ ，$\xi^2 = \sum_{i=1}^n X_i^2\sim \chi^2(n)$</p>
+<p>$n$ 为自由度</p>
+<p>$E(\chi^2(n)) = n$</p>
+<p>$Var(\chi^2(n)) = 2n$</p>
+<h3 id="t-分布"><a href="#t-分布" class="headerlink" title="t 分布"></a>t 分布</h3><p>设 $Z, \xi_n^2$ 独立，$Z \sim N(0, 1), ξ_n^2 ∼ \chi^2 (n)$，则称 $T_n = \frac{Z}{\sqrt{\xi_n^2/n}} \sim t(n)$</p>
+<p>$E(t(n)) = 0$</p>
+<p>$Var(t(n)) = \frac{n}{n-2}$</p>
+<h3 id="F-分布"><a href="#F-分布" class="headerlink" title="F 分布"></a>F 分布</h3><p>$\xi,\eta$ 独立，$\xi^2 \sim \chi^2(n), \eta^2 \sim\chi^2(m)$ ，则称 $F = \frac{\xi^2/n}{\eta^2/m} \sim F(n,m)$</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>定义 $X_i \sim N(\mu,\sigma^2), Z_i \sim N(0,1), \xi_n^2 \sim \chi^2(n)$ ，两两独立，$S^2$ 为样本方差</p>
+<p>有以下结论：</p>
+<p>1 :  $\overline X$ 与 $S^2$ 独立</p>
+<p>2 : $\frac{(n-1)S^2}{\sigma^2} \sim \chi^2(n-1)$</p>
+<blockquote>
+<p>只需证明：$\sum_{i=1}^n(Z_i-\overline Z)^2 \sim \chi^2(n)$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\sum_{i=1}^n (Z_i - \overline Z)^2
+&= \sum_{i=1}^n Z_i^2 - 2Z_i\overline Z + \overline Z^2\\
+&= \left(\sum_{i=1}^n Z_i^2\right) - n\overline Z^2\\
+&= \left(\sum_{i=1}^n Z_i^2\right) - \frac1n(\sum_{i=1}^n Z_i)^2\\
+&= \frac{n-1}{n}\left(\sum_{i=1}^n Z_i^2\right) - \frac2n\sum_{i=1}^n\sum_{j=i+1}^n Z_iZ_j\\
+&= \mathbf Z^T \mathbf A \mathbf Z\\
+\mathbf A &= \left(\begin{matrix}
+\frac{n-1}{n} & -\frac{1}{n} & -\frac{1}{n} & \cdots & -\frac{1}{n}\\
+-\frac{1}{n} & \frac{n-1}{n} & -\frac{1}{n} & \cdots & -\frac{1}{n}\\
+-\frac{1}{n} & -\frac{1}{n} & \frac{n-1}{n} & \cdots & -\frac{1}{n}\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+-\frac{1}{n} & -\frac{1}{n} & -\frac{1}{n} & \cdots & \frac{n-1}{n}\\
+\end{matrix}\right)\\
+|\lambda \mathbf I-\mathbf A| = 0 &\Longrightarrow (\lambda-1)^{n-1} \lambda\\
+\exists \mathbf Q^T\mathbf A\mathbf Q &= \left(\begin{matrix}
+1 & 0 & \cdots & 0 & 0\\
+0 & 1 & \cdots & 0 & 0\\
+\vdots & \vdots & \ddots & \vdots & \vdots\\
+0 & 0 & \cdots & 1 & 0\\
+0 & 0 & \cdots & 0 & 0\\
+\end{matrix}\right)\\
+\end{aligned}</script></blockquote>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\\
+&\frac{\overline X-\mu}{\sigma/\sqrt{n}} \sim N(0,1)\\
+\\
+&\frac{\overline X_n - \mu}{S / \sqrt{n}} \sim t(n-1)\\
+\\
+&\frac{S_1^2/S_2^2}{\sigma_1^2/\sigma_2^2} \sim F(n-1,m-1)\\
+\end{aligned}</script><script type="math/tex; mode=display">
+E\left(\frac{(n-1)S^2}{\sigma^2}\right) = n-1 \Longrightarrow E(S^2) = \sigma^2\\
+Var\left(\frac{(n-1)S^2}{\sigma^2}\right) = 2(n-1) \Longrightarrow Var(S^2) = \frac{2\sigma^4}{n-1}\\</script>
+      </div>
+      
+      
+      
+    </div>
+    
+  <ul class="breadcrumb">
+          
+            <li><a href="/document/">DOCUMENT</a></li>
+            <li><a href="/document/markdown/">MARKDOWN</a></li>
+            <li>PROBABILITY-THEORY-NOTE</li>
+          
+  </ul>
+
+    
+    
+    
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E7%8E%87%E5%85%AC%E7%90%86%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">概率公理化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">概率公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E5%85%AC%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">加法公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%8B%AC%E7%AB%8B"><span class="nav-number">2.2.</span> <span class="nav-text">事件独立</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87"><span class="nav-number">2.3.</span> <span class="nav-text">条件概率</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F-%E5%90%91%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">随机变量 &#x2F; 向量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">3.1.</span> <span class="nav-text">随机变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F"><span class="nav-number">3.2.</span> <span class="nav-text">随机向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8F%98%E6%8D%A2"><span class="nav-number">3.3.</span> <span class="nav-text">函数变换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1D-1D"><span class="nav-number">3.3.1.</span> <span class="nav-text">1D-1D</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2D-1D"><span class="nav-number">3.3.2.</span> <span class="nav-text">2D-1D</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2D-2D"><span class="nav-number">3.3.3.</span> <span class="nav-text">2D-2D</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E5%9E%8B%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">3.4.</span> <span class="nav-text">离散型随机变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83"><span class="nav-number">3.4.1.</span> <span class="nav-text">二项分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%8A%E6%9D%BE%E5%88%86%E5%B8%83"><span class="nav-number">3.4.2.</span> <span class="nav-text">泊松分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B6%85%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83"><span class="nav-number">3.4.3.</span> <span class="nav-text">超几何分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83"><span class="nav-number">3.4.4.</span> <span class="nav-text">几何分布</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E6%80%A7%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">3.5.</span> <span class="nav-text">连续性随机变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83"><span class="nav-number">3.5.1.</span> <span class="nav-text">均匀分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83"><span class="nav-number">3.5.2.</span> <span class="nav-text">指数分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">3.5.3.</span> <span class="nav-text">正态分布</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">3.5.3.1.</span> <span class="nav-text">标准正态分布</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">3.5.3.2.</span> <span class="nav-text">普通正态分布</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%E2%80%9C%E8%84%B1%E9%9D%B6%E9%87%8F%E2%80%9D"><span class="nav-number">3.5.3.3.</span> <span class="nav-text">正态分布“脱靶量”</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%E9%AB%98%E9%98%B6%E7%9F%A9"><span class="nav-number">3.5.3.4.</span> <span class="nav-text">正态分布高阶矩</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">3.5.4.</span> <span class="nav-text">二维正态分布</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E4%BA%8C%E7%BB%B4%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">3.5.4.1.</span> <span class="nav-text">标准二维正态分布</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83-1"><span class="nav-number">3.5.4.2.</span> <span class="nav-text">二维正态分布</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%BD%E9%A9%AC%E5%88%86%E5%B8%83"><span class="nav-number">3.5.5.</span> <span class="nav-text">伽马分布</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%9F%E6%9C%9B%E5%92%8C%E6%96%B9%E5%B7%AE"><span class="nav-number">3.6.</span> <span class="nav-text">期望和方差</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%9F%E6%9C%9B"><span class="nav-number">3.6.1.</span> <span class="nav-text">期望</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E5%B7%AE"><span class="nav-number">3.6.2.</span> <span class="nav-text">方差</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8F%E6%96%B9%E5%B7%AE"><span class="nav-number">3.6.3.</span> <span class="nav-text">协方差</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8F%E6%96%B9%E5%B7%AE%E7%9F%A9%E9%98%B5"><span class="nav-number">3.6.4.</span> <span class="nav-text">协方差矩阵</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E5%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">大数律</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%A4%A7%E6%95%B0%E5%BE%8B"><span class="nav-number">4.1.</span> <span class="nav-text">强大数律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E4%B8%8D%E7%AD%89%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">切比雪夫不等式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E5%A4%A7%E6%95%B0%E5%BE%8B"><span class="nav-number">4.3.</span> <span class="nav-text">切比雪夫大数律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%9B%E9%92%A6%E5%A4%A7%E6%95%B0%E5%BE%8B"><span class="nav-number">4.4.</span> <span class="nav-text">辛钦大数律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E5%BE%8B"><span class="nav-number">4.5.</span> <span class="nav-text">中心极限定律</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1"><span class="nav-number">5.</span> <span class="nav-text">参数估计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E5%9D%87%E5%80%BC"><span class="nav-number">5.1.</span> <span class="nav-text">样本均值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E6%96%B9%E5%B7%AE"><span class="nav-number">5.2.</span> <span class="nav-text">样本方差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E6%A0%87%E5%87%86%E5%B7%AE"><span class="nav-number">5.3.</span> <span class="nav-text">样本标准差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E7%9F%A9"><span class="nav-number">5.4.</span> <span class="nav-text">样本矩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E4%BC%B0%E8%AE%A1"><span class="nav-number">5.5.</span> <span class="nav-text">矩估计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%88MLE%EF%BC%89"><span class="nav-number">5.6.</span> <span class="nav-text">最大似然估计（MLE）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E5%9E%8B"><span class="nav-number">5.6.1.</span> <span class="nav-text">离散型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E6%80%A7"><span class="nav-number">5.6.2.</span> <span class="nav-text">连续性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E6%A0%B7%E5%88%86%E5%B8%83"><span class="nav-number">6.</span> <span class="nav-text">抽样分布</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chi-2-%E5%88%86%E5%B8%83"><span class="nav-number">6.1.</span> <span class="nav-text">$\chi^2$ 分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#t-%E5%88%86%E5%B8%83"><span class="nav-number">6.2.</span> <span class="nav-text">t 分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-%E5%88%86%E5%B8%83"><span class="nav-number">6.3.</span> <span class="nav-text">F 分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">6.4.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hz</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hz</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
