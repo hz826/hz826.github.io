@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.1.1">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="对无偏博弈、SG函数及其拓展的简单讨论和部分证明">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-01T14:48:51.000Z">
-<meta property="article:modified_time" content="2022-03-04T01:19:06.643Z">
+<meta property="article:modified_time" content="2022-10-22T14:27:07.334Z">
 <meta property="article:author" content="hz">
 <meta name="twitter:card" content="summary">
 
@@ -185,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-04 09:19:06" itemprop="dateModified" datetime="2022-03-04T09:19:06+08:00">2022-03-04</time>
+                <time title="修改时间：2022-10-22 22:27:07" itemprop="dateModified" datetime="2022-10-22T22:27:07+08:00">2022-10-22</time>
               </span>
 
           
@@ -200,7 +200,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <a id="more"></a>
+        <span id="more"></span>
 <h1 id="简单无偏博弈"><a href="#简单无偏博弈" class="headerlink" title="简单无偏博弈"></a>简单无偏博弈</h1><p><strong>无偏博弈(Impartial Game)</strong>，指<strong>状态可行的移动</strong>与当前<strong>轮到的人</strong>无关的双人游戏，而且有完全信息、无随机、有限步终止，状态间的转移形成一个 DAG（Graph Games）</p>
 <p>在无偏博弈中，每个状态下先手还是后手胜利是确定的（如果双方足够聪明）</p>
 <p>称<strong>先手必胜</strong>的状态为 P 状态，称<strong>先手必负</strong>的状态为 N 状态，称一个状态的结果（<strong><em>outcome classes</em></strong>）为 P 或 N</p>
@@ -210,7 +210,7 @@
 <li>N状态 <strong>只能转移到</strong> P 状态</li>
 </ol>
 <p>通过以上结论，显然可以通过<strong>递推</strong>得知一个状态的结果</p>
-<h3 id="游戏"><a href="#游戏" class="headerlink" title="游戏"></a>游戏</h3><p>集合表示： $G = \{g_i\}$ 表示当前游戏可以转移到的游戏</p>
+<h3 id="游戏"><a href="#游戏" class="headerlink" title="游戏"></a>游戏</h3><p>集合表示： $G = \{G_1,G_2,\dots, G_n\}$ 表示当前游戏可以转移到的游戏</p>
 <p>$G\in P$ 表示 $G$ 先手必胜， $G\in N$ 表示 $G$ 先手必败</p>
 <h3 id="标准游戏"><a href="#标准游戏" class="headerlink" title="标准游戏"></a>标准游戏</h3><p>定义 $\ast 0 = \varnothing$ ，是一个无法移动的游戏</p>
 <p>$\forall a\in \mathbb{N}^+$ 定义 $\ast a = \{\ast b \mid b\in \mathbb{N} ,b &lt; a\}$ ，例如 $\ast 1 = \{\ast 0\} = \{\varnothing\}, \ast2 = \{\ast 0, \ast 1\} = \{\{\varnothing\}, \varnothing\} \dots$ </p>
@@ -220,7 +220,7 @@
 <p>发现游戏加法有以下性质：</p>
 <p>$G+G\in N$</p>
 <p>$G_1 \in N \wedge G_2 \in N \Longrightarrow (G_1+G_2) \in N$</p>
-<p>$(G_1+G_2) \in N \wedge G_1 \in N \Longrightarrow G_2 \in N$</p>
+<p>$(G_1+G_2) \in N \wedge G_1 \in N \Longrightarrow G_2 \in N$ （反证法） </p>
 <p>交换律，结合律显然</p>
 <h3 id="（加法）等价"><a href="#（加法）等价" class="headerlink" title="（加法）等价"></a>（加法）等价</h3><p>定义 $G \sim \ast a \iff SG(G) = a\iff (G+\ast a) \in N$</p>
 <p>SG值不超过一个：</p>
@@ -281,18 +281,59 @@ c\le a\oplus b
 <p>但对于任意游戏，上述结论并不适用：</p>
 <p>$G = (\ast 1, \ast 1, \ast 1, \{\ast 1\})_2$ ，$\{SG(g_i)\} = \{1,1,1,0\}$，但存在先手必胜策略：</p>
 <p>先手从 $(\ast 1, \ast 1, \ast 1, \{\ast 1\})_2$ 移动到 $(\ast 1, \ast 1, \ast 1)_2$，无论后手移动到 $(\ast 1, \ast 1)_2$ 还是 $(\ast 1)_2$ ，都是必败态</p>
-<h2 id="游戏乘法（nim积）"><a href="#游戏乘法（nim积）" class="headerlink" title="游戏乘法（nim积）"></a>游戏乘法（nim积）</h2><h3 id="标准游戏积"><a href="#标准游戏积" class="headerlink" title="标准游戏积"></a>标准游戏积</h3><p>$\mathbb{N} \times \mathbb{N}$ 上有一个无穷表格 $A$，$A_{x,y} = \begin{cases}1 &amp; x=n,y=m\\0 &amp; \text{otherwise}\end{cases}$</p>
+<hr>
+<p>分割线：一般来说看到这里就可以了（</p>
+<h2 id="扩展：游戏乘法（nim积）"><a href="#扩展：游戏乘法（nim积）" class="headerlink" title="扩展：游戏乘法（nim积）"></a>扩展：游戏乘法（nim积）</h2><h3 id="标准游戏积"><a href="#标准游戏积" class="headerlink" title="标准游戏积"></a>标准游戏积</h3><p>$\mathbb{N} \times \mathbb{N}$ 上有一个无穷表格 $A$，$A_{x,y} = \begin{cases}1 &amp; x=n,y=m\\0 &amp; \text{otherwise}\end{cases}$</p>
 <p>每次可以选择 $0\le a&lt; x, 0\le b&lt; y$ ，$A_{x,y}=1$ ，翻转 $A_{a,b}, A_{a,y}, A_{x,b}, A_{x,y}$ ，不能移动者输</p>
 <p>定义 $SG(A_{x,y}) = x \otimes y$，则 $x\otimes y = \text{mex}(\{(a\otimes b)\oplus(a\otimes y)\oplus(x\otimes b)\mid a&lt;x,b&lt;y\})$</p>
 <p>可证明 $&lt;[0,2^{2^n}-1], \oplus, \otimes&gt;$ 构成有限域 $GF(2^{2^n})$ （乘法结合律、分配律、乘法逆元存在较难证明）</p>
 <h3 id="一般游戏积"><a href="#一般游戏积" class="headerlink" title="一般游戏积"></a>一般游戏积</h3><p>The Tartan Theorem: $SG(G_1×G_2) = SG(G_1) \oplus SG(G_2)$</p>
 <p>$G_1 \times G_2$ 不明</p>
 <h3 id="快速计算nim积"><a href="#快速计算nim积" class="headerlink" title="快速计算nim积"></a>快速计算nim积</h3><p>$O(\log x\log y)$ 计算 $x\otimes y$ 的代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Resolve(i, x) for (int u = (x), i = 0; (1ll <span class="meta-string">&lt;&lt; i) &lt;= u; ++ i) if (u &gt;&gt; i &amp; 1)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">f</span><span class="params">(ll x, ll y)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">g</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!x || !y) <span class="keyword">return</span> <span class="number">1l</span>l &lt;&lt; (x | y);</span><br><span class="line">	<span class="keyword">if</span> (~tab[x][y]) <span class="keyword">return</span> tab[x][y];</span><br><span class="line">	ll res = <span class="number">1</span>;</span><br><span class="line">	Resolve(i, x ^ y) res &lt;&lt;= (<span class="number">1</span> &lt;&lt; i);</span><br><span class="line">	Resolve(i, x &amp; y) res = f(res, <span class="number">3l</span>l &lt;&lt; ((<span class="number">1</span> &lt;&lt; i) - <span class="number">1</span>));</span><br><span class="line">	<span class="keyword">return</span> tab[x][y] = res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">f</span><span class="params">(ll x, ll y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!x || !y) <span class="keyword">return</span> x | y;</span><br><span class="line">	<span class="keyword">if</span> (x == <span class="number">1</span> || y == <span class="number">1</span>) <span class="keyword">return</span> max(x, y);</span><br><span class="line">	ll res = <span class="number">0</span>;</span><br><span class="line">	Resolve(i, x) Resolve(j, y) res ^= g(i, j);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">f(x,y) = x \oplus y</span></span><br><span class="line"><span class="comment">g(x,y) = 2^x \oplus 2^y</span></span><br><span class="line"><span class="comment">init : forall x,y &lt;= log, tab[x][y] = -1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Resolve(i, x) for (int u = (x), i = 0; (1ll <span class="meta-string">&lt;&lt; i) &lt;= u; ++ i) if (u &gt;</span>&gt; i &amp; 1)</span></span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">f</span><span class="params">(ll x, ll y)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">g</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!x || !y) <span class="keyword">return</span> <span class="number">1ll</span> &lt;&lt; (x | y);</span><br><span class="line">	<span class="keyword">if</span> (~tab[x][y]) <span class="keyword">return</span> tab[x][y];</span><br><span class="line">	ll res = <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">Resolve</span>(i, x ^ y) res &lt;&lt;= (<span class="number">1</span> &lt;&lt; i);</span><br><span class="line">	<span class="built_in">Resolve</span>(i, x &amp; y) res = <span class="built_in">f</span>(res, <span class="number">3ll</span> &lt;&lt; ((<span class="number">1</span> &lt;&lt; i) - <span class="number">1</span>));</span><br><span class="line">	<span class="keyword">return</span> tab[x][y] = res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">f</span><span class="params">(ll x, ll y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!x || !y) <span class="keyword">return</span> x | y;</span><br><span class="line">	<span class="keyword">if</span> (x == <span class="number">1</span> || y == <span class="number">1</span>) <span class="keyword">return</span> <span class="built_in">max</span>(x, y);</span><br><span class="line">	ll res = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">Resolve</span>(i, x) <span class="built_in">Resolve</span>(j, y) res ^= <span class="built_in">g</span>(i, j);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">f(x,y) = x \oplus y</span></span><br><span class="line"><span class="comment">g(x,y) = 2^x \oplus 2^y</span></span><br><span class="line"><span class="comment">init : forall x,y &lt;= log, tab[x][y] = -1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 <h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><a target="_blank" rel="noopener" href="http://www.doc88.com/p-5098170314707.html">WC2009 从“k倍动态减法游戏”出发探究一类组合游戏问题</a></p>
 <p>2009集训队论文 组合游戏略述——浅谈SG游戏的若干拓展及变形</p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zjp-shadow/p/10507030.html">Nim积解法小结 - zjp_shadow - 博客园 (cnblogs.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://wcysai.github.io/2019/09/17/On-nim-multiplication-and-related-games/">On nim multiplication and some related games · wcysai</a></p>
+<h2 id="扩展：组合博弈与超现实数"><a href="#扩展：组合博弈与超现实数" class="headerlink" title="扩展：组合博弈与超现实数"></a>扩展：组合博弈与超现实数</h2><p>（不会&amp;大量抄书</p>
+<h3 id="组合博弈"><a href="#组合博弈" class="headerlink" title="组合博弈"></a>组合博弈</h3><p>一般的组合博弈中，一个状态下两个玩家的移动方案是不同的，（而在上述无偏博弈中是相同的）</p>
+<p>游戏可以用 $g = (g_1^L,g_2^L,\dots \mid g_1^R,g_2^R,\dots)$ 表示</p>
+<p>关于一个游戏，有4个命题：$LN(g),LP(g),RN(g),RP(g)$ ，表示 左/右方 在 先/后手 时有必胜策略</p>
+<p>其中 $LN \iff \neg RP, LP \iff RN$ ，因此一个游戏一共有4种状态，分别为：“左玩家必胜”“右玩家必胜”“先手必胜”和“后手必胜”，记作 $o(g), o(g) \in \{L,R,N,P\}$</p>
+<p>可以定义游戏加法、对偶游戏（逆元）和结果等价</p>
+<p>简单博弈？</p>
+<h3 id="游戏比较"><a href="#游戏比较" class="headerlink" title="游戏比较"></a>游戏比较</h3><p>可以在游戏中定义比较运算 $\le$</p>
+<p>$x \ge y \iff LN(x-y)$</p>
+<p>$x \le y \iff RN(x-y)$</p>
+<p>可以证明 $\le$ 为偏序关系（满足自反性、反对称性、传递性）</p>
+<p>大于、小于、等于、不可比与4种游戏状态相对应</p>
+<p>$x &gt; y \iff x \ge y \wedge x \not\le y \iff o(x-y) \in L$</p>
+<p>$x &lt; y \iff x \le y \wedge x \not\ge y \iff o(x-y) \in R$</p>
+<p>$x = y \iff x \ge y \wedge x \le y \iff o(x-y) \in N$</p>
+<p>$x \sim y \iff x \not\ge y \wedge x \not\le y \iff o(x-y) \in P$</p>
+<h3 id="正则博弈"><a href="#正则博弈" class="headerlink" title="正则博弈"></a>正则博弈</h3><p>定义博弈 $g$ 是正则的（$g \in \mathbb{S}$），当且仅当 $\forall g^L,g^R, g^l \not\ge g^r$</p>
+<p>双边约束：正则博弈 $x$ 有 $X^L &lt; x &lt; X^R$</p>
+<p>$\ge$ 是正则博弈上的全序关系</p>
+<p>正则博弈的加法是封闭的</p>
+<p>正则博弈最简式的左右集合要么是空集, 要么只有 1 个元素（只保留左边最大的元素和右边最小的元素）</p>
+<p>正则数的整数：</p>
+<script type="math/tex; mode=display">
+0 = (\mid)\\
+1 = (0\mid)\\
+-1 = (\mid 0)\\
+n+1 = (n\mid)\\
+x=(x-1\mid x+1)</script><p>二分运算：</p>
+<script type="math/tex; mode=display">
+\frac{n}{2^k} = (\frac{n-1}{2^k}\mid \frac{n+1}{2^k})</script><p>每一天诞生的正则数：</p>
+<script type="math/tex; mode=display">
+D(0) : \{0\}\\
+D(1) : \{-1,1\}\\
+D(2) : \{-2,-\frac{1}{2},\frac{1}{2},2\}\\
+D(3) : \{-3,-\frac{3}{2},-\frac{3}{4},-\frac{1}{4},\frac{1}{4}\frac{3}{4},\frac{3}{2},2\}\\</script><h3 id="Nimbers"><a href="#Nimbers" class="headerlink" title="Nimbers"></a>Nimbers</h3><p>$\ast = (0\mid0)$，这就是无偏博弈中的 $\ast1$ </p>
+<p>$\ast \sim 0$</p>
+<h3 id="推荐链接"><a href="#推荐链接" class="headerlink" title="推荐链接"></a>推荐链接</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/53049055">https://zhuanlan.zhihu.com/p/53049055</a></p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Combinatorial_game_theory">Combinatorial game theory - Wikipedia</a></p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/On_Numbers_and_Games">On Numbers and Games</a></p>
 
     </div>
 
@@ -373,7 +414,7 @@ c\le a\oplus b
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%97%A0%E5%81%8F%E5%8D%9A%E5%BC%88"><span class="nav-number">1.</span> <span class="nav-text">简单无偏博弈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F"><span class="nav-number">1.0.1.</span> <span class="nav-text">游戏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%B8%B8%E6%88%8F"><span class="nav-number">1.0.2.</span> <span class="nav-text">标准游戏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E8%83%BD%E7%A7%BB%E5%8A%A8%E8%80%85%E8%B4%9F%EF%BC%88normal-play%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">不能移动者负（normal play）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E5%8A%A0%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">游戏加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E5%8A%A0%E6%B3%95%EF%BC%89%E7%AD%89%E4%BB%B7"><span class="nav-number">1.1.2.</span> <span class="nav-text">（加法）等价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E6%B8%B8%E6%88%8F%E7%9A%84%E8%BD%AC%E7%A7%BB"><span class="nav-number">1.1.3.</span> <span class="nav-text">一般游戏的转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%B8%B8%E6%88%8F%E7%9A%84%E5%8A%A0%E6%B3%95"><span class="nav-number">1.1.4.</span> <span class="nav-text">标准游戏的加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E6%B8%B8%E6%88%8F%E7%9A%84%E5%8A%A0%E6%B3%95"><span class="nav-number">1.1.5.</span> <span class="nav-text">一般游戏的加法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E8%83%BD%E7%A7%BB%E5%8A%A8%E8%80%85%E8%83%9C%EF%BC%88SJ%E5%AE%9A%E7%90%86%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">不能移动者胜（SJ定理）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#anti-nim"><span class="nav-number">1.2.1.</span> <span class="nav-text">anti-nim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#anti-SG"><span class="nav-number">1.2.2.</span> <span class="nav-text">anti-SG</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#n%E9%98%B6Nim%E5%92%8C"><span class="nav-number">1.3.</span> <span class="nav-text">n阶Nim和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E4%B9%98%E6%B3%95%EF%BC%88nim%E7%A7%AF%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">游戏乘法（nim积）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%B8%B8%E6%88%8F%E7%A7%AF"><span class="nav-number">1.4.1.</span> <span class="nav-text">标准游戏积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E6%B8%B8%E6%88%8F%E7%A7%AF"><span class="nav-number">1.4.2.</span> <span class="nav-text">一般游戏积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E8%AE%A1%E7%AE%97nim%E7%A7%AF"><span class="nav-number">1.4.3.</span> <span class="nav-text">快速计算nim积</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">1.5.</span> <span class="nav-text">链接</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%97%A0%E5%81%8F%E5%8D%9A%E5%BC%88"><span class="nav-number">1.</span> <span class="nav-text">简单无偏博弈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F"><span class="nav-number">1.0.1.</span> <span class="nav-text">游戏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%B8%B8%E6%88%8F"><span class="nav-number">1.0.2.</span> <span class="nav-text">标准游戏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E8%83%BD%E7%A7%BB%E5%8A%A8%E8%80%85%E8%B4%9F%EF%BC%88normal-play%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">不能移动者负（normal play）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E5%8A%A0%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">游戏加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E5%8A%A0%E6%B3%95%EF%BC%89%E7%AD%89%E4%BB%B7"><span class="nav-number">1.1.2.</span> <span class="nav-text">（加法）等价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E6%B8%B8%E6%88%8F%E7%9A%84%E8%BD%AC%E7%A7%BB"><span class="nav-number">1.1.3.</span> <span class="nav-text">一般游戏的转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%B8%B8%E6%88%8F%E7%9A%84%E5%8A%A0%E6%B3%95"><span class="nav-number">1.1.4.</span> <span class="nav-text">标准游戏的加法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E6%B8%B8%E6%88%8F%E7%9A%84%E5%8A%A0%E6%B3%95"><span class="nav-number">1.1.5.</span> <span class="nav-text">一般游戏的加法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E8%83%BD%E7%A7%BB%E5%8A%A8%E8%80%85%E8%83%9C%EF%BC%88SJ%E5%AE%9A%E7%90%86%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">不能移动者胜（SJ定理）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#anti-nim"><span class="nav-number">1.2.1.</span> <span class="nav-text">anti-nim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#anti-SG"><span class="nav-number">1.2.2.</span> <span class="nav-text">anti-SG</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#n%E9%98%B6Nim%E5%92%8C"><span class="nav-number">1.3.</span> <span class="nav-text">n阶Nim和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9A%E6%B8%B8%E6%88%8F%E4%B9%98%E6%B3%95%EF%BC%88nim%E7%A7%AF%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">扩展：游戏乘法（nim积）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%B8%B8%E6%88%8F%E7%A7%AF"><span class="nav-number">1.4.1.</span> <span class="nav-text">标准游戏积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E6%B8%B8%E6%88%8F%E7%A7%AF"><span class="nav-number">1.4.2.</span> <span class="nav-text">一般游戏积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E8%AE%A1%E7%AE%97nim%E7%A7%AF"><span class="nav-number">1.4.3.</span> <span class="nav-text">快速计算nim积</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">1.5.</span> <span class="nav-text">链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%EF%BC%9A%E7%BB%84%E5%90%88%E5%8D%9A%E5%BC%88%E4%B8%8E%E8%B6%85%E7%8E%B0%E5%AE%9E%E6%95%B0"><span class="nav-number">1.6.</span> <span class="nav-text">扩展：组合博弈与超现实数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E5%8D%9A%E5%BC%88"><span class="nav-number">1.6.1.</span> <span class="nav-text">组合博弈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E6%AF%94%E8%BE%83"><span class="nav-number">1.6.2.</span> <span class="nav-text">游戏比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E5%8D%9A%E5%BC%88"><span class="nav-number">1.6.3.</span> <span class="nav-text">正则博弈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nimbers"><span class="nav-number">1.6.4.</span> <span class="nav-text">Nimbers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E9%93%BE%E6%8E%A5"><span class="nav-number">1.6.5.</span> <span class="nav-text">推荐链接</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -415,7 +456,7 @@ c\le a\oplus b
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

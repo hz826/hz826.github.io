@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.1.1">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="简单介绍了有标号计数、无标号计数及组合类的基本构造">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-07-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-13T04:05:22.514Z">
+<meta property="article:modified_time" content="2023-01-03T08:29:01.049Z">
 <meta property="article:author" content="hz">
 <meta name="twitter:card" content="summary">
 
@@ -185,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-13 12:05:22" itemprop="dateModified" datetime="2021-11-13T12:05:22+08:00">2021-11-13</time>
+                <time title="修改时间：2023-01-03 16:29:01" itemprop="dateModified" datetime="2023-01-03T16:29:01+08:00">2023-01-03</time>
               </span>
 
           
@@ -200,7 +200,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <a id="more"></a>
+        <span id="more"></span>
 <h1 id="解析组合学习笔记"><a href="#解析组合学习笔记" class="headerlink" title="解析组合学习笔记"></a>解析组合学习笔记</h1><h2 id="无标号计数（OGF）"><a href="#无标号计数（OGF）" class="headerlink" title="无标号计数（OGF）"></a>无标号计数（OGF）</h2><h4 id="无标号组合类-mathcal-A"><a href="#无标号组合类-mathcal-A" class="headerlink" title="无标号组合类 $\mathcal{A}$"></a>无标号组合类 $\mathcal{A}$</h4><script type="math/tex; mode=display">
 \begin{aligned}
 &\mathcal{R} = \{\langle a,b\rangle \mid a,b\in \mathcal{R}\}\cup \ \mathcal{R}_0\\
@@ -232,13 +232,21 @@
 &= \sum_{d>0} \frac{\varphi(d)}{d} \sum_{i>0} \frac{1}{i} A(x^{d})^i = \sum_{d>0} \frac{\varphi(d)}{d} \ln    \frac{1}{1-A(x^d)}\\
 \end{aligned}</script><p>只需计算 $\ln\frac{1}{1-A(x)}$ ，复杂度 $O(n\log n)$</p>
 <h4 id="MSET-构造"><a href="#MSET-构造" class="headerlink" title="MSET 构造"></a>MSET 构造</h4><p>$\text{MSET}(\mathcal{A}) = \text{SEQ}(\mathcal{A}) / R$</p>
-<p>其中 $R$ 是对称群（全置换群）</p>
-<p>根据组合意义，有</p>
+<p>其中 $R$ 是对称群（全置换群），根据组合意义有：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 \text{MSET}(\mathcal{A}) &= \prod_{a\in \mathcal{A}} \frac{1}{1-x^{|a|}}= \prod_{i\ge0} (1-x^i)^{-a_i}\\
 &= \exp(\sum_{i\ge0} -a_i \ln(1-x^i))\\
 &= \exp(\sum_{i\ge0} a_i \sum_{j\ge1} \frac{x^{ij}}{j}) = \exp(\sum_{j\ge1} \frac{A(x^j)}{j})
+\end{aligned}</script><p>$\text{SEQ}(\mathcal{A}) / R$ 更本质的写法是 $\mathcal{A}^1/R_1+\mathcal{A}^2/R_2+\mathcal{A}^3/R_3+\dots$ ，商去对称群的结果也可以使用 polya 定理计算</p>
+<p>例如 $\mathcal{A}^3/R_3$ 的生成函数可以写作 $\frac{1}{6} (A^3(x)+3A(x)A(x^2)+2A(x^3))$ ，$\mathcal{A}^4/R_4$ 的生成函数可以写作 $\frac{1}{24} (A^4(x)+6A^2(x)A(x^2)+8A(x)A(x^3)+3A^2(x^2)+6A(x^4))$</p>
+<p>$\text{MSET}(\mathcal{A})$ 的生成函数也可以这样推出：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\text{MSET}(\mathcal{A}) &= \sum_{n \ge 1} \frac{1}{n!} \sum_{\pi\in\text{permutation(n)}} \prod_{r\in\text{rings}(\pi)}A(x^r)\\
+&= \sum_{n \ge 1} \frac{1}{n!} \sum_{r_1+r_2+\dots+r_m=n} \frac{1}{m!} {n\choose r_1,r_2,\dots,r_m} \left(\prod (r_i-1)!\right)\left(\prod A(x^{r_i})\right)\\
+&= \sum_{n \ge 1} \sum_{r_1+r_2+\dots+r_m=n} \frac{1}{m!}\prod \frac{A(x^{r_i})}{r_i}\\
+&= \exp(\sum_{j\ge1}\frac{A(x^{j})}{j})\\
 \end{aligned}</script><h4 id="PSET-构造"><a href="#PSET-构造" class="headerlink" title="PSET 构造"></a>PSET 构造</h4><p>$\text{PSET}(\mathcal{A}) = \sum_{\mathcal{B}\subset \mathcal{A}} \mathcal{B}$</p>
 <p>根据组合意义，有</p>
 <script type="math/tex; mode=display">
@@ -246,8 +254,10 @@
 \text{PSET}(\mathcal{A}) &= \prod_{a\in \mathcal{A}} (1+x^{|a|})= \prod_{i\ge0} (1+x^i)^{a_i}\\
 &= \exp(\sum_{i\ge0} a_i \ln(1+x^i))\\
 &= \exp(\sum_{i\ge0} a_i \sum_{j\ge1} \frac{(-1)^{j-1}x^{ij}}{j}) = \sum_{j\ge1} \frac{(-1)^{j-1}A(x^j)}{j}
-\end{aligned}</script><h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><p>无标号有根树计数</p>
+\end{aligned}</script><h4 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h4><p>无标号有根树计数</p>
 <p>$\mathcal{T} = z * \text{MSET}(\mathcal{T})$</p>
+<p>无标号有根烷烃计数</p>
+<p>$\mathcal{T} = z * (1+\mathcal{T}+\mathcal{T}^2/R_2 + \mathcal{T}^3/R_3 + \mathcal{T}^4/R_4)$</p>
 <h2 id="有标号计数（EGF）"><a href="#有标号计数（EGF）" class="headerlink" title="有标号计数（EGF）"></a>有标号计数（EGF）</h2><h4 id="有标号组合类-mathcal-A"><a href="#有标号组合类-mathcal-A" class="headerlink" title="有标号组合类 $\mathcal{A}$"></a>有标号组合类 $\mathcal{A}$</h4><script type="math/tex; mode=display">
 \begin{aligned}
 &\mathcal{R}_0 = \{\langle a,p_a\rangle \dots \mid p_a \in \text{permutation}_{\text{size}(a)}\}\\
@@ -279,7 +289,7 @@
 A(z) &= a_0 + \frac{a_1}{1!} z^1 + \frac{a_2}{2!} z^2 + \frac{a_3}{3!} z^3 + \dots\\
 \frac{\mathrm{d}}{\mathrm{d}z} A(z) &= a_1 + \frac{a_2}{1!} z^1 + \frac{a_3}{2!} z^2 + \frac{a_4}{3!} z^3 + \dots\\
 zA(z) &= \frac{1}{1!} a_0z + \frac{2a_1}{2!} z^2 + \frac{3a_2}{3!} z^3 + \frac{4a_3}{4!} z^4 + \dots\\
-\end{aligned}</script><h5 id="举例-1"><a href="#举例-1" class="headerlink" title="举例"></a>举例</h5><script type="math/tex; mode=display">
+\end{aligned}</script><h4 id="举例-1"><a href="#举例-1" class="headerlink" title="举例"></a>举例</h4><script type="math/tex; mode=display">
 \begin{aligned}
 A^{\square} \star B &= \int (\frac{\mathrm{d}}{\mathrm{d}z} A \times B)\\
 \\
@@ -369,7 +379,7 @@ A^{\square} \star B + A \star B^{\square} &= \int (\frac{\mathrm{d}}{\mathrm{d}z
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E7%BB%84%E5%90%88%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">解析组合学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E6%A0%87%E5%8F%B7%E8%AE%A1%E6%95%B0%EF%BC%88OGF%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">无标号计数（OGF）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E6%A0%87%E5%8F%B7%E7%BB%84%E5%90%88%E7%B1%BB-mathcal-A"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">无标号组合类 $\mathcal{A}$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E4%BA%A4%E5%B9%B6%EF%BC%88%E5%92%8C%EF%BC%89"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">不交并（和）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">笛卡尔积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SEQ-%E6%9E%84%E9%80%A0"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">SEQ 构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CYC-%E6%9E%84%E9%80%A0"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">CYC 构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MSET-%E6%9E%84%E9%80%A0"><span class="nav-number">1.1.0.6.</span> <span class="nav-text">MSET 构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PSET-%E6%9E%84%E9%80%A0"><span class="nav-number">1.1.0.7.</span> <span class="nav-text">PSET 构造</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B"><span class="nav-number">1.1.1.</span> <span class="nav-text">举例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E6%A0%87%E5%8F%B7%E8%AE%A1%E6%95%B0%EF%BC%88EGF%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">有标号计数（EGF）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E6%A0%87%E5%8F%B7%E7%BB%84%E5%90%88%E7%B1%BB-mathcal-A"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">有标号组合类 $\mathcal{A}$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SEQ-%E6%9E%84%E9%80%A0-1"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">SEQ 构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SET-%E6%9E%84%E9%80%A0"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">SET 构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CYC-%E6%9E%84%E9%80%A0-1"><span class="nav-number">1.2.0.4.</span> <span class="nav-text">CYC 构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pointing-%E6%9E%84%E9%80%A0"><span class="nav-number">1.2.0.5.</span> <span class="nav-text">Pointing 构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#boxed-product"><span class="nav-number">1.2.0.6.</span> <span class="nav-text">boxed product</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B-1"><span class="nav-number">1.2.0.6.1.</span> <span class="nav-text">举例</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E7%BB%84%E5%90%88%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">解析组合学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E6%A0%87%E5%8F%B7%E8%AE%A1%E6%95%B0%EF%BC%88OGF%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">无标号计数（OGF）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E6%A0%87%E5%8F%B7%E7%BB%84%E5%90%88%E7%B1%BB-mathcal-A"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">无标号组合类 $\mathcal{A}$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E4%BA%A4%E5%B9%B6%EF%BC%88%E5%92%8C%EF%BC%89"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">不交并（和）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">笛卡尔积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SEQ-%E6%9E%84%E9%80%A0"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">SEQ 构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CYC-%E6%9E%84%E9%80%A0"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">CYC 构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MSET-%E6%9E%84%E9%80%A0"><span class="nav-number">1.1.0.6.</span> <span class="nav-text">MSET 构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PSET-%E6%9E%84%E9%80%A0"><span class="nav-number">1.1.0.7.</span> <span class="nav-text">PSET 构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B"><span class="nav-number">1.1.0.8.</span> <span class="nav-text">举例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E6%A0%87%E5%8F%B7%E8%AE%A1%E6%95%B0%EF%BC%88EGF%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">有标号计数（EGF）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E6%A0%87%E5%8F%B7%E7%BB%84%E5%90%88%E7%B1%BB-mathcal-A"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">有标号组合类 $\mathcal{A}$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SEQ-%E6%9E%84%E9%80%A0-1"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">SEQ 构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SET-%E6%9E%84%E9%80%A0"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">SET 构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CYC-%E6%9E%84%E9%80%A0-1"><span class="nav-number">1.2.0.4.</span> <span class="nav-text">CYC 构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pointing-%E6%9E%84%E9%80%A0"><span class="nav-number">1.2.0.5.</span> <span class="nav-text">Pointing 构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#boxed-product"><span class="nav-number">1.2.0.6.</span> <span class="nav-text">boxed product</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B-1"><span class="nav-number">1.2.0.7.</span> <span class="nav-text">举例</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -411,7 +421,7 @@ A^{\square} \star B + A \star B^{\square} &= \int (\frac{\mathrm{d}}{\mathrm{d}z
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

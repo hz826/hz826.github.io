@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.1.1">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -200,7 +200,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <a id="more"></a>
+        <span id="more"></span>
 <h2 id="Emacs配置和快捷键笔记"><a href="#Emacs配置和快捷键笔记" class="headerlink" title="Emacs配置和快捷键笔记"></a>Emacs配置和快捷键笔记</h2><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">setq</span> default-tab-width <span class="number">4</span>)</span><br><span class="line">(<span class="name">setq</span> c-basic-offset <span class="number">4</span>)</span><br><span class="line">(<span class="name">global-linum-mode</span> <span class="literal">t</span>)<span class="comment">;;行号</span></span><br><span class="line">(<span class="name">electric-pair-mode</span> <span class="literal">t</span>)<span class="comment">;;输入时括号匹配</span></span><br><span class="line"></span><br><span class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">&quot;&lt;f8&gt;&quot;</span>) &#x27;shell)</span><br><span class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">&quot;&lt;f9&gt;&quot;</span>) &#x27;CCompile)<span class="comment">;;自定义的编译函数</span></span><br><span class="line">(<span class="name">global-set-key</span> (<span class="name">kbd</span> <span class="string">&quot;RET&quot;</span>) &#x27;newline-and-indent)<span class="comment">;;emacs24下需要</span></span><br><span class="line"><span class="comment">;;按键绑定：遇到交互题可以绑定更多快捷键</span></span><br><span class="line"></span><br><span class="line">(<span class="name">defun</span> CCompile()<span class="comment">;;一键编译</span></span><br><span class="line">  (<span class="name">interactive</span>)</span><br><span class="line">  (<span class="name">compile</span></span><br><span class="line">   	(<span class="name">format</span></span><br><span class="line">       <span class="string">&quot;g++ -Wall -o %s %s -g -lm&quot;</span></span><br><span class="line">       (<span class="name">file-name-sans-extension</span> (<span class="name">buffer-name</span>))</span><br><span class="line">       (<span class="name">buffer-name</span>)</span><br><span class="line">     )</span><br><span class="line">   )</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">;;下面是custom-set</span></span><br><span class="line">(<span class="name">custom-set-variables</span></span><br><span class="line"> <span class="comment">;; custom-set-variables was added by Custom.</span></span><br><span class="line"> <span class="comment">;; If you edit it by hand, you could mess it up, so be careful.</span></span><br><span class="line"> <span class="comment">;; Your init file should contain only one such instance.</span></span><br><span class="line"> <span class="comment">;; If there is more than one, they won&#x27;t work right.</span></span><br><span class="line"> &#x27;(backward-delete-char-untabify-method nil)<span class="comment">;;Emacs默认用四个空格代替tab，这个语句能默认使用tab，设置方法：C-h f + 函数名，选择customize-&gt;nil-&gt;save for future version...</span></span><br><span class="line"> &#x27;(gdb-many-windows t)<span class="comment">;;在gdb时默认自动分割窗格，设置方法同上</span></span><br><span class="line"> &#x27;(show-paren-mode t)<span class="comment">;;高亮配对括号，可以在菜单栏找到，勾选后点击save option</span></span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <div class="table-container">
 <table>
@@ -516,7 +516,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
