@@ -27,10 +27,12 @@
 <meta property="og:site_name" content="hz&#39;s blog">
 <meta property="og:description" content="大学文化课">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/01/29/Probability-Theory-Note/image-20231227202726415.png">
 <meta property="article:published_time" content="2022-01-29T04:30:00.000Z">
-<meta property="article:modified_time" content="2022-10-02T04:04:39.463Z">
+<meta property="article:modified_time" content="2024-03-25T11:21:46.715Z">
 <meta property="article:author" content="hz">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/01/29/Probability-Theory-Note/image-20231227202726415.png">
 
 <link rel="canonical" href="http://example.com/2022/01/29/Probability-Theory-Note/">
 
@@ -185,7 +187,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-02 12:04:39" itemprop="dateModified" datetime="2022-10-02T12:04:39+08:00">2022-10-02</time>
+                <time title="修改时间：2024-03-25 19:21:46" itemprop="dateModified" datetime="2024-03-25T19:21:46+08:00">2024-03-25</time>
               </span>
 
           
@@ -211,12 +213,63 @@
 </li>
 </ol>
 <p>可以推出：$P(\varnothing) = 0$ ，$P(\overline A) = 1-P(A)$ 等性质</p>
-<h2 id="概率公式"><a href="#概率公式" class="headerlink" title="概率公式"></a>概率公式</h2><h3 id="加法公式"><a href="#加法公式" class="headerlink" title="加法公式"></a>加法公式</h3><p>$P(A+B) = P(A) + P(B) - P(AB)$​</p>
-<p>$P(\sum_{j=1}^n A_j) = \sum_{1\le j_1 &lt; j_2 &lt; \dots &lt; j_m \le n} (-1)^{m+1} P(A_{j_1} A_{j_2} \dots A_{j_m})$ </p>
+<h2 id="概率公式"><a href="#概率公式" class="headerlink" title="概率公式"></a>概率公式</h2><h3 id="容斥原理"><a href="#容斥原理" class="headerlink" title="容斥原理"></a>容斥原理</h3><p>$P(A\cup B) = P(A) + P(B) - P(A\cap B)$​</p>
+<p>$P(A_1\cup A_2\cup\dots\cup A_n) = \sum_{1\le j_1 &lt; j_2 &lt; \dots &lt; j_m \le n} (-1)^{m+1} P(A_{j_1}\cap A_{j_2}\cap \dots\cap A_{j_m})$ </p>
+<h4 id="Boole不等式"><a href="#Boole不等式" class="headerlink" title="Boole不等式"></a>Boole不等式</h4><p>$P\left(\bigcup_{i} A_i\right) \leq \sum_i P(A_i)$</p>
+<h4 id="Bonferroni不等式"><a href="#Bonferroni不等式" class="headerlink" title="Bonferroni不等式"></a>Bonferroni不等式</h4><p>定义 $S_k =\sum_{1 \le i_1 &lt; \cdots &lt; i_k \le n}^n P(A_{i_1} \cap \cdots \cap A_{i_k})\\$ ，</p>
+<p>对于奇数 $k$ ，$P\left(\bigcup_{i=1}^n A_i\right) \le \sum_{j=1}^{k}(-1)^{j-1} S_j$</p>
+<p>对于偶数 $k$，$P\left(\bigcup_{i=1}^n A_i\right) \ge \sum_{j=1}^{k}(-1)^{j-1}S_j$</p>
+<p>证明：考虑事件 $E_{i_1}\cap E_{i_2}\cap \dots\cap E_{i_m}\cap \overline E_{j_1}\cap \overline E_{j_2}\cap \dots$</p>
+<p>被计算次数为 $\sum_{j=0}^k (-1)^j\binom{m}{j} = (-1)^k\binom {m-1}{k}$</p>
 <h3 id="事件独立"><a href="#事件独立" class="headerlink" title="事件独立"></a>事件独立</h3><p>称事件 $A,B$ 独立当且仅当 $P(AB) = P(A)P(B)$</p>
 <h3 id="条件概率"><a href="#条件概率" class="headerlink" title="条件概率"></a>条件概率</h3><p>当事件 $A$ 发生时事件 $B$ 发生的概率： $P(B|A) = \frac{P(AB)}{P(A)}$</p>
 <p>全概率公式：$P(B) = P(A)P(B|A) + P(\overline A)P(B|\overline A)$</p>
 <p>贝叶斯公式：$P(A|B) = \frac{P(AB)}{P(B)} = \frac{P(A)P(B|A)}{P(B)}$</p>
+<h3 id="近似公式"><a href="#近似公式" class="headerlink" title="近似公式"></a>近似公式</h3><h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><p>当 $x\to 0, n\to\infty$</p>
+<script type="math/tex; mode=display">
+(1-x)^{n} \approx e^{-nx}</script><h4 id="生日悖论"><a href="#生日悖论" class="headerlink" title="生日悖论"></a>生日悖论</h4><p>$m$ 个独立的在 $[1,n]$ 区间等概率随机的正整数两两不同n的概率</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P &= 1 \cdot (\frac{n-1}{n}) \cdot (\frac{n-2}{n}) \dots (1-\frac{m-1}{n})\\
+&= \prod_{j=1}^{m-1} (1-\frac{j}{n})\\
+&\approx \exp\{-\sum_{j=1}^{m-1} \frac{j}{n}\} \\
+&= e^{-\frac{m(m-1)}{2n}}\\
+&\approx e^{-m^2/2n}
+\end{aligned}</script><script type="math/tex; mode=display">
+P=\frac12 \Longrightarrow \frac{m^2}{2n} = \ln 2 \Longrightarrow m = \sqrt{2n\ln2}</script><h4 id="BALLS-INTO-BINS"><a href="#BALLS-INTO-BINS" class="headerlink" title="BALLS INTO BINS"></a>BALLS INTO BINS</h4><p>$n$ 个球独立等概率投入 $n$ 个盒子，当 $n$ 足够大时，有盒子中的球数大于 $3\ln n / \ln\ln n$ 的概率不超过 $1/n$</p>
+<p>$1$ 号盒子有 $M$ 个球的概率为：${n\choose M} (\frac 1n)^M = \frac{1}{M!}\cdot \frac{n^{\underline M}}{n^M} &lt; \frac{1}{M!} \le (\frac{e}{M})^M$</p>
+<p>（因为 $\frac{k^k}{k!} &lt; \sum_{i=0}^\infty \frac{k^i}{i!} = e^k$ ，所以 $k! &gt; (\frac{k}{e})^k$ ）</p>
+<p>当 $M=3\ln n / \ln\ln n$ 时，</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+n\left(\frac eM\right)^M &\le n\left(\frac{e\ln\ln n}{3\ln n}\right)^{3\ln n/\ln\ln n}\\
+&\le n\left(\frac{\ln\ln n}{\ln n}\right)^{3\ln n/\ln\ln n}\\
+&= e^{3(\ln n)(\ln\ln\ln n)/(\ln\ln n) - 2\ln n}\\
+&< \frac1n
+\end{aligned}</script><p>$n$ 个球独立等概率投入 $m$ 个盒子时， $1$ 号盒子为空的概率为：</p>
+<script type="math/tex; mode=display">
+\left(1-\frac 1n\right)^m \approx e^{-m/n}</script><p>$1$ 号盒子有 $r$ 个球的概率为（认为 $n,m$ 远大于 $r$）：</p>
+<script type="math/tex; mode=display">
+p_r = {m\choose r} \left(\frac 1n\right)^r \left(1-\frac 1n\right)^{m-r} \approx \frac{e^{-m/n}(m/n)^r}{r!}</script><h4 id="阶乘"><a href="#阶乘" class="headerlink" title="阶乘"></a>阶乘</h4><p>由于 $\ln$ 凸性，$\int_{i-1}^i \ln x \mathrm dx \ge \frac{\ln(i-1)+\ln i}{2}$</p>
+<script type="math/tex; mode=display">
+\int_{1}^n \ln x \mathrm dx = n\ln n-n+1 \ge \sum_{i=1}^n \ln i - \frac{\ln n}{2}\\
+\ln (n!) \le n\ln n-n+1+\frac{\ln n}{2}\\
+n! < e\sqrt n\left(\frac ne\right)^n</script><p>斯特林公式：</p>
+<script type="math/tex; mode=display">
+n!\sim \sqrt{2\pi n} \left(\frac ne\right)^n\\
+\lim_{n\to\infty} \frac{n!}{\sqrt{2\pi n} \left(\frac ne\right)^n} = 1</script><p>双阶乘：</p>
+<p>对于偶数 $m\ge 2$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+(m-1)!! &= (m-1)\cdot (m-3)\dots5\cdot 3 \cdot 1\\
+(m-1)!! &= \frac{m!}{2^{m/2}(m/2)!}\\
+(m-1)!! &= \sqrt{2} m^{m/2}e^{-m/2}(1+O(1/m))
+\end{aligned}</script><h4 id="斯特林公式和组合数"><a href="#斯特林公式和组合数" class="headerlink" title="斯特林公式和组合数"></a>斯特林公式和组合数</h4><p>$1+o(1)$ 渐进：如果 $f(n) = (1+o(1))g(n)$ ，那么 $\lim_{n\to\infty} f(n)/g(n) = 1$，存在一种等价关系</p>
+<p>斯特林公式：</p>
+<script type="math/tex; mode=display">
+n! = (1+o(1)) \sqrt{2\pi n}\ \left(\frac{n}{e}\right)^n</script><p>特别的，</p>
+<script type="math/tex; mode=display">
+{n\choose n/2} = (1+o(1)) \sqrt{\frac{2}{\pi n}}\ 2^n</script><h4 id="形式幂级数"><a href="#形式幂级数" class="headerlink" title="形式幂级数"></a>形式幂级数</h4><p>对于 $f(x) = \sum_{n\ge 0} f_n x^n$，如果全部 $f_n \ge 0$，那么有 $f_n \le f(\xi)/\xi!$ 对所有 $\xi&gt;0$ 成立（泰勒展开）</p>
 <h2 id="随机变量-向量"><a href="#随机变量-向量" class="headerlink" title="随机变量 / 向量"></a>随机变量 / 向量</h2><h3 id="随机变量"><a href="#随机变量" class="headerlink" title="随机变量"></a>随机变量</h3><p>考虑有概率得到不同实数值的变量 $X$ </p>
 <p>定义（概率）分布函数 $F(x) = P(X \le x) (-\infty &lt; x &lt; +\infty)$</p>
 <p>如果 $F(x)$ 连续，$X$ 有（概率）密度 $F(x) = \int_{-\infty}^x f(s) \mathrm d s$</p>
@@ -387,11 +440,37 @@ f_{X_1}(x) &= \frac{1}{2\pi \sigma_1\sigma_2\sqrt{1-\rho^2}} \exp(-\frac{X_1'^2}
 <p>$\forall X,Y, E(X+Y) = E(X) + E(Y), E(\lambda X) = \lambda E(X)$</p>
 <p>$X,Y$ 独立时，$E(XY) = E(X)E(Y)$</p>
 <p>内积不等式：$EX^2,EY^2&lt;+\infty, |E(XY)| \le \sqrt{EX^2EY^2}$ 当前仅当存在不全为0的 $a,b$ 满足 $P(aX+bY=0)=1$ 时等号成立（类似柯西不等式，用二次型证明）</p>
+<h5 id="Jensen-不等式"><a href="#Jensen-不等式" class="headerlink" title="Jensen 不等式"></a>Jensen 不等式</h5><p>对于凸函数 $f’’(x)\ge0$ ，有 $E[f(X)] \ge f(E[X])$</p>
+<h5 id="Markov-不等式"><a href="#Markov-不等式" class="headerlink" title="Markov 不等式"></a>Markov 不等式</h5><p>对于非负随机变量 $X$，有 $P(X\ge a) \le \frac{E[x]}{a}$</p>
 <h4 id="方差"><a href="#方差" class="headerlink" title="方差"></a>方差</h4><p>方差 $Var(X) = \sigma_{XX} = E(X-\mu_X)^2 = EX^2 - (EX)^2, \mu_X = \overline{X}$</p>
 <p>标准差 $\sigma_X = \sqrt{Var(X)}$</p>
 <p>$\forall X, Var(a+bX) = b^2 Var(X)$</p>
 <p>当 $X_1,X_2,\dots X_n$ 独立时，$Var(\sum X_i) = E\left(\sum (X_i - \mu_{i})\right)^2 = \left[\sum E (X_i - \mu_{i})^2\right] + \sum E(X_i - \mu_{i})E(X_j - \mu_{j}) = \sum Var(X_i)$</p>
-<h4 id="协方差"><a href="#协方差" class="headerlink" title="协方差"></a>协方差</h4><p>协方差 $\sigma_{XY} = Cov(X,Y) = E\left[(X-\mu_X)(Y-\mu_Y)\right]$</p>
+<h5 id="切比雪夫不等式"><a href="#切比雪夫不等式" class="headerlink" title="切比雪夫不等式"></a>切比雪夫不等式</h5><p>$X$ 为一随机变量，$\forall \varepsilon&gt;0, P(|X-\mu| \ge \varepsilon) \le \frac{1}{\varepsilon^2} Var(X)$</p>
+<p>证明：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(|X-\mu| \ge \varepsilon) &= \int_{|X-\mu| \ge \varepsilon} f(x) \mathrm dx\\
+&\le \int_{|X-\mu| \ge \varepsilon} \left(\frac{x-\mu}{\varepsilon}\right)^2f(x) \mathrm dx\\
+&\le \int_{R} \left(\frac{x-\mu}{\varepsilon}\right)^2f(x) \mathrm dx = \frac{1}{\varepsilon^2} Var(X)\\
+\end{aligned}</script><p>结论：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(|X-\mu| \ge \varepsilon) &\le \frac{1}{\varepsilon^2} Var(X)\\
+P(|X-\mu| \ge t\sigma) &\le \frac{1}{t^2}
+\end{aligned}</script><h5 id="单边切比雪夫不等式（Cantelli不等式）"><a href="#单边切比雪夫不等式（Cantelli不等式）" class="headerlink" title="单边切比雪夫不等式（Cantelli不等式）"></a>单边切比雪夫不等式（Cantelli不等式）</h5><p>对于期望为 $0$ 、有限方差的随机变量 $X$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(X\ge a) &= P(X+b \ge a+b) = P((X+b)^2 \ge (a+b)^2)\\
+&\le \frac{E[(X+b)^2]}{(a+b)^2}\\
+&= \frac{\sigma^2+b^2}{(a+b)^2}\\
+\end{aligned}</script><p>当 $b=\sigma^2/a$ 是取得最小值，此时 $P(X\ge a) \le \frac{\sigma^2}{\sigma^2+a^2}$</p>
+<p>对于一般的随机变量 $X$ ，有</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(X-\mu\ge a) &\le \frac{\sigma^2}{\sigma^2+a^2}\\
+P(X-\mu\ge t\sigma) &\le \frac{1}{1+t^2}
+\end{aligned}</script><h4 id="协方差"><a href="#协方差" class="headerlink" title="协方差"></a>协方差</h4><p>协方差 $\sigma_{XY} = Cov(X,Y) = E\left[(X-\mu_X)(Y-\mu_Y)\right]$</p>
 <p>相关系数 $\rho_{XY} = \frac{\sigma_{XY}}{\sigma_X\sigma_Y} = Cov(\frac{X-\mu_X}{\sigma_X},\frac{Y-\mu_Y}{\sigma_Y})$ ，$|\rho| \le 1$，$\rho=0$ 时 $X,Y$ 不相关（不相关不一定独立，只是无明显线性关系，独立一定不相关），$\rho=\pm 1$ 时 $X,Y$ 有线性关系</p>
 <p>$Cov(X,Y) = E(XY) - (EX)(EY)$</p>
 <p>$Cov(aX+bY,Z) = aCov(X,Z) + bCov(Y,Z)$</p>
@@ -404,9 +483,60 @@ f_{X_1}(x) &= \frac{1}{2\pi \sigma_1\sigma_2\sqrt{1-\rho^2}} \exp(-\frac{X_1'^2}
 <p>半正定矩阵的行列式是非负的</p>
 </blockquote>
 <p>$\forall a, a^T\Sigma a = \sum_{i,j} a_i E(X_i-\mu_{i})(X_j-\mu_{j})a_j = E(\sum_{i,j} a_i(X_i-\mu_{i}))^2 \ge 0$</p>
-<h2 id="大数律"><a href="#大数律" class="headerlink" title="大数律"></a>大数律</h2><blockquote>
-<p>$(X_n)_{n\ge 1}$ 是随机事件列，分布函数为 $(F_n(x))_{n\ge 1}$，$X$ 是随机事件，分布函数为 $F(x)$</p>
-<p>依分布收敛：$\lim_{n\to\infty} F_n(x) = F(x)$</p>
+<h4 id="矩"><a href="#矩" class="headerlink" title="矩"></a>矩</h4><h5 id="矩生成函数"><a href="#矩生成函数" class="headerlink" title="矩生成函数"></a>矩生成函数</h5><p>对于随机变量 $X$ ，定义矩生成函数 $M_X(t) = E[e^{tX}]$ （本质上是一个Laplace变换）</p>
+<p>此时 $n$ 阶矩 $E[X^n] = M_X^{(n)}(0)$ （因为 $M_X^{(n)}(t) = E[X^ne^{tX}]$）</p>
+<p>对于随机变量 $X,Y$ ，如果存在 $\delta&gt;0$ 使得 $M_X(t)$ 和 $M_Y(t)$ 在 $(-\delta,\delta)$ 内均相同，那么 $X,Y$ 同分布</p>
+<p>对于独立随机变量 $X,Y$ ，$M_{X+Y}(t) = M_X(t)M_Y(t)$</p>
+<p>使用马尔可夫不等式</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(X\ge a) &= P(e^{tX}\ge e^{ta})\\
+&\le \frac{E[e^{tX}]}{e^{ta}} \\
+&\le \min_{t>0} \frac{E[e^{tX}]}{e^{ta}} \\
+\end{aligned}</script><p>同理，</p>
+<script type="math/tex; mode=display">
+P(X\le a) \le \min_{t<0} \frac{E[e^{tX}]}{e^{ta}}</script><h5 id="Chernoff-bound"><a href="#Chernoff-bound" class="headerlink" title="Chernoff bound"></a>Chernoff bound</h5><p>有 $n$ 个独立泊松试验 $X_1,X_2,\dots,X_n$ （$X_i$ 有 $p_i$ 概率为 $1$，有 $1-p_i$ 概率为 $0$）</p>
+<p>定义 $X = \sum X_i, \mu = E[X] = \sum p_i$ ，</p>
+<p>考虑 $X_i$ 的矩生成函数：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+M_{X_i}(t) &= E[e^{tX_i}]\\
+&= p_ie^t+(1-p_i)\\
+&= 1+p_i(e^t-1)\\
+&\le e^{p_i(e^t-1)}\\
+\end{aligned}</script><script type="math/tex; mode=display">
+\begin{aligned}
+M_X(t) &= E[e^{tX}] = \prod M_{X_i}(t)\\
+&\le \exp \left\{ {\sum p_i(e^t-1)} \right\}\\
+&= e^{ (e^t-1) \mu}
+\end{aligned}</script><p>对于任意 $\delta&gt;0$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(X\ge (1+\delta)\mu) &= P(e^{tX} \ge e^{t(1+\delta)\mu})\\
+&\le\frac{E[e^{tX}]}{e^{t(1+\delta)\mu}}\\
+&\le \frac{e^{(e^t-1)\mu}}{e^{t(1+\delta)\mu}}
+\end{aligned}</script><p>令 $t=\ln(1+\delta)$ ，</p>
+<script type="math/tex; mode=display">
+P(X\ge (1+\delta)\mu) \le \left(\frac{e^\delta}{(1+\delta)^{(1+\delta)}}\right)^\mu</script><p>当 $0&lt;\delta\le1$ 时，</p>
+<script type="math/tex; mode=display">
+\left(\frac{e^\delta}{(1+\delta)^{(1+\delta)}}\right)^\mu < e^{-\mu\delta^2/3}</script><p>当 $R=(1+\delta)\mu \ge 6\mu$ 时，</p>
+<script type="math/tex; mode=display">
+\left(\frac{e^\delta}{(1+\delta)^{(1+\delta)}}\right)^\mu < 2^{-R}</script><p>在反方向，当 $t&lt;0$ 时，有</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(X\le (1-\delta)\mu) &= P(e^{tX} \ge e^{t(1-\delta)\mu})\\
+&\le\frac{E[e^{tX}]}{e^{t(1-\delta)\mu}}\\
+&\le \frac{e^{(e^t-1)\mu}}{e^{t(1-\delta)\mu}}
+\end{aligned}</script><p>令 $t=\ln(1-\delta)$ ，</p>
+<script type="math/tex; mode=display">
+P(X\le (1-\delta)\mu) \le \left(\frac{e^{-\delta}}{(1-\delta)^{(1-\delta)}}\right)^\mu</script><p>当 $0&lt;\delta\le1$ 时，</p>
+<script type="math/tex; mode=display">
+\left(\frac{e^{-\delta}}{(1-\delta)^{(1-\delta)}}\right)^\mu < e^{-\mu\delta^2/2}</script><p>特别的，如果 $X_i$ 为 $\pm1$ 的概率均为 $\frac12$ ，那么</p>
+<script type="math/tex; mode=display">
+P(|X|\ge a) \le 2e^{-a^2/2n}</script><h5 id="二项分布-1"><a href="#二项分布-1" class="headerlink" title="二项分布"></a>二项分布</h5><p><img src="/2022/01/29/Probability-Theory-Note/image-20231227202726415.png" alt="image-20231227202726415"></p>
+<h2 id="大数律"><a href="#大数律" class="headerlink" title="大数律"></a>大数律</h2><h3 id="随机变量的收敛"><a href="#随机变量的收敛" class="headerlink" title="随机变量的收敛"></a>随机变量的收敛</h3><blockquote>
+<p>$\{X_n, n=1,2,\dots\}$ 为随机变量列，$X$ 为随机变量</p>
+<p>依分布收敛：$\forall a, \lim_{n\to\infty} P(X_n\le a) = P(X\le a)$ ，记作 $X_n \stackrel{d}{\longrightarrow} X$</p>
 <p>依概率收敛：$\forall \varepsilon&gt;0, \lim_{n\to\infty} P(|X_n-X| &gt; \varepsilon) = 0$</p>
 <p>以概率1收敛：$P(\lim_{n\to\infty} X_n = X) = 1$</p>
 <p>依概率1收敛(a.s.)（几乎处处收敛(w.p.1)）&gt; 依概率收敛(p) &gt; 依分布收敛(d)</p>
@@ -414,14 +544,7 @@ f_{X_1}(x) &= \frac{1}{2\pi \sigma_1\sigma_2\sqrt{1-\rho^2}} \exp(-\frac{X_1'^2}
 <h3 id="强大数律"><a href="#强大数律" class="headerlink" title="强大数律"></a>强大数律</h3><p>随机变量 $X_1,X_2,\dots$ 独立同分布，$E X_1 = \mu$，$\lim_{n\to\infty} \overline{X}_n = \mu$ 以概率$1$成立</p>
 <p>也称Kolmogorov’s law，证明比弱大数律复杂</p>
 <p>（几乎处处收敛）</p>
-<h3 id="切比雪夫不等式"><a href="#切比雪夫不等式" class="headerlink" title="切比雪夫不等式"></a>切比雪夫不等式</h3><p>$X$ 为一随机变量，$\forall \varepsilon&gt;0, P(|X-\mu| \ge \varepsilon) \le \frac{1}{\varepsilon^2} Var(X)$</p>
-<p>证明：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-P(|X-\mu| \ge \varepsilon) &= \int_{|X-\mu| \ge \varepsilon} f(x) \mathrm dx\\
-&\le \int_{|X-\mu| \ge \varepsilon} \left(\frac{x-\mu}{\varepsilon}\right)^2f(x) \mathrm dx\\
-&\le \int_{R} \left(\frac{x-\mu}{\varepsilon}\right)^2f(x) \mathrm dx = \frac{1}{\varepsilon^2} Var(X)\\
-\end{aligned}</script><h3 id="切比雪夫大数律"><a href="#切比雪夫大数律" class="headerlink" title="切比雪夫大数律"></a>切比雪夫大数律</h3><p>随机变量 $X_1,X_2,\dots$ 独立（不需要同分布），期望存在，方差有相同上界 $M$ </p>
+<h3 id="切比雪夫大数律"><a href="#切比雪夫大数律" class="headerlink" title="切比雪夫大数律"></a>切比雪夫大数律</h3><p>随机变量 $X_1,X_2,\dots$ 独立（不需要同分布），期望存在，方差有相同上界 $M$ </p>
 <p>$\lim_{n\to \infty} P(|\overline{X}_n - \overline{\mu}_n| \ge \varepsilon) \le  \lim_{n\to \infty} \frac{1}{\varepsilon^2} Var(\overline{X}_i) \le \lim_{n\to \infty} \frac{M}{n\varepsilon^2} = 0$</p>
 <h3 id="辛钦大数律"><a href="#辛钦大数律" class="headerlink" title="辛钦大数律"></a>辛钦大数律</h3><p>随机变量 $X_1,X_2,\dots$ 独立同分布，期望存在</p>
 <p>$\lim_{n\to \infty} P(|\overline{X}_n - \overline{\mu}_n| \ge \varepsilon) \le \lim_{n\to \infty} \frac{M}{n\varepsilon^2} = 0$</p>
@@ -599,7 +722,7 @@ Var\left(\frac{(n-1)S^2}{\sigma^2}\right) = 2(n-1) &\Longrightarrow Var(S^2) = \
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E7%8E%87%E5%85%AC%E7%90%86%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">概率公理化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">概率公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E5%85%AC%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">加法公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%8B%AC%E7%AB%8B"><span class="nav-number">2.2.</span> <span class="nav-text">事件独立</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87"><span class="nav-number">2.3.</span> <span class="nav-text">条件概率</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F-%E5%90%91%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">随机变量 &#x2F; 向量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">3.1.</span> <span class="nav-text">随机变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F"><span class="nav-number">3.2.</span> <span class="nav-text">随机向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8F%98%E6%8D%A2"><span class="nav-number">3.3.</span> <span class="nav-text">函数变换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1D-1D"><span class="nav-number">3.3.1.</span> <span class="nav-text">1D-1D</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2D-1D"><span class="nav-number">3.3.2.</span> <span class="nav-text">2D-1D</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2D-2D"><span class="nav-number">3.3.3.</span> <span class="nav-text">2D-2D</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E5%9E%8B%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">3.4.</span> <span class="nav-text">离散型随机变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83"><span class="nav-number">3.4.1.</span> <span class="nav-text">二项分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%8A%E6%9D%BE%E5%88%86%E5%B8%83"><span class="nav-number">3.4.2.</span> <span class="nav-text">泊松分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B6%85%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83"><span class="nav-number">3.4.3.</span> <span class="nav-text">超几何分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83"><span class="nav-number">3.4.4.</span> <span class="nav-text">几何分布</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E6%80%A7%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">3.5.</span> <span class="nav-text">连续性随机变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83"><span class="nav-number">3.5.1.</span> <span class="nav-text">均匀分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83"><span class="nav-number">3.5.2.</span> <span class="nav-text">指数分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">3.5.3.</span> <span class="nav-text">正态分布</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">3.5.3.1.</span> <span class="nav-text">标准正态分布</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">3.5.3.2.</span> <span class="nav-text">普通正态分布</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%E2%80%9C%E8%84%B1%E9%9D%B6%E9%87%8F%E2%80%9D"><span class="nav-number">3.5.3.3.</span> <span class="nav-text">正态分布“脱靶量”</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%E9%AB%98%E9%98%B6%E7%9F%A9"><span class="nav-number">3.5.3.4.</span> <span class="nav-text">正态分布高阶矩</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">3.5.4.</span> <span class="nav-text">二维正态分布</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E4%BA%8C%E7%BB%B4%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">3.5.4.1.</span> <span class="nav-text">标准二维正态分布</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83-1"><span class="nav-number">3.5.4.2.</span> <span class="nav-text">二维正态分布</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%BD%E9%A9%AC%E5%88%86%E5%B8%83"><span class="nav-number">3.5.5.</span> <span class="nav-text">伽马分布</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%9F%E6%9C%9B%E5%92%8C%E6%96%B9%E5%B7%AE"><span class="nav-number">3.6.</span> <span class="nav-text">期望和方差</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%9F%E6%9C%9B"><span class="nav-number">3.6.1.</span> <span class="nav-text">期望</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E5%B7%AE"><span class="nav-number">3.6.2.</span> <span class="nav-text">方差</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8F%E6%96%B9%E5%B7%AE"><span class="nav-number">3.6.3.</span> <span class="nav-text">协方差</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8F%E6%96%B9%E5%B7%AE%E7%9F%A9%E9%98%B5"><span class="nav-number">3.6.4.</span> <span class="nav-text">协方差矩阵</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E5%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">大数律</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%A4%A7%E6%95%B0%E5%BE%8B"><span class="nav-number">4.1.</span> <span class="nav-text">强大数律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E4%B8%8D%E7%AD%89%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">切比雪夫不等式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E5%A4%A7%E6%95%B0%E5%BE%8B"><span class="nav-number">4.3.</span> <span class="nav-text">切比雪夫大数律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%9B%E9%92%A6%E5%A4%A7%E6%95%B0%E5%BE%8B"><span class="nav-number">4.4.</span> <span class="nav-text">辛钦大数律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E5%BE%8B"><span class="nav-number">4.5.</span> <span class="nav-text">中心极限定律</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1"><span class="nav-number">5.</span> <span class="nav-text">参数估计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E5%9D%87%E5%80%BC"><span class="nav-number">5.1.</span> <span class="nav-text">样本均值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E6%96%B9%E5%B7%AE"><span class="nav-number">5.2.</span> <span class="nav-text">样本方差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E6%A0%87%E5%87%86%E5%B7%AE"><span class="nav-number">5.3.</span> <span class="nav-text">样本标准差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E7%9F%A9"><span class="nav-number">5.4.</span> <span class="nav-text">样本矩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E4%BC%B0%E8%AE%A1"><span class="nav-number">5.5.</span> <span class="nav-text">矩估计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%88MLE%EF%BC%89"><span class="nav-number">5.6.</span> <span class="nav-text">最大似然估计（MLE）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E5%9E%8B"><span class="nav-number">5.6.1.</span> <span class="nav-text">离散型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E6%80%A7"><span class="nav-number">5.6.2.</span> <span class="nav-text">连续性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E6%A0%B7%E5%88%86%E5%B8%83"><span class="nav-number">6.</span> <span class="nav-text">抽样分布</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chi-2-%E5%88%86%E5%B8%83"><span class="nav-number">6.1.</span> <span class="nav-text">$\chi^2$ 分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#t-%E5%88%86%E5%B8%83"><span class="nav-number">6.2.</span> <span class="nav-text">t 分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-%E5%88%86%E5%B8%83"><span class="nav-number">6.3.</span> <span class="nav-text">F 分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">6.4.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E7%8E%87%E5%85%AC%E7%90%86%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">概率公理化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">概率公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">容斥原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Boole%E4%B8%8D%E7%AD%89%E5%BC%8F"><span class="nav-number">2.1.1.</span> <span class="nav-text">Boole不等式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bonferroni%E4%B8%8D%E7%AD%89%E5%BC%8F"><span class="nav-number">2.1.2.</span> <span class="nav-text">Bonferroni不等式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%8B%AC%E7%AB%8B"><span class="nav-number">2.2.</span> <span class="nav-text">事件独立</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87"><span class="nav-number">2.3.</span> <span class="nav-text">条件概率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%91%E4%BC%BC%E5%85%AC%E5%BC%8F"><span class="nav-number">2.4.</span> <span class="nav-text">近似公式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#exp"><span class="nav-number">2.4.1.</span> <span class="nav-text">exp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%97%A5%E6%82%96%E8%AE%BA"><span class="nav-number">2.4.2.</span> <span class="nav-text">生日悖论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BALLS-INTO-BINS"><span class="nav-number">2.4.3.</span> <span class="nav-text">BALLS INTO BINS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%B6%E4%B9%98"><span class="nav-number">2.4.4.</span> <span class="nav-text">阶乘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%AF%E7%89%B9%E6%9E%97%E5%85%AC%E5%BC%8F%E5%92%8C%E7%BB%84%E5%90%88%E6%95%B0"><span class="nav-number">2.4.5.</span> <span class="nav-text">斯特林公式和组合数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%A2%E5%BC%8F%E5%B9%82%E7%BA%A7%E6%95%B0"><span class="nav-number">2.4.6.</span> <span class="nav-text">形式幂级数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F-%E5%90%91%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">随机变量 &#x2F; 向量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">3.1.</span> <span class="nav-text">随机变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%90%91%E9%87%8F"><span class="nav-number">3.2.</span> <span class="nav-text">随机向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%8F%98%E6%8D%A2"><span class="nav-number">3.3.</span> <span class="nav-text">函数变换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1D-1D"><span class="nav-number">3.3.1.</span> <span class="nav-text">1D-1D</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2D-1D"><span class="nav-number">3.3.2.</span> <span class="nav-text">2D-1D</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2D-2D"><span class="nav-number">3.3.3.</span> <span class="nav-text">2D-2D</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E5%9E%8B%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">3.4.</span> <span class="nav-text">离散型随机变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83"><span class="nav-number">3.4.1.</span> <span class="nav-text">二项分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%8A%E6%9D%BE%E5%88%86%E5%B8%83"><span class="nav-number">3.4.2.</span> <span class="nav-text">泊松分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B6%85%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83"><span class="nav-number">3.4.3.</span> <span class="nav-text">超几何分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%A0%E4%BD%95%E5%88%86%E5%B8%83"><span class="nav-number">3.4.4.</span> <span class="nav-text">几何分布</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E6%80%A7%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">3.5.</span> <span class="nav-text">连续性随机变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83"><span class="nav-number">3.5.1.</span> <span class="nav-text">均匀分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83"><span class="nav-number">3.5.2.</span> <span class="nav-text">指数分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">3.5.3.</span> <span class="nav-text">正态分布</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">3.5.3.1.</span> <span class="nav-text">标准正态分布</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">3.5.3.2.</span> <span class="nav-text">普通正态分布</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%E2%80%9C%E8%84%B1%E9%9D%B6%E9%87%8F%E2%80%9D"><span class="nav-number">3.5.3.3.</span> <span class="nav-text">正态分布“脱靶量”</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%E9%AB%98%E9%98%B6%E7%9F%A9"><span class="nav-number">3.5.3.4.</span> <span class="nav-text">正态分布高阶矩</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">3.5.4.</span> <span class="nav-text">二维正态分布</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E4%BA%8C%E7%BB%B4%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">3.5.4.1.</span> <span class="nav-text">标准二维正态分布</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83-1"><span class="nav-number">3.5.4.2.</span> <span class="nav-text">二维正态分布</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%BD%E9%A9%AC%E5%88%86%E5%B8%83"><span class="nav-number">3.5.5.</span> <span class="nav-text">伽马分布</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%9F%E6%9C%9B%E5%92%8C%E6%96%B9%E5%B7%AE"><span class="nav-number">3.6.</span> <span class="nav-text">期望和方差</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%9F%E6%9C%9B"><span class="nav-number">3.6.1.</span> <span class="nav-text">期望</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Jensen-%E4%B8%8D%E7%AD%89%E5%BC%8F"><span class="nav-number">3.6.1.1.</span> <span class="nav-text">Jensen 不等式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Markov-%E4%B8%8D%E7%AD%89%E5%BC%8F"><span class="nav-number">3.6.1.2.</span> <span class="nav-text">Markov 不等式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E5%B7%AE"><span class="nav-number">3.6.2.</span> <span class="nav-text">方差</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E4%B8%8D%E7%AD%89%E5%BC%8F"><span class="nav-number">3.6.2.1.</span> <span class="nav-text">切比雪夫不等式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%95%E8%BE%B9%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E4%B8%8D%E7%AD%89%E5%BC%8F%EF%BC%88Cantelli%E4%B8%8D%E7%AD%89%E5%BC%8F%EF%BC%89"><span class="nav-number">3.6.2.2.</span> <span class="nav-text">单边切比雪夫不等式（Cantelli不等式）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8F%E6%96%B9%E5%B7%AE"><span class="nav-number">3.6.3.</span> <span class="nav-text">协方差</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8F%E6%96%B9%E5%B7%AE%E7%9F%A9%E9%98%B5"><span class="nav-number">3.6.4.</span> <span class="nav-text">协方差矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A9"><span class="nav-number">3.6.5.</span> <span class="nav-text">矩</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9F%A9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><span class="nav-number">3.6.5.1.</span> <span class="nav-text">矩生成函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Chernoff-bound"><span class="nav-number">3.6.5.2.</span> <span class="nav-text">Chernoff bound</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E9%A1%B9%E5%88%86%E5%B8%83-1"><span class="nav-number">3.6.5.3.</span> <span class="nav-text">二项分布</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E5%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">大数律</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E6%94%B6%E6%95%9B"><span class="nav-number">4.1.</span> <span class="nav-text">随机变量的收敛</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%A4%A7%E6%95%B0%E5%BE%8B"><span class="nav-number">4.2.</span> <span class="nav-text">强大数律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E5%A4%A7%E6%95%B0%E5%BE%8B"><span class="nav-number">4.3.</span> <span class="nav-text">切比雪夫大数律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%9B%E9%92%A6%E5%A4%A7%E6%95%B0%E5%BE%8B"><span class="nav-number">4.4.</span> <span class="nav-text">辛钦大数律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E5%BE%8B"><span class="nav-number">4.5.</span> <span class="nav-text">中心极限定律</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1"><span class="nav-number">5.</span> <span class="nav-text">参数估计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E5%9D%87%E5%80%BC"><span class="nav-number">5.1.</span> <span class="nav-text">样本均值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E6%96%B9%E5%B7%AE"><span class="nav-number">5.2.</span> <span class="nav-text">样本方差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E6%A0%87%E5%87%86%E5%B7%AE"><span class="nav-number">5.3.</span> <span class="nav-text">样本标准差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B7%E6%9C%AC%E7%9F%A9"><span class="nav-number">5.4.</span> <span class="nav-text">样本矩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E4%BC%B0%E8%AE%A1"><span class="nav-number">5.5.</span> <span class="nav-text">矩估计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%EF%BC%88MLE%EF%BC%89"><span class="nav-number">5.6.</span> <span class="nav-text">最大似然估计（MLE）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E5%9E%8B"><span class="nav-number">5.6.1.</span> <span class="nav-text">离散型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E6%80%A7"><span class="nav-number">5.6.2.</span> <span class="nav-text">连续性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E6%A0%B7%E5%88%86%E5%B8%83"><span class="nav-number">6.</span> <span class="nav-text">抽样分布</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chi-2-%E5%88%86%E5%B8%83"><span class="nav-number">6.1.</span> <span class="nav-text">$\chi^2$ 分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#t-%E5%88%86%E5%B8%83"><span class="nav-number">6.2.</span> <span class="nav-text">t 分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-%E5%88%86%E5%B8%83"><span class="nav-number">6.3.</span> <span class="nav-text">F 分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">6.4.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -641,7 +764,7 @@ Var\left(\frac{(n-1)S^2}{\sigma^2}\right) = 2(n-1) &\Longrightarrow Var(S^2) = \
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
